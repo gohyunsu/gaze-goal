@@ -1,0 +1,36 @@
+schema: goalexit-kd-confirmatory-config-v1
+protocol: docs/04_KD_CONFIRMATORY_PROTOCOL.md
+development_config: configs/development_goalexit.yaml
+development_state: experiments/development/selection_state.json
+development_metrics: artifacts/metrics/development_goalexit.json
+development_audit: artifacts/manifests/development_output_audit.json
+cpu_benchmark: artifacts/manifests/cpu_benchmark_manifest.json
+canonical_manifest: artifacts/manifests/canonical_goalexit.json
+split_manifest: artifacts/manifests/split_manifest.json
+roberta_manifest: artifacts/manifests/roberta_cache_manifest.json
+families: [b0, b1, teacher, t_text, d]
+seed: 13
+epoch_rule: integer_median_selected_inner_epoch
+outer_contexts: 25
+inner_epochs_per_context: 3
+parallel_workers: 4
+training_threads_per_worker: 3
+bootstrap:
+  reader_cluster_replicates: 5000
+  reader_article_replicates: 2000
+  seed: 20271027
+viability:
+  primary_contrast: d_minus_b1
+  primary_point_must_be_positive: true
+  primary_reader_cluster_ci_lower_must_exceed: 0.0
+  d_minus_b0_must_be_at_least: 0.0
+  d_minus_teacher_must_be_at_least: -0.010
+  text_gain_fraction_of_teacher_gain_maximum: 0.5
+outputs:
+  output_root: experiments/outer_kd
+  checkpoint_root: research_storage/checkpoints/outer_kd
+  prediction_root: research_storage/predictions/outer_kd
+  teacher_cache_root: research_storage/teacher_cache/outer_kd
+  metrics: artifacts/metrics/outer_kd_confirmatory.json
+  audit: artifacts/manifests/outer_kd_output_audit.json
+  report: docs/05_KD_CONFIRMATORY_REPORT.md

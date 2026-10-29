@@ -1,0 +1,8 @@
+model: causal-GRU
+input_layer_norm: true
+layers: 2
+hidden_size: 64
+head: [64, 64, 1]
+activation: ReLU
+head_dropout: 0.2
+learning_rates: [0.001, 0.0003]

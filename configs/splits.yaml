@@ -1,0 +1,5 @@
+seed: 20271002
+reader_folds: 5
+article_folds: 5
+inner_holdouts: 3
+outer_evaluation: sealed

@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying paper."
+title: "Gaze-Only Reading-Goal Distillation"
+type: software
+version: 1.0.0
+date-released: 2026-10-30
+license: MIT
+repository-code: "https://github.com/gohyunsu/gaze-only-reading-goal-distillation"
+authors:
+  - family-names: Go
+    given-names: Hyunsu
+  - family-names: Lee
+    given-names: Sumin
+  - family-names: Jun
+    given-names: Jinyong
+  - family-names: Kim
+    given-names: Kyeonghun
+  - family-names: Lee
+    given-names: Hyuk-Jae
+  - family-names: Kim
+    given-names: Nam-Joon
+preferred-citation:
+  type: conference-paper
+  title: "Compact Gaze-Only Reading-Goal Classification with Word-Aligned Teacher Distillation"
+  year: 2027
+  conference:
+    name: "IEEE International Conference on Consumer Electronics"
+  authors:
+    - family-names: Go
+      given-names: Hyunsu
+    - family-names: Lee
+      given-names: Sumin
+    - family-names: Jun
+      given-names: Jinyong
+    - family-names: Kim
+      given-names: Kyeonghun
+    - family-names: Lee
+      given-names: Hyuk-Jae
+    - family-names: Kim
+      given-names: Nam-Joon

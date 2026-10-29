@@ -1,0 +1,592 @@
+{
+  "aggregate_contrasts": {
+    "gaze_kd_minus_gru": {
+      "maximum_seed_difference": 0.04156559631823176,
+      "mean_pooled_difference": 0.03642203626492043,
+      "minimum_seed_difference": 0.030609907202027165,
+      "positive_seeds": 3,
+      "reader_article_crossed_bootstrap": {
+        "bootstrap_mean": 0.03650353435158252,
+        "ci_95_percentile": [
+          0.016834279198692802,
+          0.056863111060054344
+        ],
+        "cluster": "independent reader and article multiplicities; seed-specific BA differences averaged per draw",
+        "probability_difference_le_zero": 0.0005,
+        "replicates": 2000,
+        "seed": 20271131
+      },
+      "reader_cluster_bootstrap": {
+        "bootstrap_mean": 0.036348401197255666,
+        "ci_95_percentile": [
+          0.019855127030829013,
+          0.05335619248081434
+        ],
+        "cluster": "reader, sampled within goal; seed-specific BA differences averaged per draw",
+        "point_mean_difference": 0.03642203626492043,
+        "probability_difference_le_zero": 0.0,
+        "replicates": 5000,
+        "seed": 20271031,
+        "seed_differences": [
+          0.037090605274502364,
+          0.04156559631823176,
+          0.030609907202027165
+        ]
+      },
+      "seeds": 3
+    },
+    "label_smoothing_minus_gru": {
+      "maximum_seed_difference": 0.0003598388125382046,
+      "mean_pooled_difference": -0.0005320723412580719,
+      "minimum_seed_difference": -0.001235901813867124,
+      "positive_seeds": 1,
+      "reader_article_crossed_bootstrap": {
+        "bootstrap_mean": -0.0004973355374495971,
+        "ci_95_percentile": [
+          -0.0033911783729065276,
+          0.0024313459243586015
+        ],
+        "cluster": "independent reader and article multiplicities; seed-specific BA differences averaged per draw",
+        "probability_difference_le_zero": 0.6595,
+        "replicates": 2000,
+        "seed": 20271130
+      },
+      "reader_cluster_bootstrap": {
+        "bootstrap_mean": -0.000536455788988634,
+        "ci_95_percentile": [
+          -0.002194796157132009,
+          0.0011487664763186211
+        ],
+        "cluster": "reader, sampled within goal; seed-specific BA differences averaged per draw",
+        "point_mean_difference": -0.0005320723412580719,
+        "probability_difference_le_zero": 0.7384,
+        "replicates": 5000,
+        "seed": 20271030,
+        "seed_differences": [
+          -0.001235901813867124,
+          -0.0007201540224452962,
+          0.0003598388125382046
+        ]
+      },
+      "seeds": 3
+    },
+    "text_gaze_kd_minus_gaze_kd": {
+      "maximum_seed_difference": 0.007306506444703653,
+      "mean_pooled_difference": 0.0011318283975742711,
+      "minimum_seed_difference": -0.00318934275795546,
+      "positive_seeds": 1,
+      "reader_article_crossed_bootstrap": {
+        "bootstrap_mean": 0.0011898788208684666,
+        "ci_95_percentile": [
+          -0.0046090678911100596,
+          0.006882574794419066
+        ],
+        "cluster": "independent reader and article multiplicities; seed-specific BA differences averaged per draw",
+        "probability_difference_le_zero": 0.3375,
+        "replicates": 2000,
+        "seed": 20271133
+      },
+      "reader_cluster_bootstrap": {
+        "bootstrap_mean": 0.001134902235657326,
+        "ci_95_percentile": [
+          -0.003035707972807611,
+          0.005195858833566827
+        ],
+        "cluster": "reader, sampled within goal; seed-specific BA differences averaged per draw",
+        "point_mean_difference": 0.0011318283975742711,
+        "probability_difference_le_zero": 0.2898,
+        "replicates": 5000,
+        "seed": 20271033,
+        "seed_differences": [
+          -0.00318934275795546,
+          0.007306506444703653,
+          -0.0007216784940253795
+        ]
+      },
+      "seeds": 3
+    },
+    "text_gaze_kd_minus_gru": {
+      "maximum_seed_difference": 0.04887210276293541,
+      "mean_pooled_difference": 0.0375538646624947,
+      "minimum_seed_difference": 0.029888228708001785,
+      "positive_seeds": 3,
+      "reader_article_crossed_bootstrap": {
+        "bootstrap_mean": 0.03779034282821439,
+        "ci_95_percentile": [
+          0.019137912778931884,
+          0.057055733310557216
+        ],
+        "cluster": "independent reader and article multiplicities; seed-specific BA differences averaged per draw",
+        "probability_difference_le_zero": 0.0,
+        "replicates": 2000,
+        "seed": 20271132
+      },
+      "reader_cluster_bootstrap": {
+        "bootstrap_mean": 0.037612180764632214,
+        "ci_95_percentile": [
+          0.022290545456637126,
+          0.05290056812127222
+        ],
+        "cluster": "reader, sampled within goal; seed-specific BA differences averaged per draw",
+        "point_mean_difference": 0.0375538646624947,
+        "probability_difference_le_zero": 0.0,
+        "replicates": 5000,
+        "seed": 20271032,
+        "seed_differences": [
+          0.033901262516546904,
+          0.04887210276293541,
+          0.029888228708001785
+        ]
+      },
+      "seeds": 3
+    },
+    "text_gaze_teacher_minus_gaze_teacher": {
+      "maximum_seed_difference": 0.003910153150108675,
+      "mean_pooled_difference": 0.0020062963499350626,
+      "minimum_seed_difference": -0.0011351278904616624,
+      "positive_seeds": 2,
+      "reader_article_crossed_bootstrap": {
+        "bootstrap_mean": 0.0020039118191926483,
+        "ci_95_percentile": [
+          -0.0066721989500179634,
+          0.010536513271694673
+        ],
+        "cluster": "independent reader and article multiplicities; seed-specific BA differences averaged per draw",
+        "probability_difference_le_zero": 0.328,
+        "replicates": 2000,
+        "seed": 20271134
+      },
+      "reader_cluster_bootstrap": {
+        "bootstrap_mean": 0.0020016415312847165,
+        "ci_95_percentile": [
+          -0.004218550576157272,
+          0.008265376238211879
+        ],
+        "cluster": "reader, sampled within goal; seed-specific BA differences averaged per draw",
+        "point_mean_difference": 0.0020062963499350626,
+        "probability_difference_le_zero": 0.265,
+        "replicates": 5000,
+        "seed": 20271034,
+        "seed_differences": [
+          -0.0011351278904616624,
+          0.0032438637901581746,
+          0.003910153150108675
+        ]
+      },
+      "seeds": 3
+    }
+  },
+  "audit_sha256": "5a7baf2d2c282e393c3a13a55ed03ba93f0733544d10194e358704f76ba1b475",
+  "mean_balanced_accuracy": {
+    "gaze_kd": 0.6221146869850497,
+    "gaze_teacher": 0.6105766391386622,
+    "gru": 0.5856926507201293,
+    "label_smoothing": 0.5851605783788713,
+    "text_gaze_kd": 0.623246515382624,
+    "text_gaze_teacher": 0.6125829354885973
+  },
+  "outer_trials": 19438,
+  "per_seed": {
+    "13": {
+      "contrasts": {
+        "gaze_kd_minus_gru": 0.037090605274502364,
+        "label_smoothing_minus_gru": -0.001235901813867124,
+        "text_gaze_kd_minus_gaze_kd": -0.00318934275795546,
+        "text_gaze_kd_minus_gru": 0.033901262516546904,
+        "text_gaze_teacher_minus_gaze_teacher": -0.0011351278904616624
+      },
+      "metrics": {
+        "gaze_kd": {
+          "auroc": 0.6731620907111405,
+          "balanced_accuracy": 0.6236254242053905,
+          "brier": 0.22574707880279415,
+          "confusion_counts": [
+            [
+              6211,
+              3507
+            ],
+            [
+              3809,
+              5911
+            ]
+          ],
+          "ece": 0.009853249736070996,
+          "macro_by_article_balanced_accuracy": 0.624072410394509,
+          "macro_f1": 0.6235341559442809,
+          "nll": 0.640887443540786,
+          "trial_count": 19438
+        },
+        "gaze_teacher": {
+          "auroc": 0.6637499078965088,
+          "balanced_accuracy": 0.611695862414746,
+          "brier": 0.22842930095697164,
+          "confusion_counts": [
+            [
+              6645,
+              3073
+            ],
+            [
+              4475,
+              5245
+            ]
+          ],
+          "ece": 0.030425568693562992,
+          "macro_by_article_balanced_accuracy": 0.6118588979874002,
+          "macro_f1": 0.6096635994517381,
+          "nll": 0.6482891289339344,
+          "trial_count": 19438
+        },
+        "gru": {
+          "auroc": 0.6186425512201277,
+          "balanced_accuracy": 0.5865348189308881,
+          "brier": 0.23926038757646362,
+          "confusion_counts": [
+            [
+              6010,
+              3708
+            ],
+            [
+              4329,
+              5391
+            ]
+          ],
+          "ece": 0.020906958773839725,
+          "macro_by_article_balanced_accuracy": 0.5865425692720494,
+          "macro_f1": 0.586111814709236,
+          "nll": 0.671698703800728,
+          "trial_count": 19438
+        },
+        "label_smoothing": {
+          "auroc": 0.6184586353692652,
+          "balanced_accuracy": 0.585298917117021,
+          "brier": 0.23853219802307832,
+          "confusion_counts": [
+            [
+              5884,
+              3834
+            ],
+            [
+              4227,
+              5493
+            ]
+          ],
+          "ece": 0.01118095376303286,
+          "macro_by_article_balanced_accuracy": 0.5858180562963184,
+          "macro_f1": 0.5851289749598793,
+          "nll": 0.6692412940893536,
+          "trial_count": 19438
+        },
+        "text_gaze_kd": {
+          "auroc": 0.6691244324519346,
+          "balanced_accuracy": 0.620436081447435,
+          "brier": 0.2270294876133037,
+          "confusion_counts": [
+            [
+              6207,
+              3511
+            ],
+            [
+              3867,
+              5853
+            ]
+          ],
+          "ece": 0.013531035093240018,
+          "macro_by_article_balanced_accuracy": 0.620652440672828,
+          "macro_f1": 0.6203082695116192,
+          "nll": 0.6447091875990347,
+          "trial_count": 19438
+        },
+        "text_gaze_teacher": {
+          "auroc": 0.6599273218760825,
+          "balanced_accuracy": 0.6105607345242844,
+          "brier": 0.2314955552012739,
+          "confusion_counts": [
+            [
+              6320,
+              3398
+            ],
+            [
+              4172,
+              5548
+            ]
+          ],
+          "ece": 0.050470424075631036,
+          "macro_by_article_balanced_accuracy": 0.610317892110568,
+          "macro_f1": 0.6099413778809057,
+          "nll": 0.6578637683334023,
+          "trial_count": 19438
+        }
+      }
+    },
+    "29": {
+      "contrasts": {
+        "gaze_kd_minus_gru": 0.04156559631823176,
+        "label_smoothing_minus_gru": -0.0007201540224452962,
+        "text_gaze_kd_minus_gaze_kd": 0.007306506444703653,
+        "text_gaze_kd_minus_gru": 0.04887210276293541,
+        "text_gaze_teacher_minus_gaze_teacher": 0.0032438637901581746
+      },
+      "metrics": {
+        "gaze_kd": {
+          "auroc": 0.6801476641284216,
+          "balanced_accuracy": 0.6229520206447329,
+          "brier": 0.224118606994332,
+          "confusion_counts": [
+            [
+              5769,
+              3949
+            ],
+            [
+              3380,
+              6340
+            ]
+          ],
+          "ece": 0.0057771572633392495,
+          "macro_by_article_balanced_accuracy": 0.6225029576482779,
+          "macro_f1": 0.6226293969907849,
+          "nll": 0.6371945077465111,
+          "trial_count": 19438
+        },
+        "gaze_teacher": {
+          "auroc": 0.6651359013480563,
+          "balanced_accuracy": 0.6121486834070584,
+          "brier": 0.23035888251747086,
+          "confusion_counts": [
+            [
+              5687,
+              4031
+            ],
+            [
+              3508,
+              6212
+            ]
+          ],
+          "ece": 0.04241654407516513,
+          "macro_by_article_balanced_accuracy": 0.6127929961781258,
+          "macro_f1": 0.6118683202691966,
+          "nll": 0.6551426505949061,
+          "trial_count": 19438
+        },
+        "gru": {
+          "auroc": 0.6141888816053025,
+          "balanced_accuracy": 0.5813864243265011,
+          "brier": 0.24085138279707638,
+          "confusion_counts": [
+            [
+              5598,
+              4120
+            ],
+            [
+              4017,
+              5703
+            ]
+          ],
+          "ece": 0.028686310829288925,
+          "macro_by_article_balanced_accuracy": 0.5816235005061855,
+          "macro_f1": 0.5813747587608848,
+          "nll": 0.6754990776209203,
+          "trial_count": 19438
+        },
+        "label_smoothing": {
+          "auroc": 0.612473300574133,
+          "balanced_accuracy": 0.5806662703040558,
+          "brier": 0.24016454821032637,
+          "confusion_counts": [
+            [
+              5599,
+              4119
+            ],
+            [
+              4032,
+              5688
+            ]
+          ],
+          "ece": 0.018310190788877814,
+          "macro_by_article_balanced_accuracy": 0.5806707947280988,
+          "macro_f1": 0.5806579441191804,
+          "nll": 0.6728897204913566,
+          "trial_count": 19438
+        },
+        "text_gaze_kd": {
+          "auroc": 0.682113782535823,
+          "balanced_accuracy": 0.6302585270894365,
+          "brier": 0.22377443525984103,
+          "confusion_counts": [
+            [
+              5956,
+              3762
+            ],
+            [
+              3425,
+              6295
+            ]
+          ],
+          "ece": 0.017309390113922053,
+          "macro_by_article_balanced_accuracy": 0.6297892579846228,
+          "macro_f1": 0.6301478221263375,
+          "nll": 0.6361133971721237,
+          "trial_count": 19438
+        },
+        "text_gaze_teacher": {
+          "auroc": 0.6654969311540165,
+          "balanced_accuracy": 0.6153925471972166,
+          "brier": 0.23216059035049919,
+          "confusion_counts": [
+            [
+              5982,
+              3736
+            ],
+            [
+              3740,
+              5980
+            ]
+          ],
+          "ece": 0.05526773876567431,
+          "macro_by_article_balanced_accuracy": 0.6162837534993145,
+          "macro_f1": 0.6153925260240003,
+          "nll": 0.6610740624286571,
+          "trial_count": 19438
+        }
+      }
+    },
+    "47": {
+      "contrasts": {
+        "gaze_kd_minus_gru": 0.030609907202027165,
+        "label_smoothing_minus_gru": 0.0003598388125382046,
+        "text_gaze_kd_minus_gaze_kd": -0.0007216784940253795,
+        "text_gaze_kd_minus_gru": 0.029888228708001785,
+        "text_gaze_teacher_minus_gaze_teacher": 0.003910153150108675
+      },
+      "metrics": {
+        "gaze_kd": {
+          "auroc": 0.6747218368696839,
+          "balanced_accuracy": 0.6197666161050259,
+          "brier": 0.22458550122637372,
+          "confusion_counts": [
+            [
+              6137,
+              3581
+            ],
+            [
+              3810,
+              5910
+            ]
+          ],
+          "ece": 0.017107242448128078,
+          "macro_by_article_balanced_accuracy": 0.6199246934228083,
+          "macro_f1": 0.6197135447510572,
+          "nll": 0.6375013555807486,
+          "trial_count": 19438
+        },
+        "gaze_teacher": {
+          "auroc": 0.6610442302138411,
+          "balanced_accuracy": 0.6078853715941823,
+          "brier": 0.22953335929427252,
+          "confusion_counts": [
+            [
+              6276,
+              3442
+            ],
+            [
+              4180,
+              5540
+            ]
+          ],
+          "ece": 0.03952984691291521,
+          "macro_by_article_balanced_accuracy": 0.6085373216025467,
+          "macro_f1": 0.6073184893395166,
+          "nll": 0.6502448142839147,
+          "trial_count": 19438
+        },
+        "gru": {
+          "auroc": 0.6206922350193143,
+          "balanced_accuracy": 0.5891567089029988,
+          "brier": 0.2387950093802233,
+          "confusion_counts": [
+            [
+              5862,
+              3856
+            ],
+            [
+              4130,
+              5590
+            ]
+          ],
+          "ece": 0.023725872019801964,
+          "macro_by_article_balanced_accuracy": 0.5894365864604629,
+          "macro_f1": 0.5890747996634705,
+          "nll": 0.6707709031983908,
+          "trial_count": 19438
+        },
+        "label_smoothing": {
+          "auroc": 0.6226517262099858,
+          "balanced_accuracy": 0.589516547715537,
+          "brier": 0.23761678303704692,
+          "confusion_counts": [
+            [
+              5839,
+              3879
+            ],
+            [
+              4100,
+              5620
+            ]
+          ],
+          "ece": 0.012236544568562702,
+          "macro_by_article_balanced_accuracy": 0.5899433463423948,
+          "macro_f1": 0.5894632703188101,
+          "nll": 0.6673171049045322,
+          "trial_count": 19438
+        },
+        "text_gaze_kd": {
+          "auroc": 0.6719854368500352,
+          "balanced_accuracy": 0.6190449376110005,
+          "brier": 0.22623499424057386,
+          "confusion_counts": [
+            [
+              5994,
+              3724
+            ],
+            [
+              3681,
+              6039
+            ]
+          ],
+          "ece": 0.02293248474195044,
+          "macro_by_article_balanced_accuracy": 0.6197627056106635,
+          "macro_f1": 0.6190431275290368,
+          "nll": 0.6418983223930672,
+          "trial_count": 19438
+        },
+        "text_gaze_teacher": {
+          "auroc": 0.662050196191023,
+          "balanced_accuracy": 0.611795524744291,
+          "brier": 0.23277478601331514,
+          "confusion_counts": [
+            [
+              6341,
+              3377
+            ],
+            [
+              4169,
+              5551
+            ]
+          ],
+          "ece": 0.058582666722289824,
+          "macro_by_article_balanced_accuracy": 0.6116985965402039,
+          "macro_f1": 0.6111490420616384,
+          "nll": 0.6617350144739076,
+          "trial_count": 19438
+        }
+      }
+    }
+  },
+  "postconfirmatory": true,
+  "schema": "goalexit-postconfirmatory-seed-extension-results-v1",
+  "seeds": [
+    13,
+    29,
+    47
+  ],
+  "status": "PASS"
+}

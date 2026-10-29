@@ -1,0 +1,10 @@
+{
+  "final_lock_exists": false,
+  "final_lock_path": "configs/final_goalexit_lock.yaml",
+  "guard_exception_expected": "OuterEvaluationSealedError",
+  "outer_scientific_metrics_computed": false,
+  "outer_scientific_predictions_created": false,
+  "schema": "goalexit-outer-guard-audit-v1",
+  "split_manifest_sha256": "9cd86d6f061e154edf405eb223d0b5300dc72f11f473b5a0fd5f92095960257b",
+  "status": "pass"
+}

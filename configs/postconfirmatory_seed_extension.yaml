@@ -1,0 +1,29 @@
+schema: goalexit-postconfirmatory-seed-extension-v1
+protocol: docs/12_POSTCONFIRMATORY_SEED_EXTENSION_PROTOCOL.md
+postconfirmatory: true
+outer_results_known_when_designed: true
+base_ablation_config: configs/postconfirmatory_ablation.yaml
+development_config: configs/development_goalexit.yaml
+development_state: experiments/development/selection_state.json
+confirmatory_config: configs/confirmatory_kd.yaml
+split_manifest: artifacts/manifests/split_manifest.json
+canonical_manifest: artifacts/manifests/canonical_goalexit.json
+label_smoothing: 0.10
+base_seed: 13
+additional_seeds: [29, 47]
+outer_contexts: 25
+device: cuda
+gpu_ids: [0]
+training_threads_per_worker: 2
+bootstrap:
+  reader_cluster_replicates: 5000
+  reader_article_replicates: 2000
+  seed: 20271030
+outputs:
+  output_root: experiments/postconfirmatory_seed_extension
+  checkpoint_root: research_storage/checkpoints/postconfirmatory_seed_extension
+  prediction_root: research_storage/predictions/postconfirmatory_seed_extension
+  teacher_cache_root: research_storage/teacher_cache/postconfirmatory_seed_extension
+  metrics: artifacts/metrics/postconfirmatory_seed_extension.json
+  audit: artifacts/manifests/postconfirmatory_seed_extension_audit.json
+  report: docs/13_POSTCONFIRMATORY_SEED_EXTENSION_REPORT.md

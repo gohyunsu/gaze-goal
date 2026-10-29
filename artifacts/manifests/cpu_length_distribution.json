@@ -1,0 +1,120 @@
+{
+  "checkpoint_sha256": "bcaaa7904e5269ea0c84b6d47c4dcc6ea779cd33f86d199d31b287c2a8fee2d6",
+  "consumer_or_embedded_hardware_claimed": false,
+  "cpu_model": "Intel(R) Core(TM) Ultra 7 155H",
+  "device": "CPU",
+  "family": "d",
+  "input_fixations": {
+    "maximum": 814.0,
+    "mean": 105.09126453338821,
+    "median": 96.0,
+    "minimum": 9.0,
+    "p90": 170.0,
+    "p95": 199.0,
+    "p99": 266.0
+  },
+  "latency_ms": {
+    "maximum": 124.789493,
+    "mean": 6.687493518674761,
+    "median": 5.0757465,
+    "minimum": 0.765132,
+    "p90": 12.329738500000001,
+    "p95": 16.57468355,
+    "p99": 30.77077322000009
+  },
+  "length_quartiles": {
+    "longest_quartile": {
+      "input_fixations": {
+        "maximum": 814.0,
+        "mean": 174.37416666666667,
+        "median": 161.0,
+        "minimum": 132.0,
+        "p90": 227.0,
+        "p95": 260.0,
+        "p99": 326.0
+      },
+      "latency_ms": {
+        "maximum": 124.789493,
+        "mean": 10.602250602916666,
+        "median": 8.125741,
+        "minimum": 4.557783,
+        "p90": 18.082858000000027,
+        "p95": 25.262698100000005,
+        "p99": 42.504302450000175
+      },
+      "trials": 4800
+    },
+    "second_quartile": {
+      "input_fixations": {
+        "maximum": 96.0,
+        "mean": 82.73348196189704,
+        "median": 83.0,
+        "minimum": 70.0,
+        "p90": 94.0,
+        "p95": 95.0,
+        "p99": 96.0
+      },
+      "latency_ms": {
+        "maximum": 54.985193,
+        "mean": 5.358337415687069,
+        "median": 4.073561,
+        "minimum": 2.487607,
+        "p90": 9.1236337,
+        "p95": 12.973029649999983,
+        "p99": 19.775466450000007
+      },
+      "trials": 4934
+    },
+    "shortest_quartile": {
+      "input_fixations": {
+        "maximum": 69.0,
+        "mean": 52.4916223947691,
+        "median": 55.0,
+        "minimum": 9.0,
+        "p90": 67.0,
+        "p95": 68.0,
+        "p99": 69.0
+      },
+      "latency_ms": {
+        "maximum": 33.469152,
+        "mean": 3.660250222517368,
+        "median": 2.761418,
+        "minimum": 0.765132,
+        "p90": 6.4569122,
+        "p95": 9.158831099999999,
+        "p99": 15.145344329999881
+      },
+      "trials": 4894
+    },
+    "third_quartile": {
+      "input_fixations": {
+        "maximum": 131.0,
+        "mean": 112.4047817047817,
+        "median": 112.0,
+        "minimum": 97.0,
+        "p90": 127.0,
+        "p95": 129.0,
+        "p99": 131.0
+      },
+      "latency_ms": {
+        "maximum": 65.906038,
+        "mean": 7.224406387525987,
+        "median": 5.4871915,
+        "minimum": 3.356195,
+        "p90": 12.631859300000002,
+        "p95": 17.167114500000018,
+        "p99": 28.279587600000003
+      },
+      "trials": 4810
+    }
+  },
+  "measurement_order_seed": 20271030,
+  "os": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "schema": "goalexit-cpu-length-distribution-v1",
+  "semantics": "one model-only single-sequence forward pass for every retained trial after warm-up; tensor construction, preprocessing, parsing, and I/O excluded",
+  "status": "complete",
+  "torch": "2.7.0+cu128",
+  "torch_threads": 1,
+  "trials": 19438,
+  "warmup_iterations": 100
+}

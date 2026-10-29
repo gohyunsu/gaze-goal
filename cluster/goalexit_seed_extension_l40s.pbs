@@ -1,0 +1,125 @@
+#!/bin/bash
+#PBS -N goalexit_seed_extension
+#PBS -l select=1:ncpus=8:ngpus=1:mem=64gb
+#PBS -l walltime=24:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${GOALEXIT_EXPECTED_COMMIT:?GOALEXIT_EXPECTED_COMMIT is required}"
+: "${GOALEXIT_TRACKED_ARCHIVE:?GOALEXIT_TRACKED_ARCHIVE is required}"
+: "${GOALEXIT_GIT_ARCHIVE:?GOALEXIT_GIT_ARCHIVE is required}"
+: "${GOALEXIT_TRANSFER_DIR:?GOALEXIT_TRANSFER_DIR is required}"
+: "${GOALEXIT_PYTHON:?GOALEXIT_PYTHON is required}"
+: "${GOALEXIT_RESULT_BASE:?GOALEXIT_RESULT_BASE is required}"
+: "${GOALEXIT_BASE_RESULTS:?GOALEXIT_BASE_RESULTS is required}"
+
+TRANSFER=${GOALEXIT_TRANSFER_DIR}
+PYTHON=${GOALEXIT_PYTHON}
+RUN_TAG=${PBS_JOBID%%.*}
+RUN_ROOT=/tmp/goalexit_seed_extension_${RUN_TAG}
+PROJECT=${RUN_ROOT}/project
+RESULT_ROOT=${GOALEXIT_RESULT_BASE}/${RUN_TAG}
+BASE_RESULTS=${GOALEXIT_BASE_RESULTS}
+EXPECTED_PAYLOAD_SHA=61c011d7d6bddb5a28c037b6e26e3c24c5f5cc99efd9d5c16dcec17c8ebc40c1
+
+mkdir -p "$PROJECT" "$RESULT_ROOT"
+
+# Keep a server-side log even if PBS output staging fails.
+exec > >(tee -a "$RESULT_ROOT/run.log") 2>&1
+
+snapshot() {
+  local label=$1
+  local present=()
+  local relative
+  for relative in \
+    experiments/postconfirmatory_seed_extension \
+    research_storage/checkpoints/postconfirmatory_seed_extension \
+    research_storage/predictions/postconfirmatory_seed_extension \
+    research_storage/teacher_cache/postconfirmatory_seed_extension \
+    artifacts/metrics/postconfirmatory_seed_extension.json \
+    artifacts/manifests/postconfirmatory_seed_extension_audit.json \
+    docs/13_POSTCONFIRMATORY_SEED_EXTENSION_REPORT.md
+  do
+    if [ -e "$PROJECT/$relative" ]; then
+      present+=("$relative")
+    fi
+  done
+  if [ "${#present[@]}" -gt 0 ]; then
+    tar -czf "$RESULT_ROOT/${label}.tar.gz" -C "$PROJECT" "${present[@]}"
+  fi
+  printf 'snapshot=%s\ntime=%s\ncommit=%s\nhost=%s\n' \
+    "$label" "$(date -Is)" "$GOALEXIT_EXPECTED_COMMIT" "$(hostname)" \
+    > "$RESULT_ROOT/${label}.txt"
+}
+
+on_exit() {
+  local job_status=$?
+  trap - EXIT
+  set +e
+  snapshot exit_latest
+  printf 'exit_status=%s\ntime=%s\n' "$job_status" "$(date -Is)" \
+    > "$RESULT_ROOT/exit_status.txt"
+  exit "$job_status"
+}
+trap on_exit EXIT
+
+echo "job_id=${PBS_JOBID}"
+echo "host=$(hostname)"
+echo "visible_devices=${CUDA_VISIBLE_DEVICES:-unset}"
+echo "started=$(date -Is)"
+nvidia-smi --query-gpu=index,name,uuid,memory.total,driver_version --format=csv,noheader
+
+payload_sha=$(cat \
+  "$TRANSFER/goalexit_payload.part0" \
+  "$TRANSFER/goalexit_payload.part1" \
+  "$TRANSFER/goalexit_payload.part2" \
+  "$TRANSFER/goalexit_payload.part3" | sha256sum | cut -d ' ' -f 1)
+test "$payload_sha" = "$EXPECTED_PAYLOAD_SHA"
+test -f "$BASE_RESULTS"
+test -f "$GOALEXIT_TRACKED_ARCHIVE"
+test -f "$GOALEXIT_GIT_ARCHIVE"
+
+cat \
+  "$TRANSFER/goalexit_payload.part0" \
+  "$TRANSFER/goalexit_payload.part1" \
+  "$TRANSFER/goalexit_payload.part2" \
+  "$TRANSFER/goalexit_payload.part3" | tar -xzf - -C "$PROJECT"
+tar -xzf "$BASE_RESULTS" -C "$PROJECT"
+tar -xzf "$GOALEXIT_TRACKED_ARCHIVE" -C "$PROJECT"
+tar -xzf "$GOALEXIT_GIT_ARCHIVE" -C "$PROJECT"
+
+test "$(git -C "$PROJECT" rev-parse HEAD)" = "$GOALEXIT_EXPECTED_COMMIT"
+test -z "$(git -C "$PROJECT" status --porcelain)"
+
+export PYTHONPATH="$PROJECT/src"
+export OMP_NUM_THREADS=2
+export MKL_NUM_THREADS=2
+cd "$PROJECT"
+
+"$PYTHON" -c 'import torch, pandas, sklearn, pyarrow, yaml; assert torch.cuda.is_available(); print("runtime", torch.__version__, torch.version.cuda, torch.cuda.get_device_name(0), flush=True)'
+"$PYTHON" -m pytest -q
+
+echo "teachers_started=$(date -Is)"
+"$PYTHON" -m goalexit.eval.postconfirmatory_seed_extension \
+  --config configs/postconfirmatory_seed_extension.yaml --stage teachers
+snapshot teachers_complete
+echo "teachers_completed=$(date -Is)"
+
+echo "students_started=$(date -Is)"
+"$PYTHON" -m goalexit.eval.postconfirmatory_seed_extension \
+  --config configs/postconfirmatory_seed_extension.yaml --stage students
+snapshot students_complete
+echo "students_completed=$(date -Is)"
+
+echo "analysis_started=$(date -Is)"
+"$PYTHON" -m goalexit.eval.postconfirmatory_seed_extension \
+  --config configs/postconfirmatory_seed_extension.yaml --stage analyze
+snapshot complete
+echo "analysis_completed=$(date -Is)"
+
+sha256sum \
+  artifacts/metrics/postconfirmatory_seed_extension.json \
+  artifacts/manifests/postconfirmatory_seed_extension_audit.json \
+  docs/13_POSTCONFIRMATORY_SEED_EXTENSION_REPORT.md \
+  > "$RESULT_ROOT/final_sha256.txt"

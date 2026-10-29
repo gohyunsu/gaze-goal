@@ -1,0 +1,71 @@
+{
+  "array_bytes": 85916288,
+  "array_path": "research_storage/roberta_cache/word_embeddings.npy",
+  "array_sha256": "29c4de97edc9866314374ab0647f950d0161a7106fdca5fb39c819a9ea4ed47a",
+  "array_shape": [
+    339,
+    165,
+    768
+  ],
+  "assertions": {
+    "all_words_aligned": true,
+    "encoder_parameters_frozen": true,
+    "exact_pinned_revision": true,
+    "no_network_during_encoding": true,
+    "no_truncation": true
+  },
+  "dtype": "float16 storage; float32 fusion input",
+  "hidden_size": 768,
+  "local_files_only": true,
+  "local_model_path": "research_storage/roberta-base-e2da8e2f",
+  "maximum_subword_tokens_including_special_tokens": 223,
+  "maximum_words": 165,
+  "model_files": {
+    "config.json": {
+      "bytes": 481,
+      "sha256": "ef0185e2aae6e06c5f105a285006952c340e20c7dbf43c86ec82601b13fc45e9"
+    },
+    "merges.txt": {
+      "bytes": 456318,
+      "sha256": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+    },
+    "model.safetensors": {
+      "bytes": 498818054,
+      "sha256": "5bde1d28afb363d0103324efeb5afc8b2b397fe5e04beabb9b1ef355255ade81"
+    },
+    "tokenizer.json": {
+      "bytes": 1355863,
+      "sha256": "847bbeab6174d66a88898f729d52fa8d355fafe1bea101cf960dd404581df70e"
+    },
+    "tokenizer_config.json": {
+      "bytes": 25,
+      "sha256": "994f46754c5bf4014f1aa92d34b1374319c3a6b3f702105cd5b742beaecd18ce"
+    },
+    "vocab.json": {
+      "bytes": 898823,
+      "sha256": "9e7f63c2d15d666b52e21d250d2e513b87c9b713cfa6987a82ed89e5e6e50655"
+    }
+  },
+  "paragraph_ids_path": "research_storage/roberta_cache/paragraph_ids.json",
+  "paragraph_ids_sha256": "4c950cc7428813f113ea459231fe6a716e45c15475aa307fd5669efba1da9f86",
+  "paragraph_table_path": "data/processed/goalexit_paragraphs.parquet",
+  "paragraph_table_sha256": "d260f9abfb3badfe44c362ba91ef0a30c8a6cc9dfbef40269a196b26b34b07b3",
+  "paragraphs": 339,
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "repo_id": "FacebookAI/roberta-base",
+  "resolved_revision": "e2da8e2f811d1448a5b465c236feacd80ffbac7b",
+  "roberta_frozen": true,
+  "schema": "goalexit-roberta-word-cache-v1",
+  "status": "pass",
+  "tokenizer": {
+    "add_prefix_space": true,
+    "class": "RobertaTokenizerFast",
+    "is_split_into_words": true,
+    "subword_aggregation": "arithmetic mean of last hidden states",
+    "truncation": false
+  },
+  "torch_version": "2.7.0+cu128",
+  "transformers_version": "4.56.2",
+  "unmapped_words": 0,
+  "unused_pooler_created": false
+}

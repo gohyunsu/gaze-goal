@@ -1,0 +1,4 @@
+architecture: identical-to-b1
+temperature: 2.0
+alphas: [0.25, 0.50, 0.75]
+learning_rates: [0.001, 0.0003]

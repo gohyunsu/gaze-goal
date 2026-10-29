@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "goalexit"
+version = "1.0.0"
+description = "Compact gaze-only reading-goal classification with teacher distillation"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "Hyunsu Go", email = "hsmail02@snu.ac.kr"}]
+dependencies = [
+  "numpy>=2.2,<3",
+  "pandas>=2.3,<3",
+  "pyarrow>=20,<26",
+  "PyYAML>=6,<7",
+  "scikit-learn>=1.7,<2",
+  "torch>=2.6,<2.8",
+]
+
+[project.optional-dependencies]
+teacher = ["transformers>=4.56,<5"]
+dev = ["pytest>=8,<9"]
+
+[project.urls]
+Repository = "https://github.com/gohyunsu/gaze-only-reading-goal-distillation"
+Issues = "https://github.com/gohyunsu/gaze-only-reading-goal-distillation/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,23 @@
+schema: goalexit-postfeedback-controls-v1
+status: post_feedback
+outer_results_known_when_designed: true
+development_config: configs/development_goalexit.yaml
+split_manifest: artifacts/manifests/split_manifest.json
+candidates: [0.01, 0.1, 1.0, 10.0, 100.0]
+inner_folds: 3
+random_seed: 20271030
+bootstrap:
+  reader_cluster_replicates: 5000
+  reader_article_replicates: 2000
+  seed: 20271030
+outputs:
+  predictions: research_storage/predictions/postfeedback_controls
+  metrics: artifacts/metrics/postfeedback_controls.json
+  report: docs/16_POSTFEEDBACK_CONTROL_REPORT.md
+  latency_manifest: artifacts/manifests/cpu_length_distribution.json
+latency:
+  source_manifest: artifacts/manifests/cpu_benchmark_manifest.json
+  family: d
+  threads: 1
+  warmup: 100
+  seed: 20271030

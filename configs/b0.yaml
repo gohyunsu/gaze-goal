@@ -1,0 +1,5 @@
+model: GlobalStats-MLP
+architecture: [input, 128, 64, 1]
+activation: ReLU
+dropout: 0.2
+learning_rates: [0.001, 0.0003]

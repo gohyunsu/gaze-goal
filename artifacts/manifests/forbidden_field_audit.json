@@ -1,0 +1,210 @@
+{
+  "article_id_use": "split membership and macro-by-article metric only; never a model tensor",
+  "canonical_data_sha256": "9c3560ee8cf8e5eadd1ca22d9704544e5403ac9885080a8a284681f78032c75d",
+  "deployment_model_input_allowlists": {
+    "a": [
+      "x_norm",
+      "y_norm",
+      "log_fixation_duration",
+      "dx_norm",
+      "dy_norm",
+      "log_saccade_amplitude",
+      "saccade_angle_sin",
+      "saccade_angle_cos",
+      "line_change",
+      "fixation_position"
+    ],
+    "b0": [
+      "observed_fixation_count",
+      "total_dwell_ms",
+      "mean_fixation_duration_ms",
+      "std_fixation_duration_ms",
+      "median_fixation_duration_ms",
+      "p25_fixation_duration_ms",
+      "p75_fixation_duration_ms",
+      "p90_fixation_duration_ms",
+      "mean_saccade_amplitude",
+      "std_saccade_amplitude",
+      "median_saccade_amplitude",
+      "p90_saccade_amplitude",
+      "mean_absolute_dx_norm",
+      "mean_absolute_dy_norm",
+      "net_dx_norm",
+      "net_dy_norm",
+      "forward_movement_proportion",
+      "backward_movement_proportion",
+      "line_change_rate",
+      "x_spatial_dispersion",
+      "y_spatial_dispersion",
+      "path_length_norm"
+    ],
+    "b1": [
+      "x_norm",
+      "y_norm",
+      "log_fixation_duration",
+      "dx_norm",
+      "dy_norm",
+      "log_saccade_amplitude",
+      "saccade_angle_sin",
+      "saccade_angle_cos",
+      "line_change",
+      "fixation_position"
+    ],
+    "d": [
+      "x_norm",
+      "y_norm",
+      "log_fixation_duration",
+      "dx_norm",
+      "dy_norm",
+      "log_saccade_amplitude",
+      "saccade_angle_sin",
+      "saccade_angle_cos",
+      "line_change",
+      "fixation_position"
+    ]
+  },
+  "forbidden_source_fields": [
+    "ANSWER_RT",
+    "PARAGRAPH_RT",
+    "PREVIEW_QUESTION_RT",
+    "QUESTION_RT",
+    "answer_1",
+    "answer_2",
+    "answer_3",
+    "answer_4",
+    "answers_order",
+    "article_index",
+    "correct_answer_position",
+    "is_correct",
+    "onestopqa_question_id",
+    "question",
+    "selected_answer",
+    "selected_answer_position",
+    "trial_index"
+  ],
+  "forbidden_source_fields_requested": [],
+  "model_feature_audit": {
+    "forbidden_tokens": [
+      "reader_id",
+      "participant_id",
+      "regime",
+      "goal_index",
+      "goal_label",
+      "article_id",
+      "paragraph_id",
+      "question",
+      "answer",
+      "correct",
+      "selected",
+      "session",
+      "trial_index",
+      "article_index",
+      "repeat",
+      "timestamp",
+      "full_fixation_count",
+      "final_length"
+    ],
+    "models": {
+      "a": [
+        "x_norm",
+        "y_norm",
+        "log_fixation_duration",
+        "dx_norm",
+        "dy_norm",
+        "log_saccade_amplitude",
+        "saccade_angle_sin",
+        "saccade_angle_cos",
+        "line_change",
+        "fixation_position"
+      ],
+      "b0": [
+        "observed_fixation_count",
+        "total_dwell_ms",
+        "mean_fixation_duration_ms",
+        "std_fixation_duration_ms",
+        "median_fixation_duration_ms",
+        "p25_fixation_duration_ms",
+        "p75_fixation_duration_ms",
+        "p90_fixation_duration_ms",
+        "mean_saccade_amplitude",
+        "std_saccade_amplitude",
+        "median_saccade_amplitude",
+        "p90_saccade_amplitude",
+        "mean_absolute_dx_norm",
+        "mean_absolute_dy_norm",
+        "net_dx_norm",
+        "net_dy_norm",
+        "forward_movement_proportion",
+        "backward_movement_proportion",
+        "line_change_rate",
+        "x_spatial_dispersion",
+        "y_spatial_dispersion",
+        "path_length_norm"
+      ],
+      "b1": [
+        "x_norm",
+        "y_norm",
+        "log_fixation_duration",
+        "dx_norm",
+        "dy_norm",
+        "log_saccade_amplitude",
+        "saccade_angle_sin",
+        "saccade_angle_cos",
+        "line_change",
+        "fixation_position"
+      ],
+      "d": [
+        "x_norm",
+        "y_norm",
+        "log_fixation_duration",
+        "dx_norm",
+        "dy_norm",
+        "log_saccade_amplitude",
+        "saccade_angle_sin",
+        "saccade_angle_cos",
+        "line_change",
+        "fixation_position"
+      ],
+      "t_text": [
+        "frozen_roberta_word_embedding"
+      ],
+      "teacher": [
+        "frozen_roberta_word_embedding",
+        "word_fixation_count",
+        "word_total_dwell_ms",
+        "word_mean_fixation_duration_ms",
+        "word_first_fixation_duration_ms",
+        "word_first_pass_dwell_ms",
+        "word_regression_in_count",
+        "word_revisit_count",
+        "word_skip_indicator"
+      ]
+    },
+    "status": "pass",
+    "violations": []
+  },
+  "reader_id_use": "split membership and reader-cluster audit only; never a model tensor",
+  "schema": "goalexit-forbidden-field-audit-v1",
+  "source_condition_fields_used_only_for_population_and_target": [
+    "question_preview",
+    "repeated_reading_trial",
+    "practice_trial"
+  ],
+  "status": "pass",
+  "teacher_input_allowlists": {
+    "t_text": [
+      "frozen_roberta_word_embedding"
+    ],
+    "teacher": [
+      "frozen_roberta_word_embedding",
+      "word_fixation_count",
+      "word_total_dwell_ms",
+      "word_mean_fixation_duration_ms",
+      "word_first_fixation_duration_ms",
+      "word_first_pass_dwell_ms",
+      "word_regression_in_count",
+      "word_revisit_count",
+      "word_skip_indicator"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+schema: goalexit-postconfirmatory-ablation-v1
+protocol: docs/09_POSTCONFIRMATORY_ABLATION_PROTOCOL.md
+postconfirmatory: true
+outer_results_known_when_designed: true
+development_config: configs/development_goalexit.yaml
+development_state: experiments/development/selection_state.json
+confirmatory_config: configs/confirmatory_kd.yaml
+confirmatory_metrics: artifacts/metrics/outer_kd_confirmatory.json
+split_manifest: artifacts/manifests/split_manifest.json
+canonical_manifest: artifacts/manifests/canonical_goalexit.json
+label_smoothing: 0.10
+base_seed: 13
+additional_seeds: [29, 47]
+outer_contexts: 25
+device: cuda
+gpu_ids: [0]
+training_threads_per_worker: 2
+bootstrap:
+  reader_cluster_replicates: 5000
+  reader_article_replicates: 2000
+  seed: 20271029
+setting_inheritance:
+  stats: b0
+  gru: b1
+  text_gaze_teacher: teacher
+  text_only: t_text
+  text_gaze_kd: d
+  gaze_teacher: teacher
+  gaze_kd: d
+  label_smoothing: b1
+  seed_gru: b1
+  seed_text_gaze_kd: d
+outputs:
+  output_root: experiments/postconfirmatory_ablation
+  checkpoint_root: research_storage/checkpoints/postconfirmatory_ablation
+  prediction_root: research_storage/predictions/postconfirmatory_ablation
+  teacher_cache_root: research_storage/teacher_cache/postconfirmatory_ablation
+  metrics: artifacts/metrics/postconfirmatory_ablation.json
+  audit: artifacts/manifests/postconfirmatory_ablation_audit.json
+  report: docs/10_POSTCONFIRMATORY_ABLATION_REPORT.md

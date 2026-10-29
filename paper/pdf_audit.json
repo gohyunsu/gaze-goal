@@ -1,0 +1,27 @@
+{
+  "schema": "goalexit-icce2027-pdf-audit-v1",
+  "status": "pass",
+  "pdf": "paper/main.pdf",
+  "sha256": "01413a9ae8f1c0e450d21cb86ed0f312cdc9a180220c86a36db32d8490aaa88f",
+  "pages": 4,
+  "page_width_points": 612.0,
+  "page_height_points": 792.0,
+  "page_size": "US Letter",
+  "template": "IEEEtran conference, letterpaper",
+  "overfull_hbox": false,
+  "overfull_vbox": false,
+  "underfull_hbox": false,
+  "underfull_vbox": true,
+  "underfull_vbox_visual_defect": false,
+  "undefined_references": false,
+  "visual_pages_inspected": 4,
+  "tables_or_figures_clipped": false,
+  "fonts_subset_embedded": true,
+  "embedded_font_programs": 11,
+  "build_engine": "Tectonic 0.15.0 / xdvipdfmx",
+  "tests": {
+    "command": "PYTHONPATH=src conda run -n bodex pytest -q",
+    "passed": 29,
+    "failed": 0
+  }
+}

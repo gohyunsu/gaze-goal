@@ -1,0 +1,467 @@
+{
+  "audit_sha256": "d741dd0d6cdc636b503b8769a981dc0de954aa9e4cb290e7b3ed178a7ac6f415",
+  "context_metrics": [
+    {
+      "b0": 0.5909297333003054,
+      "b1": 0.5237077863099662,
+      "context_id": "r0_a0",
+      "d": 0.5438788429251644,
+      "t_text": 0.5,
+      "teacher": 0.6007383095257754,
+      "trials": 763
+    },
+    {
+      "b0": 0.5665562281849913,
+      "b1": 0.5499222840314136,
+      "context_id": "r0_a1",
+      "d": 0.5670470658813264,
+      "t_text": 0.5,
+      "teacher": 0.6373050283595113,
+      "trials": 766
+    },
+    {
+      "b0": 0.5698837887557769,
+      "b1": 0.5369750302867142,
+      "context_id": "r0_a2",
+      "d": 0.6006135863956567,
+      "t_text": 0.5,
+      "teacher": 0.601345515322834,
+      "trials": 845
+    },
+    {
+      "b0": 0.560325743200506,
+      "b1": 0.5133330458283021,
+      "context_id": "r0_a3",
+      "d": 0.5803432810074176,
+      "t_text": 0.5,
+      "teacher": 0.5894787533781841,
+      "trials": 746
+    },
+    {
+      "b0": 0.5859375,
+      "b1": 0.5299479166666667,
+      "context_id": "r0_a4",
+      "d": 0.54296875,
+      "t_text": 0.5,
+      "teacher": 0.6393229166666666,
+      "trials": 768
+    },
+    {
+      "b0": 0.6141439205955335,
+      "b1": 0.5955334987593053,
+      "context_id": "r1_a0",
+      "d": 0.6476426799007444,
+      "t_text": 0.5,
+      "teacher": 0.5880893300248139,
+      "trials": 806
+    },
+    {
+      "b0": 0.6080729166666667,
+      "b1": 0.5807291666666667,
+      "context_id": "r1_a1",
+      "d": 0.6861979166666667,
+      "t_text": 0.5,
+      "teacher": 0.6471354166666667,
+      "trials": 768
+    },
+    {
+      "b0": 0.6068702290076335,
+      "b1": 0.6145038167938932,
+      "context_id": "r1_a2",
+      "d": 0.6374045801526718,
+      "t_text": 0.5,
+      "teacher": 0.6005089058524173,
+      "trials": 786
+    },
+    {
+      "b0": 0.6209677419354839,
+      "b1": 0.5362903225806451,
+      "context_id": "r1_a3",
+      "d": 0.5900537634408602,
+      "t_text": 0.5,
+      "teacher": 0.5833333333333333,
+      "trials": 744
+    },
+    {
+      "b0": 0.6096938775510203,
+      "b1": 0.6135204081632653,
+      "context_id": "r1_a4",
+      "d": 0.6517857142857143,
+      "t_text": 0.5,
+      "teacher": 0.6211734693877551,
+      "trials": 784
+    },
+    {
+      "b0": 0.5771593401116428,
+      "b1": 0.5884108353269537,
+      "context_id": "r2_a0",
+      "d": 0.5944353070175439,
+      "t_text": 0.5,
+      "teacher": 0.5932702850877194,
+      "trials": 802
+    },
+    {
+      "b0": 0.6354513226070357,
+      "b1": 0.5830447232069811,
+      "context_id": "r2_a1",
+      "d": 0.6472116171257158,
+      "t_text": 0.47239569130079084,
+      "teacher": 0.6047995636760295,
+      "trials": 766
+    },
+    {
+      "b0": 0.6073789128595601,
+      "b1": 0.6257600994077834,
+      "context_id": "r2_a2",
+      "d": 0.610789445854484,
+      "t_text": 0.5,
+      "teacher": 0.6141867597292724,
+      "trials": 778
+    },
+    {
+      "b0": 0.5748108108108108,
+      "b1": 0.647045045045045,
+      "context_id": "r2_a3",
+      "d": 0.6436036036036036,
+      "t_text": 0.5,
+      "teacher": 0.6290810810810811,
+      "trials": 745
+    },
+    {
+      "b0": 0.5903748733535967,
+      "b1": 0.6030521783181357,
+      "context_id": "r2_a4",
+      "d": 0.6570921985815603,
+      "t_text": 0.5,
+      "teacher": 0.6449974670719352,
+      "trials": 796
+    },
+    {
+      "b0": 0.6138192584821798,
+      "b1": 0.6143610413273335,
+      "context_id": "r3_a0",
+      "d": 0.6820977003561273,
+      "t_text": 0.5,
+      "teacher": 0.6555952019435165,
+      "trials": 763
+    },
+    {
+      "b0": 0.6070593448546204,
+      "b1": 0.6781334151412892,
+      "context_id": "r3_a1",
+      "d": 0.6723898149095,
+      "t_text": 0.5,
+      "teacher": 0.6434638851961687,
+      "trials": 766
+    },
+    {
+      "b0": 0.6112758643930714,
+      "b1": 0.6448181348430725,
+      "context_id": "r3_a2",
+      "d": 0.637457594751859,
+      "t_text": 0.5,
+      "teacher": 0.5952208442856821,
+      "trials": 845
+    },
+    {
+      "b0": 0.6289128481581312,
+      "b1": 0.5801653189577718,
+      "context_id": "r3_a3",
+      "d": 0.553958670260557,
+      "t_text": 0.5,
+      "teacher": 0.6548643306379155,
+      "trials": 746
+    },
+    {
+      "b0": 0.6609196961475854,
+      "b1": 0.6316467715680956,
+      "context_id": "r3_a4",
+      "d": 0.7166304937601736,
+      "t_text": 0.5071622354856213,
+      "teacher": 0.6678513293543136,
+      "trials": 768
+    },
+    {
+      "b0": 0.5658611529733248,
+      "b1": 0.541329244193206,
+      "context_id": "r4_a0",
+      "d": 0.5228694739434596,
+      "t_text": 0.5,
+      "teacher": 0.5696903238669349,
+      "trials": 826
+    },
+    {
+      "b0": 0.5768911500870264,
+      "b1": 0.5357544517338332,
+      "context_id": "r4_a1",
+      "d": 0.6510275806667559,
+      "t_text": 0.5,
+      "teacher": 0.6094390145936537,
+      "trials": 773
+    },
+    {
+      "b0": 0.6014974356561427,
+      "b1": 0.588699242459888,
+      "context_id": "r4_a2",
+      "d": 0.6278378346586364,
+      "t_text": 0.5,
+      "teacher": 0.5942396367571636,
+      "trials": 825
+    },
+    {
+      "b0": 0.5279466483065745,
+      "b1": 0.625816682292277,
+      "context_id": "r4_a3",
+      "d": 0.652067707722958,
+      "t_text": 0.5,
+      "teacher": 0.5869418727294036,
+      "trials": 739
+    },
+    {
+      "b0": 0.5446756425948592,
+      "b1": 0.5716034271725826,
+      "context_id": "r4_a4",
+      "d": 0.5867503059975521,
+      "t_text": 0.5,
+      "teacher": 0.5326805385556916,
+      "trials": 724
+    }
+  ],
+  "context_summary": {
+    "b0": {
+      "mean_balanced_accuracy": 0.5942966392237632,
+      "median_balanced_accuracy": 0.6014974356561427
+    },
+    "b1": {
+      "mean_balanced_accuracy": 0.5861641554832435,
+      "median_balanced_accuracy": 0.5884108353269537
+    },
+    "d": {
+      "mean_balanced_accuracy": 0.6201662211946684,
+      "median_balanced_accuracy": 0.6374045801526718
+    },
+    "t_text": {
+      "mean_balanced_accuracy": 0.4991823170714565,
+      "median_balanced_accuracy": 0.5
+    },
+    "teacher": {
+      "mean_balanced_accuracy": 0.6121901245233775,
+      "median_balanced_accuracy": 0.6047995636760295
+    }
+  },
+  "contrasts": {
+    "d_minus_b0": {
+      "context_mean_difference": 0.025869581970905182,
+      "context_median_difference": 0.03053435114503822,
+      "contexts": 25,
+      "pooled_difference": 0.02628656932068707,
+      "positive_contexts": 20
+    },
+    "d_minus_b1": {
+      "context_mean_difference": 0.03400206571142489,
+      "context_median_difference": 0.02625102543068092,
+      "contexts": 25,
+      "pooled_difference": 0.03390122017011421,
+      "positive_contexts": 19
+    },
+    "t_text_minus_b1": {
+      "context_mean_difference": -0.08698183841178699,
+      "context_median_difference": -0.08869924245988803,
+      "contexts": 25,
+      "pooled_difference": -0.08797582569191947,
+      "positive_contexts": 0
+    },
+    "teacher_minus_b1": {
+      "context_mean_difference": 0.026025969040134087,
+      "context_median_difference": 0.028361079673728806,
+      "contexts": 25,
+      "pooled_difference": 0.025980933942105655,
+      "positive_contexts": 17
+    },
+    "teacher_minus_d": {
+      "context_mean_difference": -0.0079760966712908,
+      "context_median_difference": -0.026502498412610764,
+      "contexts": 25,
+      "pooled_difference": -0.007920286228008555,
+      "positive_contexts": 8
+    }
+  },
+  "interpretation": "positive KD manuscript authorized",
+  "outer_articles": 30,
+  "outer_readers": 360,
+  "outer_trials": 19438,
+  "pooled_metrics": {
+    "b0": {
+      "auroc": 0.6358791373523486,
+      "balanced_accuracy": 0.5942007830702349,
+      "brier": 0.23598388945437845,
+      "confusion_counts": [
+        [
+          6138,
+          3580
+        ],
+        [
+          4308,
+          5412
+        ]
+      ],
+      "ece": 0.0410367819900226,
+      "macro_by_article_balanced_accuracy": 0.5945948639367249,
+      "macro_f1": 0.5936300531452267,
+      "nll": 0.6631886346490893,
+      "recall_goal_0": 0.6316114426836797,
+      "recall_goal_1": 0.5567901234567901,
+      "trial_count": 19438
+    },
+    "b1": {
+      "auroc": 0.6177571508303712,
+      "balanced_accuracy": 0.5865861322208078,
+      "brier": 0.23907983293151056,
+      "confusion_counts": [
+        [
+          5998,
+          3720
+        ],
+        [
+          4316,
+          5404
+        ]
+      ],
+      "ece": 0.020976006984397933,
+      "macro_by_article_balanced_accuracy": 0.5867208673043671,
+      "macro_f1": 0.5861965580183148,
+      "nll": 0.6709946458223665,
+      "recall_goal_0": 0.6172051862523152,
+      "recall_goal_1": 0.5559670781893004,
+      "trial_count": 19438
+    },
+    "d": {
+      "auroc": 0.6708196871953704,
+      "balanced_accuracy": 0.620487352390922,
+      "brier": 0.2264620156439658,
+      "confusion_counts": [
+        [
+          6191,
+          3527
+        ],
+        [
+          3850,
+          5870
+        ]
+      ],
+      "ece": 0.014160757897476358,
+      "macro_by_article_balanced_accuracy": 0.6210688119207671,
+      "macro_f1": 0.6203821196858035,
+      "nll": 0.6426924380626241,
+      "recall_goal_0": 0.6370652397612677,
+      "recall_goal_1": 0.6039094650205762,
+      "trial_count": 19438
+    },
+    "t_text": {
+      "auroc": 0.5017472667494963,
+      "balanced_accuracy": 0.4986103065288883,
+      "brier": 0.25104522629739556,
+      "confusion_counts": [
+        [
+          4783,
+          4935
+        ],
+        [
+          4811,
+          4909
+        ]
+      ],
+      "ece": 0.030382091960985916,
+      "macro_by_article_balanced_accuracy": 0.4984644810567877,
+      "macro_f1": 0.4985898998329278,
+      "nll": 0.6952473184940063,
+      "recall_goal_0": 0.4921794607944021,
+      "recall_goal_1": 0.5050411522633745,
+      "trial_count": 19438
+    },
+    "teacher": {
+      "auroc": 0.6613164913100885,
+      "balanced_accuracy": 0.6125670661629135,
+      "brier": 0.2311650181156261,
+      "confusion_counts": [
+        [
+          6335,
+          3383
+        ],
+        [
+          4148,
+          5572
+        ]
+      ],
+      "ece": 0.04964889396684835,
+      "macro_by_article_balanced_accuracy": 0.612205893247874,
+      "macro_f1": 0.6119651372514794,
+      "nll": 0.6560877290938844,
+      "recall_goal_0": 0.6518831035192426,
+      "recall_goal_1": 0.5732510288065844,
+      "trial_count": 19438
+    }
+  },
+  "primary_reader_cluster_bootstrap": {
+    "bootstrap_mean": 0.03399338785779229,
+    "ci_95_percentile": [
+      0.0174901672440343,
+      0.05041612941256146
+    ],
+    "cluster": "reader, sampled with replacement within each goal",
+    "left": "d",
+    "point_difference": 0.03390122017011421,
+    "probability_difference_le_zero": 0.0,
+    "replicates": 5000,
+    "right": "b1",
+    "seed": 20271027
+  },
+  "reader_article_crossed_bootstrap_sensitivity": {
+    "bootstrap_mean": 0.03408874813869423,
+    "ci_95_percentile": [
+      0.012990107618157807,
+      0.055337045479127205
+    ],
+    "cluster": "independent goal-stratified reader and article multiplicities",
+    "left": "d",
+    "probability_difference_le_zero": 0.002,
+    "replicates": 2000,
+    "right": "b1",
+    "seed": 20271028
+  },
+  "reader_macro_accuracy": {
+    "b1": 0.5866148381085488,
+    "d": 0.6205101327742837
+  },
+  "resource_evidence": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 7 155H",
+    "end_to_end_full": {
+      "iterations": 1000,
+      "mean_ms": 3.312621744,
+      "median_ms": 3.149111,
+      "p95_ms": 4.3936537
+    },
+    "interpretation": "single-thread CPU deployment proxy",
+    "parameter_count": 43797,
+    "per_new_fixation_update": {
+      "iterations": 1000,
+      "mean_ms": 1.806700923,
+      "median_ms": 1.7705225,
+      "p95_ms": 3.3810375499999994,
+      "semantics": "exact causal prefix re-evaluation because fixation_position is normalized by current observed prefix length"
+    },
+    "serialized_state_bytes": 180341,
+    "source_sha256": "ba3d585b818c0dfebf412c06203f16fa2e0f1b8610ded1b0861d0d211a53f57a",
+    "torch_threads": 1
+  },
+  "schema": "goalexit-kd-confirmatory-outer-v1",
+  "verdict": "PASS",
+  "viability_conditions": {
+    "complete_set_audit_pass": true,
+    "d_minus_b0_nonnegative": true,
+    "d_minus_b1_point_positive": true,
+    "d_minus_b1_reader_ci_lower_positive": true,
+    "d_within_0p010_of_teacher": true,
+    "text_gain_at_most_half_teacher_gain": true
+  }
+}

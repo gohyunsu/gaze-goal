@@ -1,0 +1,222 @@
+{
+  "article_goal_trial_count_minimum": 239,
+  "articles_have_both_goals": true,
+  "assertions": {
+    "all_articles_cover_both_goals": true,
+    "all_trials_have_valid_fixations": true,
+    "fixation_order_deterministic": true,
+    "outer_scientific_metrics_computed": false,
+    "outer_scientific_predictions_created": false,
+    "paragraph_screen_only": true,
+    "reader_goal_constant": true,
+    "regular_first_reading_only": true,
+    "teacher_word_alignment_feasible": true
+  },
+  "canonical_data_sha256": "9c3560ee8cf8e5eadd1ca22d9704544e5403ac9885080a8a284681f78032c75d",
+  "environment": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "pyarrow": "25.0.1",
+    "python": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]",
+    "sklearn": "1.7.2",
+    "torch": "2.7.0+cu128"
+  },
+  "fixation_counts": {
+    "canonical_fixations": 2042764,
+    "hunting_raw_fixation_rows": 981459,
+    "hunting_selected_source_fixations": 928800,
+    "invalid_fixation_rows_excluded": 70,
+    "nonfinite_coordinate_rows": 0,
+    "nonpositive_or_missing_duration_rows": 70,
+    "ordinary_raw_fixation_rows": 1172718,
+    "ordinary_selected_source_fixations": 1114034,
+    "out_of_text_fixations": 0,
+    "valid_rows_missing_chronology": 0,
+    "word_aligned_fixations": 2042764
+  },
+  "metadata_counts": {
+    "hunting_raw_ia_rows": 1105109,
+    "hunting_regular_trials": 9720,
+    "ordinary_raw_ia_rows": 1104883,
+    "ordinary_regular_trials": 9718
+  },
+  "observed": {
+    "articles": 30,
+    "fixations": 2042764,
+    "information_seeking_readers": 180,
+    "information_seeking_trials": 9720,
+    "ordinary_readers": 180,
+    "ordinary_trials": 9718,
+    "paragraph_versions": 339,
+    "readers": 360,
+    "trials": 19438
+  },
+  "outputs": {
+    "fixation_table": {
+      "bytes": 57998146,
+      "path": "data/processed/goalexit_fixations.parquet",
+      "sha256": "af67fd87d3c073ada559c34dcec7ef176b3e274de2ae3f31bf30b7b4876946c8"
+    },
+    "paragraph_table": {
+      "bytes": 180895,
+      "path": "data/processed/goalexit_paragraphs.parquet",
+      "sha256": "d260f9abfb3badfe44c362ba91ef0a30c8a6cc9dfbef40269a196b26b34b07b3"
+    },
+    "trial_table": {
+      "bytes": 493641,
+      "path": "data/processed/goalexit_trials.parquet",
+      "sha256": "788603352b4afb6137658fd02dc38e0efc8eeb46bc7a0dad9aaf7b8abf82adcf"
+    },
+    "word_table": {
+      "bytes": 11700526,
+      "path": "data/processed/goalexit_words.parquet",
+      "sha256": "cbea96025c25cd6f88c17d62cd907d6c1cd6e85966fbfc7d0431e4c8acd45665"
+    }
+  },
+  "overall_sequence_length_quantiles": {
+    "0.0": 9.0,
+    "0.25": 69.0,
+    "0.5": 96.0,
+    "0.75": 131.0,
+    "0.9": 170.0,
+    "0.95": 199.0,
+    "0.99": 266.0,
+    "1.0": 814.0
+  },
+  "population_definition": "regular first-reading Paragraph trials only",
+  "public_expectation": {
+    "articles": 30,
+    "information_seeking_readers": 180,
+    "information_seeking_trials": 9720,
+    "ordinary_readers": 180,
+    "ordinary_trials": 9718,
+    "readers": 360,
+    "trials": 19438
+  },
+  "public_expectation_matches": true,
+  "reader_goal_constancy": true,
+  "requested_source_columns": {
+    "fixations": [
+      "participant_id",
+      "TRIAL_INDEX",
+      "article_batch",
+      "article_id",
+      "difficulty_level",
+      "paragraph_id",
+      "practice_trial",
+      "question_preview",
+      "repeated_reading_trial",
+      "CURRENT_FIX_INDEX",
+      "CURRENT_FIX_START",
+      "CURRENT_FIX_DURATION",
+      "CURRENT_FIX_X",
+      "CURRENT_FIX_Y",
+      "CURRENT_FIX_INTEREST_AREA_INDEX",
+      "IP_START_TIME",
+      "TRIAL_START_TIME"
+    ],
+    "ia": [
+      "participant_id",
+      "TRIAL_INDEX",
+      "article_batch",
+      "article_id",
+      "difficulty_level",
+      "paragraph_id",
+      "practice_trial",
+      "question_preview",
+      "repeated_reading_trial",
+      "IA_ID",
+      "IA_LABEL",
+      "IA_LEFT",
+      "IA_TOP",
+      "IA_RIGHT",
+      "IA_BOTTOM",
+      "IA_FIXATION_COUNT",
+      "IA_DWELL_TIME",
+      "IA_FIRST_FIXATION_DURATION",
+      "IA_FIRST_RUN_DWELL_TIME",
+      "IA_REGRESSION_IN_COUNT",
+      "IA_RUN_COUNT",
+      "IA_SKIP"
+    ],
+    "trial": [
+      "participant_id",
+      "TRIAL_INDEX",
+      "article_batch",
+      "article_id",
+      "difficulty_level",
+      "paragraph_id",
+      "practice_trial",
+      "question_preview",
+      "repeated_reading_trial"
+    ]
+  },
+  "schema": "goalexit-canonical-v1",
+  "sequence_length_quantiles_by_goal": {
+    "H": {
+      "0.0": 9.0,
+      "0.25": 63.0,
+      "0.5": 88.0,
+      "0.75": 119.0,
+      "0.9": 155.0,
+      "0.95": 179.0,
+      "0.99": 238.8099999999995,
+      "1.0": 397.0
+    },
+    "O": {
+      "0.0": 22.0,
+      "0.25": 76.0,
+      "0.5": 104.0,
+      "0.75": 142.0,
+      "0.9": 184.0,
+      "0.95": 212.0,
+      "0.99": 291.0,
+      "1.0": 814.0
+    }
+  },
+  "sources": {
+    "hunting_fixations": {
+      "bytes": 245787943,
+      "member": "fixations_Paragraph_information_seeking.csv",
+      "path": "external_data/onestop/information_seeking/fixations_Paragraph_information_seeking.csv.zip",
+      "sha256": "49fc77d9b8ac38e0665df611e22430b625077c53e3bf2080679faf28715eef88"
+    },
+    "hunting_ia": {
+      "bytes": 165756770,
+      "member": "ia_Paragraph_information_seeking.csv",
+      "path": "external_data/onestop/information_seeking/ia_Paragraph_information_seeking.csv.zip",
+      "sha256": "05e9ab76a9ac47269cfb1386614f47b582da520b4953be2452fa81bf707e0e30"
+    },
+    "ordinary_fixations": {
+      "bytes": 288349184,
+      "member": "fixations_Paragraph_ordinary.csv",
+      "path": "external_data/onestop/ordinary_reading/fixations_Paragraph_ordinary.csv.zip",
+      "sha256": "1de8fb62e10f69b417aaeff7ddfc380261713f7d4e927e025eb781d051b1a248"
+    },
+    "ordinary_ia": {
+      "bytes": 177291322,
+      "member": "ia_Paragraph_ordinary.csv",
+      "path": "external_data/onestop/ordinary_reading/ia_Paragraph_ordinary.csv.zip",
+      "sha256": "8883478946ee52381e7057683c9e84dc69fcea9054acc34f0c900463a6b546e9"
+    }
+  },
+  "status": "pass",
+  "word_alignment_audit": {
+    "canonical_paragraph_word_rows": 36983,
+    "canonical_trial_word_rows": 2110632,
+    "hunting_selected_ia_rows": 1055429,
+    "layout_policy": "retain each trial's rendered IA geometry for coordinate normalization",
+    "maximum_ia_word_sequence_variants_per_source_version": 2,
+    "maximum_paragraph_words": 165,
+    "maximum_rendered_layout_variants_per_paragraph": 3,
+    "ordinary_selected_ia_rows": 1055203,
+    "paragraph_versions": 339,
+    "paragraph_versions_with_multiple_rendered_layouts": 236,
+    "reported_vs_derived_skip_disagreements": 390948,
+    "source_paragraph_versions": 324,
+    "source_versions_with_multiple_ia_word_sequences": 15,
+    "teacher_word_alignment_complete": true,
+    "word_sequence_matches_across_trials": true
+  }
+}

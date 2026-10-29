@@ -1,0 +1,12 @@
+text_encoder: roberta-base
+revision: e2da8e2f811d1448a5b465c236feacd80ffbac7b
+frozen: true
+text_projection: [768, 128]
+gaze_projection: [8, 64]
+position_embedding_dim: 32
+d_model: 192
+layers: 3
+attention_heads: 6
+feedforward_size: 384
+dropout: 0.1
+learning_rates: [0.0003, 0.0001]

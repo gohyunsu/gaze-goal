@@ -1,0 +1,84 @@
+sources:
+  ordinary_ia: ../../lexic_v5/research/source_audit/data/raw/ia_Paragraph_ordinary.csv.zip
+  ordinary_fixations: ../../lexic_v5/research/source_audit/data/raw/fixations_Paragraph_ordinary.csv.zip
+  hunting_ia: ../SpanGaze/research_storage/source_assets/hunting/ia_Paragraph_information_seeking.csv.zip
+  hunting_fixations: ../SpanGaze/research_storage/source_assets/hunting/fixations_Paragraph_information_seeking.csv.zip
+source_members:
+  ordinary_ia: ia_Paragraph_ordinary.csv
+  ordinary_fixations: fixations_Paragraph_ordinary.csv
+  hunting_ia: ia_Paragraph_information_seeking.csv
+  hunting_fixations: fixations_Paragraph_information_seeking.csv
+source_hashes:
+  ordinary_ia: 8883478946ee52381e7057683c9e84dc69fcea9054acc34f0c900463a6b546e9
+  ordinary_fixations: 1de8fb62e10f69b417aaeff7ddfc380261713f7d4e927e025eb781d051b1a248
+  hunting_ia: 05e9ab76a9ac47269cfb1386614f47b582da520b4953be2452fa81bf707e0e30
+  hunting_fixations: 49fc77d9b8ac38e0665df611e22430b625077c53e3bf2080679faf28715eef88
+roberta:
+  repo_id: FacebookAI/roberta-base
+  revision: e2da8e2f811d1448a5b465c236feacd80ffbac7b
+  local_path: research_storage/roberta-base-e2da8e2f
+  python_deps: research_storage/python_deps
+  cache_array: research_storage/roberta_cache/word_embeddings.npy
+  cache_ids: research_storage/roberta_cache/paragraph_ids.json
+outputs:
+  trial_table: data/processed/goalexit_trials.parquet
+  fixation_table: data/processed/goalexit_fixations.parquet
+  word_table: data/processed/goalexit_words.parquet
+  paragraph_table: data/processed/goalexit_paragraphs.parquet
+  canonical_manifest: artifacts/manifests/canonical_goalexit.json
+  feature_schema: artifacts/manifests/feature_schema.json
+  forbidden_field_audit: artifacts/manifests/forbidden_field_audit.json
+  split_manifest: artifacts/manifests/split_manifest.json
+  roberta_manifest: artifacts/manifests/roberta_cache_manifest.json
+  metadata_probe: artifacts/manifests/metadata_shortcut_probe.json
+  teacher_cache_manifest: artifacts/manifests/teacher_cache_manifest.json
+  development_metrics: artifacts/metrics/development_goalexit.json
+  development_output_audit: artifacts/manifests/development_output_audit.json
+  cpu_benchmark: artifacts/manifests/cpu_benchmark_manifest.json
+  permutation_sanity: artifacts/manifests/reader_label_permutation.json
+  outer_guard_audit: artifacts/manifests/outer_guard_audit.json
+  output_root: experiments/development
+  prediction_root: research_storage/predictions/development
+  checkpoint_root: research_storage/checkpoints/development
+split_seed: 20271002
+outer_folds: 5
+inner_folds: 3
+development_seed: 13
+prefixes: [5, 10, 20, 40, 80, FULL]
+threshold_grid: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95]
+learning_rates:
+  b0: [0.001, 0.0003]
+  b1: [0.001, 0.0003]
+  teacher: [0.0003, 0.0001]
+  distill: [0.001, 0.0003]
+distillation_alphas: [0.25, 0.50, 0.75]
+distillation_temperature: 2.0
+maximum_epochs: 30
+patience: 5
+minimum_delta: 0.0
+weight_decay: 0.0001
+gradient_clip: 1.0
+batch_size:
+  b0: 512
+  b1: 256
+  teacher: 128
+dropout:
+  student: 0.2
+  teacher: 0.1
+ece_bins: 15
+bootstrap_replicates: 2000
+parallel_workers: 4
+training_threads_per_worker: 3
+benchmark:
+  threads: 1
+  warmup: 100
+  iterations: 1000
+permutation_sanity:
+  evaluations:
+    - [r0_a0, 0]
+    - [r1_a1, 0]
+    - [r2_a2, 0]
+    - [r3_a3, 0]
+    - [r4_a4, 0]
+  seed: 2027100213
+  chance_tolerance_max_mean_ba: 0.55

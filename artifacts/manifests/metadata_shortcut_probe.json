@@ -1,0 +1,538 @@
+{
+  "constant_implementation_column_is_model_information": false,
+  "evaluations": [
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a0",
+      "inner_holdout": 0,
+      "training_trials": 5333,
+      "validation_trials": 1462
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a0",
+      "inner_holdout": 1,
+      "training_trials": 5582,
+      "validation_trials": 1358
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a0",
+      "inner_holdout": 2,
+      "training_trials": 5667,
+      "validation_trials": 1409
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a1",
+      "inner_holdout": 0,
+      "training_trials": 5741,
+      "validation_trials": 1310
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a1",
+      "inner_holdout": 1,
+      "training_trials": 5368,
+      "validation_trials": 1500
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a1",
+      "inner_holdout": 2,
+      "training_trials": 5549,
+      "validation_trials": 1371
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a2",
+      "inner_holdout": 0,
+      "training_trials": 5254,
+      "validation_trials": 1542
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a2",
+      "inner_holdout": 1,
+      "training_trials": 5794,
+      "validation_trials": 1266
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a2",
+      "inner_holdout": 2,
+      "training_trials": 5426,
+      "validation_trials": 1350
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a3",
+      "inner_holdout": 0,
+      "training_trials": 5634,
+      "validation_trials": 1374
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a3",
+      "inner_holdout": 1,
+      "training_trials": 5630,
+      "validation_trials": 1387
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a3",
+      "inner_holdout": 2,
+      "training_trials": 5492,
+      "validation_trials": 1419
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a4",
+      "inner_holdout": 0,
+      "training_trials": 5616,
+      "validation_trials": 1392
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a4",
+      "inner_holdout": 1,
+      "training_trials": 5416,
+      "validation_trials": 1450
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r0_a4",
+      "inner_holdout": 2,
+      "training_trials": 5616,
+      "validation_trials": 1328
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a0",
+      "inner_holdout": 0,
+      "training_trials": 5536,
+      "validation_trials": 1466
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a0",
+      "inner_holdout": 1,
+      "training_trials": 5678,
+      "validation_trials": 1358
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a0",
+      "inner_holdout": 2,
+      "training_trials": 5305,
+      "validation_trials": 1299
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a1",
+      "inner_holdout": 0,
+      "training_trials": 5671,
+      "validation_trials": 1271
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a1",
+      "inner_holdout": 1,
+      "training_trials": 5655,
+      "validation_trials": 1383
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a1",
+      "inner_holdout": 2,
+      "training_trials": 5304,
+      "validation_trials": 1497
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a2",
+      "inner_holdout": 0,
+      "training_trials": 5511,
+      "validation_trials": 1497
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a2",
+      "inner_holdout": 1,
+      "training_trials": 5454,
+      "validation_trials": 1343
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a2",
+      "inner_holdout": 2,
+      "training_trials": 5584,
+      "validation_trials": 1452
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a3",
+      "inner_holdout": 0,
+      "training_trials": 5430,
+      "validation_trials": 1464
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a3",
+      "inner_holdout": 1,
+      "training_trials": 5993,
+      "validation_trials": 1243
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a3",
+      "inner_holdout": 2,
+      "training_trials": 5396,
+      "validation_trials": 1538
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a4",
+      "inner_holdout": 0,
+      "training_trials": 5450,
+      "validation_trials": 1429
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a4",
+      "inner_holdout": 1,
+      "training_trials": 5451,
+      "validation_trials": 1462
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r1_a4",
+      "inner_holdout": 2,
+      "training_trials": 5825,
+      "validation_trials": 1341
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a0",
+      "inner_holdout": 0,
+      "training_trials": 5864,
+      "validation_trials": 1220
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a0",
+      "inner_holdout": 1,
+      "training_trials": 5601,
+      "validation_trials": 1307
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a0",
+      "inner_holdout": 2,
+      "training_trials": 5053,
+      "validation_trials": 1598
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a1",
+      "inner_holdout": 0,
+      "training_trials": 5245,
+      "validation_trials": 1417
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a1",
+      "inner_holdout": 1,
+      "training_trials": 5495,
+      "validation_trials": 1384
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a1",
+      "inner_holdout": 2,
+      "training_trials": 5791,
+      "validation_trials": 1252
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a2",
+      "inner_holdout": 0,
+      "training_trials": 5472,
+      "validation_trials": 1310
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a2",
+      "inner_holdout": 1,
+      "training_trials": 5514,
+      "validation_trials": 1311
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a2",
+      "inner_holdout": 2,
+      "training_trials": 5329,
+      "validation_trials": 1444
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a3",
+      "inner_holdout": 0,
+      "training_trials": 5183,
+      "validation_trials": 1579
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a3",
+      "inner_holdout": 1,
+      "training_trials": 5536,
+      "validation_trials": 1386
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a3",
+      "inner_holdout": 2,
+      "training_trials": 6020,
+      "validation_trials": 1198
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a4",
+      "inner_holdout": 0,
+      "training_trials": 5702,
+      "validation_trials": 1267
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a4",
+      "inner_holdout": 1,
+      "training_trials": 5235,
+      "validation_trials": 1354
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r2_a4",
+      "inner_holdout": 2,
+      "training_trials": 5478,
+      "validation_trials": 1287
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a0",
+      "inner_holdout": 0,
+      "training_trials": 5373,
+      "validation_trials": 1437
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a0",
+      "inner_holdout": 1,
+      "training_trials": 5399,
+      "validation_trials": 1392
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a0",
+      "inner_holdout": 2,
+      "training_trials": 5723,
+      "validation_trials": 1313
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a1",
+      "inner_holdout": 0,
+      "training_trials": 5804,
+      "validation_trials": 1227
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a1",
+      "inner_holdout": 1,
+      "training_trials": 5315,
+      "validation_trials": 1433
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a1",
+      "inner_holdout": 2,
+      "training_trials": 5440,
+      "validation_trials": 1422
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a2",
+      "inner_holdout": 0,
+      "training_trials": 5275,
+      "validation_trials": 1534
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a2",
+      "inner_holdout": 1,
+      "training_trials": 5673,
+      "validation_trials": 1349
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a2",
+      "inner_holdout": 2,
+      "training_trials": 5538,
+      "validation_trials": 1287
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a3",
+      "inner_holdout": 0,
+      "training_trials": 5637,
+      "validation_trials": 1380
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a3",
+      "inner_holdout": 1,
+      "training_trials": 5432,
+      "validation_trials": 1609
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a3",
+      "inner_holdout": 2,
+      "training_trials": 5790,
+      "validation_trials": 1294
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a4",
+      "inner_holdout": 0,
+      "training_trials": 5641,
+      "validation_trials": 1347
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a4",
+      "inner_holdout": 1,
+      "training_trials": 5254,
+      "validation_trials": 1538
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r3_a4",
+      "inner_holdout": 2,
+      "training_trials": 5763,
+      "validation_trials": 1295
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a0",
+      "inner_holdout": 0,
+      "training_trials": 5330,
+      "validation_trials": 1319
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a0",
+      "inner_holdout": 1,
+      "training_trials": 5450,
+      "validation_trials": 1424
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a0",
+      "inner_holdout": 2,
+      "training_trials": 5643,
+      "validation_trials": 1263
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a1",
+      "inner_holdout": 0,
+      "training_trials": 5301,
+      "validation_trials": 1510
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a1",
+      "inner_holdout": 1,
+      "training_trials": 5703,
+      "validation_trials": 1324
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a1",
+      "inner_holdout": 2,
+      "training_trials": 5676,
+      "validation_trials": 1361
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a2",
+      "inner_holdout": 0,
+      "training_trials": 5279,
+      "validation_trials": 1468
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a2",
+      "inner_holdout": 1,
+      "training_trials": 5553,
+      "validation_trials": 1355
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a2",
+      "inner_holdout": 2,
+      "training_trials": 5619,
+      "validation_trials": 1331
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a3",
+      "inner_holdout": 0,
+      "training_trials": 5511,
+      "validation_trials": 1425
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a3",
+      "inner_holdout": 1,
+      "training_trials": 5852,
+      "validation_trials": 1276
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a3",
+      "inner_holdout": 2,
+      "training_trials": 5426,
+      "validation_trials": 1518
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a4",
+      "inner_holdout": 0,
+      "training_trials": 5593,
+      "validation_trials": 1353
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a4",
+      "inner_holdout": 1,
+      "training_trials": 5408,
+      "validation_trials": 1397
+    },
+    {
+      "balanced_accuracy": 0.5,
+      "context_id": "r4_a4",
+      "inner_holdout": 2,
+      "training_trials": 5504,
+      "validation_trials": 1320
+    }
+  ],
+  "materially_exceeds_chance_threshold": 0.55,
+  "maximum_balanced_accuracy": 0.5,
+  "mean_balanced_accuracy": 0.5,
+  "outer_rows_touched": false,
+  "probe": "intercept-only logistic regression",
+  "remaining_non_gaze_metadata_features": [],
+  "schema": "goalexit-metadata-shortcut-probe-v1",
+  "status": "pass"
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "goalexit-figure1-scanpath-provenance-v1",
+  "status": "PASS",
+  "figure": "paper/main.tex#fig:overview",
+  "source_fixation_table": "data/processed/goalexit_fixations.parquet",
+  "source_fixation_table_sha256": "af67fd87d3c073ada559c34dcec7ef176b3e274de2ae3f31bf30b7b4876946c8",
+  "trial_id": "t_19f632e63de01d75c3773a89",
+  "trial_selection": "median-length validation trial used for the distilled-GRU CPU benchmark",
+  "trial_fixation_count": 90,
+  "source_span": {
+    "first_fixation_index": 34,
+    "last_fixation_index": 68,
+    "fixation_count": 35
+  },
+  "displayed_fixations": [
+    {"fixation_index": 34, "duration_ms": 155.0, "size_class": "medium"},
+    {"fixation_index": 36, "duration_ms": 253.0, "size_class": "large"},
+    {"fixation_index": 38, "duration_ms": 126.0, "size_class": "small"},
+    {"fixation_index": 39, "duration_ms": 244.0, "size_class": "large"},
+    {"fixation_index": 44, "duration_ms": 148.0, "size_class": "medium"}
+  ],
+  "observed_patterns": {
+    "forward_progression": [
+      {
+        "line_index": 0,
+        "fixation_indices": [34, 35, 36, 37, 38],
+        "x_norm_start": 0.126630,
+        "x_norm_end": 0.907123
+      },
+      {
+        "line_index": 1,
+        "fixation_indices": [39, 40, 41, 42, 43, 44],
+        "x_norm_start": 0.093699,
+        "x_norm_end": 0.887178
+      }
+    ],
+    "return_sweeps": [
+      {
+        "fixation_indices": [38, 39],
+        "line_indices": [0, 1],
+        "x_norm": [0.907123, 0.093699]
+      },
+      {
+        "fixation_indices": [44, 45],
+        "line_indices": [1, 2],
+        "x_norm": [0.887178, 0.082137]
+      },
+      {
+        "fixation_indices": [50, 51],
+        "line_indices": [2, 3],
+        "x_norm": [0.815014, 0.079616]
+      }
+    ],
+    "within_line_regressions": [
+      {
+        "fixation_indices": [55, 56],
+        "line_index": 3,
+        "x_norm": [0.523781, 0.242795]
+      },
+      {
+        "fixation_indices": [58, 59],
+        "line_index": 3,
+        "x_norm": [0.361534, 0.257973]
+      }
+    ]
+  },
+  "diagram_policy": "Five markers compress the observed span while preserving forward progression and a return sweep. Small, medium, and large marker classes encode the relative fixation durations of the displayed observations; coordinates remain schematic."
+}
