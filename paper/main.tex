@@ -208,12 +208,11 @@ This study makes three contributions:
 
   \draw[kdarr] (75,12) -- (75,-2);
 \end{tikzpicture}
-\caption{Training-only distillation.  The teacher uses contextual text and
-word-level gaze summaries.  The student uses a fixation sequence.  The
-simplified scanpath retains line progression and a return sweep from a
-representative trial, with marker size indicating fixation duration.  The
-dashed link denotes soft-target matching.  Only the green path remains at
-inference.}
+\caption{Training-only distillation for gaze-only inference.  A teacher
+predicts the reading goal from contextual text and word-aligned gaze
+summaries, and its soft predictions supervise a student that receives only
+the fixation sequence.  Marker size represents fixation duration.  At
+inference, the student operates without text, word alignment, or the teacher.}
 \label{fig:overview}
 \end{figure}
 
