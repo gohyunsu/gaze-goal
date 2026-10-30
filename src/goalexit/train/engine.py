@@ -350,6 +350,7 @@ def train_candidate(
     teacher_training_logits: dict[str, float] | None = None,
     alpha: float | None = None,
     temperature: float = 2.0,
+    student_architecture: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     deterministic_seed(seed)
     if family in {"teacher", "t_text"}:
@@ -372,7 +373,12 @@ def train_candidate(
             train_lengths = {key: 1 for key in training_ids}
         else:
             train_student = store.transformed_student(training_ids, preprocessor)
-            model = make_deployment_model(family, len(STUDENT_FEATURES), dropout=dropout).to(device)
+            model = make_deployment_model(
+                family,
+                len(STUDENT_FEATURES),
+                dropout=dropout,
+                student_architecture=student_architecture,
+            ).to(device)
             train_lengths = {key: len(train_student[key]) for key in training_ids}
     target_map = training_targets.set_index("trial_id")["goal_index"].astype(float).to_dict()
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
@@ -698,6 +704,7 @@ def load_checkpoint(
             deployment_family,
             len(B0_FEATURES) if family == "b0" else len(STUDENT_FEATURES),
             dropout=float(value["run_config"]["dropout"]),
+            student_architecture=value["run_config"].get("architecture"),
         )
     model.load_state_dict(value["model_state_dict"])
     model.to(device).eval()

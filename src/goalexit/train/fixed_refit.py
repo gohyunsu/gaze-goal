@@ -77,6 +77,7 @@ def fit_fixed_epochs(
     alpha: float | None = None,
     temperature: float = 2.0,
     label_smoothing: float = 0.0,
+    student_architecture: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     if family not in {"b0", "b1", "teacher", "t_text", "d", "gaze_teacher", "d_gaze", "ls"}:
         raise ValueError(f"Unauthorized fixed-refit family {family}")
@@ -109,7 +110,12 @@ def fit_fixed_epochs(
             train_lengths = {key: 1 for key in training_ids}
         else:
             train_student = store.transformed_student(training_ids, preprocessor)
-            model = make_deployment_model(family, len(STUDENT_FEATURES), dropout=dropout).to(device)
+            model = make_deployment_model(
+                family,
+                len(STUDENT_FEATURES),
+                dropout=dropout,
+                student_architecture=student_architecture,
+            ).to(device)
             train_lengths = {key: len(train_student[key]) for key in training_ids}
     if family in {"d", "d_gaze"}:
         if teacher_training_logits is None or set(teacher_training_logits) != set(training_ids):

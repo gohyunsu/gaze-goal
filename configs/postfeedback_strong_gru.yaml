@@ -1,0 +1,68 @@
+schema: goalexit-postfeedback-strong-gru-v1
+protocol: docs/19_POSTFEEDBACK_STRONG_GRU_PROTOCOL.md
+post_hoc: true
+outer_results_known_when_designed: true
+development_config: configs/development_goalexit.yaml
+split_manifest: artifacts/manifests/split_manifest.json
+canonical_manifest: artifacts/manifests/canonical_goalexit.json
+inner_teacher_cache_root: experiments/development
+base_teacher_cache_root: research_storage/teacher_cache/postconfirmatory_ablation
+extension_teacher_cache_root: research_storage/teacher_cache/postconfirmatory_seed_extension
+base_seed: 13
+seeds: [13, 29, 47]
+inner_folds: 3
+device: cuda
+training_threads: 2
+development_seed: 13
+architectures:
+  shallow_64:
+    input_layer_norm: true
+    gru_layers: 1
+    hidden_size: 64
+    head_size: 64
+    bidirectional: false
+    recurrent_dropout: 0.0
+  original_64:
+    input_layer_norm: true
+    gru_layers: 2
+    hidden_size: 64
+    head_size: 64
+    bidirectional: false
+    recurrent_dropout: 0.0
+  shallow_128:
+    input_layer_norm: true
+    gru_layers: 1
+    hidden_size: 128
+    head_size: 128
+    bidirectional: false
+    recurrent_dropout: 0.0
+  stacked_128:
+    input_layer_norm: true
+    gru_layers: 2
+    hidden_size: 128
+    head_size: 128
+    bidirectional: false
+    recurrent_dropout: 0.2
+learning_rates: [0.003, 0.001, 0.0003, 0.0001]
+distillation_alphas: [0.25, 0.50, 0.75]
+distillation_temperature: 2.0
+maximum_epochs: 50
+patience: 7
+minimum_delta: 0.0
+weight_decay: 0.0001
+gradient_clip: 1.0
+batch_size: 256
+head_dropout: 0.2
+ece_bins: 15
+bootstrap:
+  reader_cluster_replicates: 5000
+  reader_article_replicates: 2000
+  seed: 20271031
+outputs:
+  output_root: experiments/postfeedback_strong_gru
+  checkpoint_root: research_storage/checkpoints/postfeedback_strong_gru
+  prediction_root: research_storage/predictions/postfeedback_strong_gru
+  selection_state: experiments/postfeedback_strong_gru/selection_state.json
+  outer_state: experiments/postfeedback_strong_gru/outer_state.json
+  metrics: artifacts/metrics/postfeedback_strong_gru.json
+  report: docs/20_POSTFEEDBACK_STRONG_GRU_REPORT.md

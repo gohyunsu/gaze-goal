@@ -9,6 +9,7 @@ experiments/outer_kd/
 experiments/postconfirmatory_ablation/
 experiments/postconfirmatory_seed_extension/
 experiments/postfeedback_shuffled_kd/
+experiments/postfeedback_strong_gru/
 artifacts/predictions/
 artifacts/checkpoints/
 artifacts/cache/

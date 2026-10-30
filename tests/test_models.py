@@ -2,7 +2,13 @@ from __future__ import annotations
 
 import torch
 
-from goalexit.models.goalexit import CausalGazeGRU, GlobalStatsMLP, PrivilegedTeacher, make_deployment_model
+from goalexit.models.goalexit import (
+    CausalGazeGRU,
+    GlobalStatsMLP,
+    PrivilegedTeacher,
+    make_deployment_model,
+    parameter_counts,
+)
 from goalexit.train.engine import bernoulli_distillation_loss
 from goalexit.train.fixed_refit import smooth_binary_targets
 
@@ -20,6 +26,24 @@ def test_authorized_model_shapes_and_student_capacity_identity() -> None:
     assert sum(p.numel() for p in d.parameters()) == sum(p.numel() for p in a.parameters())
     assert not any("reader" in name or "identity" in name for name, _ in b1.named_parameters())
     assert b1.gru.bidirectional is False and b1.gru.num_layers == 2
+
+
+def test_student_architecture_can_be_tuned_without_changing_interface() -> None:
+    model = make_deployment_model(
+        "b1",
+        10,
+        student_architecture={
+            "gru_layers": 1,
+            "hidden_size": 128,
+            "head_size": 128,
+            "bidirectional": False,
+            "recurrent_dropout": 0.0,
+        },
+    )
+    output = model(torch.randn(3, 7, 10), torch.tensor([7, 5, 4]))
+    default = make_deployment_model("b1", 10)
+    assert output.shape == (3,)
+    assert parameter_counts(model)["trainable"] > parameter_counts(default)["trainable"]
 
 
 def test_teacher_shapes_and_text_only_ignores_gaze_values() -> None:

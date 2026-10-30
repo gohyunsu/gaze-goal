@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
+from typing import Any
+
 import torch
 from torch import nn
 
@@ -22,22 +25,37 @@ class GlobalStatsMLP(nn.Module):
 
 
 class CausalGazeGRU(nn.Module):
-    def __init__(self, input_dim: int = 10, hidden_size: int = 64, dropout: float = 0.2):
+    def __init__(
+        self,
+        input_dim: int = 10,
+        hidden_size: int = 64,
+        num_layers: int = 2,
+        head_size: int = 64,
+        dropout: float = 0.2,
+        recurrent_dropout: float = 0.0,
+        bidirectional: bool = False,
+    ):
         super().__init__()
+        if hidden_size < 1 or num_layers < 1 or head_size < 1:
+            raise ValueError("GRU dimensions and layer count must be positive")
+        if not 0.0 <= recurrent_dropout < 1.0:
+            raise ValueError("Recurrent dropout must be in [0, 1)")
+        if bidirectional:
+            raise ValueError("Deployment GRU must remain causal")
         self.input_norm = nn.LayerNorm(input_dim)
         self.gru = nn.GRU(
             input_size=input_dim,
             hidden_size=hidden_size,
-            num_layers=2,
+            num_layers=num_layers,
             batch_first=True,
-            dropout=0.0,
-            bidirectional=False,
+            dropout=recurrent_dropout if num_layers > 1 else 0.0,
+            bidirectional=bidirectional,
         )
         self.head = nn.Sequential(
-            nn.Linear(hidden_size, 64),
+            nn.Linear(hidden_size, head_size),
             nn.ReLU(),
             nn.Dropout(dropout),
-            nn.Linear(64, 1),
+            nn.Linear(head_size, 1),
         )
 
     def encode(self, values: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
@@ -117,12 +135,33 @@ class PrivilegedTeacher(nn.Module):
 
 
 def make_deployment_model(
-    model: str, input_dim: int, *, dropout: float = 0.2
+    model: str,
+    input_dim: int,
+    *,
+    dropout: float = 0.2,
+    student_architecture: Mapping[str, Any] | None = None,
 ) -> nn.Module:
     if model == "b0":
         return GlobalStatsMLP(input_dim, dropout=dropout)
     if model in {"b1", "d", "a", "d_gaze", "ls"}:
-        return CausalGazeGRU(input_dim=input_dim, hidden_size=64, dropout=dropout)
+        architecture = dict(student_architecture or {})
+        head = architecture.get("head")
+        head_size = (
+            int(architecture["head_size"])
+            if "head_size" in architecture
+            else int(head[-2])
+            if isinstance(head, (list, tuple)) and len(head) >= 3
+            else 64
+        )
+        return CausalGazeGRU(
+            input_dim=input_dim,
+            hidden_size=int(architecture.get("hidden_size", 64)),
+            num_layers=int(architecture.get("gru_layers", 2)),
+            head_size=head_size,
+            dropout=dropout,
+            recurrent_dropout=float(architecture.get("recurrent_dropout", 0.0)),
+            bidirectional=bool(architecture.get("bidirectional", False)),
+        )
     raise ValueError(f"Unauthorized deployment model {model}")
 
 
