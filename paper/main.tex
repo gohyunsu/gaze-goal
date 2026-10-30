@@ -226,11 +226,11 @@ comprehension under new-reader and new-item conditions
 
 Shubi \emph{et al.} introduced this reading-goal decoding task under new-reader
 and new-item conditions~\cite{shubi2025decoding}.  Their fixation-level
-text--gaze model substantially outperforms their word-level variant, although
-different split construction and metrics prevent direct numerical comparison.
-We use a word-level teacher to place contextual text and aggregated gaze in a
-common representation.  This supports a controlled removal of text while the
-student's chronological fixation input remains fixed.
+text--gaze model outperformed their word-level variant.  Because their split
+construction and metrics differ from ours, we do not compare numerical results
+directly.  We use a word-level teacher to place contextual text and aggregated
+gaze in a common representation.  This supports a controlled removal of text
+while the student's chronological fixation input remains fixed.
 
 \subsection{Distillation with Privileged Information}
 
@@ -369,11 +369,11 @@ threshold selection.
 Models are optimized with AdamW~\cite{loshchilov2019adamw}, weight decay
 $10^{-4}$, and gradient clipping at 1.0.  Inner training uses at most 30 epochs
 with a patience of five epochs.  Batch sizes are 512 for \modelStats{}, 256 for
-the GRU students, and 128 for the teacher models.  Final refits use the selected
+the GRU models, and 128 for the teacher models.  Final refits use the selected
 learning rate and fixed epoch count described above, without test-dependent
 stopping.
 
-\subsection{Ablation Controls}
+\subsection{Baseline and Ablation Controls}
 
 We used the same outer splits and training setup for the following post hoc
 controls.  Paired conditions inherit the selected learning rate and
@@ -436,58 +436,56 @@ Lower is better for NLL, Brier, and ECE.}
 \toprule
 Model & BA & AUROC & Macro F1 & NLL & Brier & ECE \\
 \midrule
-\modelTime{}$^b$ & .5887 & .6292 & .5887 & .6635 & .2359 & .0155 \\
-\modelLinear{}$^b$ & .6066 & .6493 & .6065 & .6572 & .2327 & .0236 \\
+\modelTime{}$^a$ & .5887 & .6292 & .5887 & .6635 & .2359 & .0155 \\
+\modelLinear{}$^a$ & .6066 & .6493 & .6065 & .6572 & .2327 & .0236 \\
 \modelStats{} & .5942 & .6359 & .5936 & .6632 & .2360 & .0410 \\
 \modelGru{} & .5866 & .6178 & .5862 & .6710 & .2391 & .0210 \\
-\modelTeacher{} & .6126 & .6613 & .6120 & .6561 & .2312 & .0496 \\
-\modelText{} & .4986 & .5017 & .4986 & .6952 & .2510 & .0304 \\
 \modelDistill{} & \best{.6205} & \best{.6708} & \best{.6204} & \best{.6427} &
 \best{.2265} & \best{.0142} \\
+\modelTeacher{} & .6126 & .6613 & .6120 & .6561 & .2312 & .0496 \\
+\modelText{} & .4986 & .5017 & .4986 & .6952 & .2510 & .0304 \\
 \bottomrule
-\multicolumn{7}{@{}l}{\scriptsize $^b$LR controls use nested selection within the same reader/article splits.}
+\multicolumn{7}{@{}l}{\scriptsize $^a$LR controls use nested selection within the same reader/article splits.}
 \end{tabular}
 \end{table}
 
-\modelDistill{} improves BA over \modelGru{} by 0.0339.  The reader-clustered
-95\% interval is $[0.0175, 0.0504]$, and the crossed reader/article interval is
-$[0.0130, 0.0553]$.  Its NLL, Brier score, and ECE are also lower than those of
-the matched GRU.  The distilled model exceeds \modelStats{} and
-\modelTeacher{} in pooled BA, while \modelText{} is near chance.
+\modelDistill{} raises BA by 3.39 percentage points relative to \modelGru{}.
+Reader-clustered resampling gives a 95\% interval of $[1.75, 5.04]$ points, and
+crossed reader/article resampling gives $[1.30, 5.53]$ points.  Its NLL, Brier
+score, and ECE are also lower than those of the matched GRU, while \modelText{}
+is near chance.
 
 \modelLinear{} is the best-performing logistic control at 0.6066 BA.  \modelDistill{}
-is 0.0139 higher, but its crossed reader/article interval includes zero
-($[-0.0037, 0.0321]$).
+is 1.39 percentage points higher, but its crossed reader/article interval
+includes zero ($[-0.37, 3.21]$ points).
 
 \subsection{Ablations and Seed Sensitivity}
 
 Table~\ref{tab:controls} averages the ablation comparisons over three matched
 random seeds.  The tested label-smoothing condition does not improve BA over
-the GRU.  All three seeds show positive BA differences for both teacher
-variants and class-shuffled targets, and their reader-clustered intervals are
-above zero.
+the GRU.  KD yields positive seed-wise differences for both teacher variants
+and for class-shuffled targets.
 
 \begin{table}[t]
-\caption{Separate post hoc matched-seed reruns for fixation-sequence students.
-Model-row $\Delta$BA is relative to GRU+BCE.  Aligned teachers aggregate gaze
-by word.  CIs are reader-clustered, and $n_+$ counts seeds with
-$\Delta\mathrm{BA}>0$.}
+\caption{Post hoc matched-seed controls.  Model rows compare with GRU+BCE.
+Aligned teachers aggregate gaze by word.  CIs use reader-clustered resampling,
+and $n_+$ counts positive seed-wise differences.}
 \label{tab:controls}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{1.7pt}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
-Condition & BA & $\Delta$BA & Reader 95\% CI & $n_+$ \\
+Condition & BA (\%) & $\Delta$BA (pp) & 95\% CI (pp) & $n_+$ \\
 \midrule
-GRU+BCE & .5857 & -- & -- & -- \\
-$+$ label smoothing & .5852 & $-$.0005 & [$-$.0022,.0011] & 1/3 \\
-KD: aligned gaze teacher & .6221 & +.0364 & [.0199,.0534] & 3/3 \\
-KD: aligned text--gaze teacher & .6232 & +.0376 & [.0223,.0529] & 3/3 \\
-KD: class-shuffled targets & .6042 & +.0185 & [.0052,.0317] & 3/3 \\
+GRU+BCE & 58.57 & -- & -- & -- \\
+GRU+label smoothing & 58.52 & $-$0.05 & [$-$0.22, 0.11] & 1/3 \\
+KD: aligned gaze teacher & 62.21 & +3.64 & [1.99, 5.34] & 3/3 \\
+KD: aligned text--gaze teacher & 62.32 & +3.76 & [2.23, 5.29] & 3/3 \\
+KD: class-shuffled targets & 60.42 & +1.85 & [0.52, 3.17] & 3/3 \\
 \midrule
-KD: aligned text--gaze $-$ gaze & -- & +.0011 & [$-$.0030,.0052] & 1/3 \\
-KD: unshuffled $-$ class-shuffled & -- & +.0190 & [.0061,.0317] & 3/3 \\
+KD: aligned text--gaze $-$ gaze & -- & +0.11 & [$-$0.30, 0.52] & 1/3 \\
+KD: unshuffled $-$ class-shuffled & -- & +1.90 & [0.61, 3.17] & 3/3 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -505,7 +503,7 @@ all retained sequences, model-only latency has a 5.08-ms median and a 16.57-ms
 
 \section{Discussion}
 
-Teacher-derived soft targets improve the fixed gaze-only GRU relative to
+Teacher-derived soft targets improve the matched gaze-only GRU relative to
 hard-label BCE, whereas the tested label-smoothing control does not.  The
 gaze-summary logistic baseline remains competitive, and the distilled model's
 advantage over it is uncertain under crossed reader/article resampling.
@@ -520,14 +518,13 @@ remove it.  Preserving trial-level correspondence between teacher targets and
 student inputs contributes to the gain.  The remaining improvement may reflect
 class-dependent soft targets or changes in optimization.
 
-All bootstraps resample fixed out-of-fold predictions and therefore exclude
-retraining variability.  The post hoc ablation intervals also average three
-seed-specific differences in each draw, rather than characterizing the full
-distribution across initializations.  Because each reader was assigned one
-goal, within-reader effects require crossover data.  The data come from English
-news articles read with a laboratory eye tracker, and predictions use complete
-scanpaths.  Other domains, devices, self-selected goals, and partial sequences
-remain to be evaluated.
+Bootstrap intervals condition on fixed out-of-fold predictions and do not
+include retraining variability.  The seed analysis covers three
+initializations.  Because each reader was assigned one goal, within-reader
+effects require crossover data.  The data come from English news articles read
+with a laboratory eye tracker, and predictions use complete scanpaths.  Other
+domains, devices, self-selected goals, and partial sequences remain to be
+evaluated.
 
 The gaze-only student still requires calibrated coordinates and paragraph
 bounds.  The CPU benchmark excludes eye tracking, preprocessing, memory use,
@@ -536,13 +533,12 @@ with users.
 
 \section{Conclusion}
 
-Training-time distillation improves a gaze-only GRU when both readers
-and articles are unseen.  The deployed model uses only fixation sequences.
-Within-class target shuffling indicates that trial-level target correspondence
-contributes to the gain.  Adding contextual text to the tested word-level
-teacher yields no detectable benefit.  The improvement is established against
-the matched GRU.  Superiority over the best-performing logistic control remains
-uncertain.
+Training-time distillation improves a gaze-only GRU for unseen readers and
+articles while inference uses only fixation sequences.  Within-class target
+shuffling reduces the gain, whereas adding contextual text to the tested
+word-level teacher yields no detectable benefit.  The evidence establishes an
+improvement over the matched GRU, not superiority over the best-performing
+logistic control.
 
 \section*{Code Availability}
 
