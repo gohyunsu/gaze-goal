@@ -70,7 +70,7 @@ knj01@snu.ac.kr}}
 Reading interfaces could adapt to whether users read for comprehension or seek
 specific information.  A prior approach combines gaze and contextual text and
 requires fixation-to-word alignment at inference.  We instead use a
-word-aligned teacher only during training to supervise a compact GRU that
+word-aligned teacher only during training to supervise a GRU that
 receives the chronological fixation sequence.  On OneStop, with readers and
 articles both held out, distillation raises balanced accuracy by 3.39
 percentage points over the same GRU trained with hard labels.  This gain
@@ -102,7 +102,7 @@ alignment, and a language encoder.  We ask whether word-aligned supervision
 can instead be used only during training while prediction uses gaze alone.
 
 We study teachers that aggregate gaze by word.  One teacher also receives
-contextual word representations.  Their soft predictions supervise a compact
+contextual word representations.  Their soft predictions supervise a
 student that observes the chronological fixation sequence.  The primary
 comparison holds the student architecture and input fixed.  At inference, the
 student uses no teacher, text encoder, tokenization, or fixation-to-word
@@ -238,10 +238,10 @@ Knowledge distillation (KD) trains a student with class labels and a teacher's
 temperature-softened predictive distribution~\cite{hinton2015distilling}.
 Generalized distillation allows the teacher to use privileged information that
 is unavailable to the student at inference~\cite{lopezpaz2016unifying}.  This
-setting allows word-level text and gaze representations to guide training while
-the deployed model remains gaze-only.  We apply it to reading-goal
-classification and test whether the benefit depends on contextual text or
-the pairing between each training trial and its teacher prediction.
+setting allows word-level gaze, with or without contextual text, to guide
+training while the deployed model remains gaze-only.  We apply it to
+reading-goal classification and test whether the benefit depends on contextual
+text or the pairing between each training trial and its teacher prediction.
 
 \section{Method}
 
@@ -251,7 +251,8 @@ The unit of analysis is a completed paragraph-reading trial represented by its
 eye movements.  The binary target is the experimentally assigned reading-goal
 condition: ordinary reading for comprehension ($y=0$) or information seeking
 ($y=1$).  In the information-seeking condition, readers preview the question
-before the paragraph.  In ordinary reading, the question follows it.  Readers
+before the paragraph.  In ordinary reading, readers see the question only
+after reading the paragraph.  Readers
 were randomly assigned to one condition~\cite{berzak2025onestop}.  We use the
 anonymized public release, collected with consent under an institutional ethics
 protocol, and retain first readings from these two conditions.  We exclude
@@ -269,8 +270,8 @@ the paragraph bounds, log fixation duration, horizontal and vertical
 displacement from the preceding fixation, and log saccade amplitude.  The
 remaining features are the sine and cosine of the saccade angle, a
 line-transition indicator, and position within the observed sequence.  Retained
-fixations have positive finite durations and finite paragraph-screen
-coordinates.  Continuous features are standardized using statistics from the
+fixations have positive finite durations and coordinates within the paragraph
+region.  Continuous features are standardized using statistics from the
 current training set only.
 
 \subsection{Models}
@@ -454,7 +455,7 @@ $[0.0130, 0.0553]$.  Its NLL, Brier score, and ECE are also lower than those of
 the matched GRU.  The distilled model exceeds \modelStats{} and
 \modelTeacher{} in pooled BA, while \modelText{} is near chance.
 
-\modelLinear{} is the strongest logistic control at 0.6066 BA.  \modelDistill{}
+\modelLinear{} is the best-performing logistic control at 0.6066 BA.  \modelDistill{}
 is 0.0139 higher, but its crossed reader/article interval includes zero
 ($[-0.0037, 0.0321]$).
 
@@ -535,12 +536,12 @@ with users.
 
 \section{Conclusion}
 
-Training-time distillation improves a compact gaze-only GRU when both readers
+Training-time distillation improves a gaze-only GRU when both readers
 and articles are unseen.  The deployed model uses only fixation sequences.
 Within-class target shuffling indicates that trial-level target correspondence
 contributes to the gain.  Adding contextual text to the tested word-level
 teacher yields no detectable benefit.  The improvement is established against
-the matched GRU.  Superiority over the strongest logistic control remains
+the matched GRU.  Superiority over the best-performing logistic control remains
 uncertain.
 
 \section*{Code Availability}
