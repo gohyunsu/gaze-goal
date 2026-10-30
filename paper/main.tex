@@ -68,18 +68,19 @@ knj01@snu.ac.kr}}
 
 \begin{abstract}
 Reading interfaces could adapt to whether a user reads for comprehension or
-seeks specific information.  In prior work, the strongest single model combines
+seeks specific information.  In prior work, the best non-ensemble model combines
 gaze with contextual text and requires fixation-to-word alignment at inference.
 We use these resources only during training: a word-aligned teacher distills soft
 targets into a compact GRU that operates on fixation sequences alone.  On
 OneStop, with both readers and articles held out, distillation improves
 balanced accuracy by 3.39 percentage points over the same GRU trained with
 hard labels.  Reader-clustered and crossed reader/article bootstrap intervals
-exclude zero.  Label smoothing does not reproduce the gain.  Shuffling teacher
-logits within class reduces the improvement by 1.90 points, indicating that
-trial-specific targets contribute.  Adding contextual text to the teacher
-yields no detectable student improvement.  On a single-thread laptop CPU,
-model-only latency is 5.08~ms at the median and 16.57~ms at the 95th percentile.
+exclude zero.  Label smoothing does not reproduce the gain.  Within-class
+shuffling of the teacher's soft targets reduces the improvement by 1.90 points,
+indicating that trial-specific supervision matters.  Adding contextual text to
+the teacher yields no detectable student improvement.  Using one CPU thread on
+a laptop, model-only latency is 5.08~ms at the median and 16.57~ms at the 95th
+percentile.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -98,7 +99,7 @@ each paragraph~\cite{shubi2025decoding}.  Such a classifier must generalize to
 readers and articles absent from its training data.
 
 Recent work established paragraph-level reading-goal decoding on OneStop Eye
-Movements and found that its strongest single model combined scanpaths with
+Movements and found that its best non-ensemble model combined scanpaths with
 contextual language representations~\cite{shubi2025decoding}.  Its inference
 path requires passage text, fixation-to-word alignment, and a language encoder.
 We ask whether these resources can instead be confined to training while
@@ -228,10 +229,9 @@ comprehension under new-reader and new-item conditions
 
 Shubi \emph{et al.} introduced the reading-goal decoding task used here and
 evaluated gaze-only and multimodal models under new-reader and new-item
-conditions~\cite{shubi2025decoding}.  Their highest-performing single model
-retains text at inference.  We instead hold the gaze-only inference
-architecture fixed and test whether richer training-time supervision improves
-it.
+conditions~\cite{shubi2025decoding}.  Their multimodal models retain text at
+inference.  We instead hold the gaze-only inference architecture fixed and test
+whether richer training-time supervision improves it.
 
 \subsection{Distillation with Privileged Information}
 

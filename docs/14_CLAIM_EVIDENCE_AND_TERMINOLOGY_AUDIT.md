@@ -10,7 +10,7 @@ used consistently in the paper.
 |---|---|---|
 | Reading goals are associated with differences in fixation behavior and scanpaths. | Rayner (1998); Shubi and Berzak (2023) | Motivation, not a causal claim from the present experiment |
 | OneStop contains ordinary-reading, information-seeking, and repeated-reading regimes. | Berzak et al. (2025), *Scientific Data* | Dataset description |
-| Prior reading-goal decoders combine scanpaths with language representations and outperform gaze-only models. | Shubi et al. (2025), ACL, New Item & Participant condition | Prior-work context only; no direct rank comparison because metrics and splits differ |
+| The best non-ensemble model in prior reading-goal work combines scanpaths with language representations and outperforms gaze-only models. | Shubi et al. (2025), ACL, New Item & Participant condition | Prior-work context only; no direct rank comparison because metrics and splits differ |
 | The retained data contain 19,438 trials from 360 readers and 30 articles. | `artifacts/manifests/canonical_goalexit.json` | Reported once in the data section |
 | Student inputs contain ten fixation-level features and exclude reader, article, question, answer, and session identifiers. | `artifacts/manifests/feature_schema.json`; `artifacts/manifests/forbidden_field_audit.json` | Exact input definition and leakage boundary |
 | Every test trial has a reader and article absent from its training set. | `artifacts/manifests/split_manifest.json`; `artifacts/manifests/outer_guard_audit.json` | Simultaneous reader and article holdout |
