@@ -81,15 +81,32 @@ test -f "$GOALEXIT_SEED_RESULTS"
 test -f "$GOALEXIT_TRACKED_ARCHIVE"
 test -f "$GOALEXIT_GIT_ARCHIVE"
 
+extract_archive() {
+  local archive=$1
+  local status
+  set +e
+  tar -mxzf "$archive" -C "$PROJECT"
+  status=$?
+  set -e
+  if [ "$status" -gt 1 ]; then
+    return "$status"
+  fi
+}
+
+set +e
 cat \
   "$TRANSFER/goalexit_payload.part0" \
   "$TRANSFER/goalexit_payload.part1" \
   "$TRANSFER/goalexit_payload.part2" \
   "$TRANSFER/goalexit_payload.part3" | tar -mxzf - -C "$PROJECT"
-tar -mxzf "$GOALEXIT_BASE_RESULTS" -C "$PROJECT"
-tar -mxzf "$GOALEXIT_SEED_RESULTS" -C "$PROJECT"
-tar -mxzf "$GOALEXIT_TRACKED_ARCHIVE" -C "$PROJECT"
-tar -mxzf "$GOALEXIT_GIT_ARCHIVE" -C "$PROJECT"
+payload_status=("${PIPESTATUS[@]}")
+set -e
+test "${payload_status[0]}" -eq 0
+test "${payload_status[1]}" -le 1
+extract_archive "$GOALEXIT_BASE_RESULTS"
+extract_archive "$GOALEXIT_SEED_RESULTS"
+extract_archive "$GOALEXIT_TRACKED_ARCHIVE"
+extract_archive "$GOALEXIT_GIT_ARCHIVE"
 
 test "$(git -C "$PROJECT" rev-parse HEAD)" = "$GOALEXIT_EXPECTED_COMMIT"
 test -z "$(git -C "$PROJECT" status --porcelain)"
