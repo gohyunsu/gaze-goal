@@ -211,9 +211,8 @@ This study makes three contributions:
 \caption{Training-only distillation for gaze-only inference.  A teacher
 predicts the reading goal from contextual text and word-level gaze
 summaries, and its soft predictions supervise a student that receives only
-the fixation sequence.  The scanpath schematic is derived from an observed
-trial, with marker size representing fixation duration.  At inference, the
-student operates without text, word alignment, or the teacher.}
+the fixation sequence.  Marker size represents fixation duration.  At
+inference, the student operates without text, word alignment, or the teacher.}
 \label{fig:overview}
 \end{figure}
 
@@ -240,10 +239,10 @@ Knowledge distillation (KD) trains a student with class labels and a teacher's
 temperature-softened predictive distribution~\cite{hinton2015distilling}.
 Generalized distillation allows the teacher to use privileged information that
 is unavailable to the student at inference~\cite{lopezpaz2016unifying}.  This
-setting allows word-level text and gaze representations to guide training while the
-deployed model remains gaze-only.  We apply it to reading-goal classification
-and test whether the benefit depends on contextual text or trial-specific
-teacher predictions.
+setting allows word-level text and gaze representations to guide training while
+the deployed model remains gaze-only.  We apply it to reading-goal
+classification and test whether the benefit depends on contextual text or
+trial-specific teacher predictions.
 
 \section{Method}
 
@@ -373,11 +372,11 @@ and training setup.  Paired conditions inherit the selected learning rate and
 epoch count and keep the remaining student, teacher, or KD settings fixed.
 
 The first control replaces teacher targets with binary label smoothing
-($\epsilon=0.10$)~\cite{szegedy2016label}.  The second zeros every RoBERTa
-representation in an architecture-matched teacher while retaining its
-word-level gaze summaries.  Across three random seeds, we refit the BCE
-and label-smoothed GRUs, both teachers, and both KD students.  Each student
-uses logits from the teacher trained with the same seed.
+($\epsilon=0.10$)~\cite{szegedy2016label}.  The second creates a gaze-only
+teacher by zeroing every RoBERTa representation while retaining the
+architecture and word-level gaze summaries.  Across three random seeds, we
+refit the BCE and label-smoothed GRUs, both teachers, and both KD students.
+Each student uses logits from the teacher trained with the same seed.
 
 The third control cyclically reassigns teacher logits within each ground-truth
 class, preserving the class-conditional distributions while removing
@@ -455,12 +454,13 @@ interval of $[-0.0037,0.0321]$.
 
 Table~\ref{tab:controls} averages the post hoc comparisons over three matched
 random seeds.  Label smoothing does not improve BA over the GRU.  Students
-trained with either teacher, as well as class-shuffled KD, improve BA at every
-seed, with reader-clustered intervals above zero.
+distilled from either teacher, as well as those trained with class-shuffled
+targets, improve BA at every seed, with reader-clustered intervals above zero.
 
 \begin{table}[t]
-\caption{Matched-seed post hoc controls.  For model rows, $\Delta$BA is relative
-to GRU+BCE.  Rows below the rule are direct contrasts.  CIs are
+\caption{Matched-seed post hoc controls.  KD rows name the teacher or target
+condition; every student receives fixation sequences.  Model-row $\Delta$BA is
+relative to GRU+BCE; rows below the rule are direct contrasts.  CIs are
 reader-clustered, and $n_+$ counts positive seeds.}
 \label{tab:controls}
 \centering
@@ -472,20 +472,20 @@ Condition & BA & $\Delta$BA & Reader 95\% CI & $n_+$ \\
 \midrule
 GRU+BCE & .5857 & -- & -- & -- \\
 $+$ label smoothing & .5852 & $-$.0005 & [$-$.0022,.0011] & 1/3 \\
-$+$ gaze-only KD & .6221 & +.0364 & [.0199,.0534] & 3/3 \\
-$+$ text--gaze KD & .6232 & +.0376 & [.0223,.0529] & 3/3 \\
-$+$ class-shuffled KD & .6042 & +.0185 & [.0052,.0317] & 3/3 \\
+KD: gaze-only teacher & .6221 & +.0364 & [.0199,.0534] & 3/3 \\
+KD: text--gaze teacher & .6232 & +.0376 & [.0223,.0529] & 3/3 \\
+KD: class-shuffled targets & .6042 & +.0185 & [.0052,.0317] & 3/3 \\
 \midrule
-Text--gaze KD $-$ gaze-only KD & -- & +.0011 & [$-$.0030,.0052] & 1/3 \\
-Text--gaze KD $-$ class-shuffled & -- & +.0190 & [.0061,.0317] & 3/3 \\
+Text--gaze teacher $-$ gaze-only & -- & +.0011 & [$-$.0030,.0052] & 1/3 \\
+Unshuffled $-$ class-shuffled & -- & +.0190 & [.0061,.0317] & 3/3 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Text--gaze and gaze-only KD differ by .0011 BA, with both reader-clustered and
-crossed intervals spanning zero.  Text--gaze KD exceeds class-shuffled KD by
-.0190 BA, with a crossed interval of $[.0033,.0352]$.  Class-shuffled KD still
-exceeds the GRU by .0185 BA.
+The reader-clustered and crossed intervals both span zero for the direct
+teacher-modality contrast.  Both intervals exclude zero for unshuffled versus
+class-shuffled targets, although shuffled targets retain an advantage over
+BCE.
 
 \subsection{Inference Cost}
 
@@ -510,14 +510,14 @@ remove it.  Trial-specific teacher predictions account for part of the gain,
 while the remainder is consistent with class-dependent soft targets or their
 optimization effect.
 
-The post hoc ablations were designed after the primary analysis and average
-three seeds.  Their intervals therefore characterize reader and article
-sampling more directly than variability across initializations.  Because
-reading goal is assigned between readers, a crossover study is needed to
-identify within-reader effects.  The data come from one English news corpus and
-a laboratory eye tracker, and all predictions use completed scanpaths.  Other
-domains, trackers, self-selected goals, and partial sequences require separate
-evaluation.
+The post hoc ablations were designed after the primary analysis.  Their
+bootstrap intervals average the three seed-specific differences within each
+draw, so they quantify reader and article sampling rather than the full
+distribution over initializations.  Because reading goal is assigned between
+readers, a crossover study is needed to identify within-reader effects.  The
+data come from one English news corpus and a laboratory eye tracker, and all
+predictions use completed scanpaths.  Other domains, trackers, self-selected
+goals, and partial sequences require separate evaluation.
 
 The gaze-only student still requires calibrated coordinates and paragraph
 bounds.  End-to-end device studies should include eye tracking, preprocessing,
