@@ -79,12 +79,13 @@ requires fixation-to-word alignment at inference.  We instead use a
 word-aligned teacher only during training to supervise a GRU that
 receives the chronological fixation sequence.  On OneStop, with readers and
 articles both held out, distillation raises balanced accuracy by 3.39
-percentage points over the same GRU trained with hard labels.  This gain
+percentage points over the same GRU trained with hard labels.  The improvement
 remains positive under reader-clustered and crossed reader/article bootstrap
-analyses.  Within-class target shuffling reduces the gain by 1.90 points, while
-adding contextual text to the word-level teacher yields no detectable student
-benefit.  On one laptop CPU thread, median and 95th-percentile forward-pass
-latencies are 5.08 and 16.57~ms.
+analyses.  Shuffling teacher targets within each class reduces the gain by
+1.90 points but does not eliminate it.  Adding contextual text to the
+word-level teacher yields no detectable student benefit.  On one laptop CPU
+thread, median and 95th-percentile forward-pass latencies are 5.08 and
+16.57~ms.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -99,21 +100,23 @@ specific information.  These goals are associated with differences in
 fixation durations, regressions, and scanpath structure
 ~\cite{rayner1998,shubi2023information}.  An opt-in classifier could support
 navigation or content assistance after each paragraph~\cite{shubi2025decoding}.
-It must generalize to readers and articles absent from its training data.
+We therefore evaluate whether prediction generalizes to readers and articles
+absent from training.
 
-The best-performing model reported by Shubi \emph{et al.} for unseen readers
-and articles combined fixation-level gaze with contextual text
-~\cite{shubi2025decoding}.  Its inference path requires text, fixation-to-word
-alignment, and a language encoder.  We ask whether word-aligned supervision
-can instead be used only during training while prediction uses gaze alone.
+Shubi \emph{et al.} combined fixation-level gaze with contextual text to
+classify reading goals for unseen readers and articles
+~\cite{shubi2025decoding}.  At inference, this model requires text,
+fixation-to-word alignment, and a language encoder.  We ask whether
+word-aligned supervision can instead be used only during training while
+prediction uses gaze alone.
 
 We study teachers that aggregate gaze by word.  One teacher also receives
 contextual word representations.  Their soft predictions supervise a
-student that observes the chronological fixation sequence.  Fig.~\ref{fig:overview}
-summarizes this separation between training and inference.  The primary
-comparison holds the student architecture and input fixed.  At inference, the
-student uses no teacher, text encoder, tokenization, or fixation-to-word
-alignment.
+student that observes the chronological fixation sequence.  The primary
+comparison isolates the training signal by holding the student architecture
+and input fixed.  At inference, the student uses no teacher, text encoder,
+tokenization, or fixation-to-word alignment.  Fig.~\ref{fig:overview}
+summarizes this separation between training and inference.
 
 Each OneStop reader completes only one goal condition, while articles recur
 across readers.  We therefore hold out readers and articles simultaneously and
@@ -232,12 +235,11 @@ comprehension under new-reader and new-item conditions
 ~\cite{shubi2024comprehension}.
 
 Shubi \emph{et al.} introduced this reading-goal decoding task under new-reader
-and new-item conditions~\cite{shubi2025decoding}.  Their fixation-level
-text--gaze model outperformed their word-level variant.  Because their split
-construction and metrics differ from ours, we do not compare numerical results
-directly.  We use a word-level teacher to place contextual text and aggregated
-gaze in a common representation.  This supports a controlled removal of text
-while the student's chronological fixation input remains fixed.
+and new-item conditions and evaluated gaze-only and text--gaze models at
+fixation and word levels~\cite{shubi2025decoding}.  We use a word-level teacher
+to place contextual text and aggregated gaze in a common representation.  This
+supports a controlled removal of text while the student's chronological
+fixation input remains fixed.
 
 \subsection{Distillation with Privileged Information}
 
@@ -345,17 +347,20 @@ q_T^{(\tau)}\,\middle\|\,q_S^{(\tau)}\right],
 \end{aligned}
 \label{eq:kd}
 \end{equation}
+In the primary analysis, \modelDistill{} uses targets from \modelTeacher{}.
+The word-aligned gaze teacher is evaluated as a post hoc control in
+Sec.~\ref{sec:controls}.
 Each teacher produces in-sample logits for the outer-training trials on which
 it was fit.  These logits are used only to train the student.  No held-out test
 trial is used to fit either model or construct a distillation target.
 
 \subsection{Evaluation Protocol}
 
-Readers are divided into five goal-stratified folds, and articles are divided
-into five folds.  Each reader belongs to one of three article batches, and every
-reader fold includes both goals from all three batches.  Their Cartesian product
-produces disjoint test partitions of 724--845 trials, each containing both
-goals.  Together, these partitions cover all retained trials once.  For each
+OneStop assigns each reader to one of three article batches.  Readers are
+divided into five folds stratified by goal and batch, and articles are divided
+independently into five folds.  Every reader fold contains both goals from all
+three batches.  The Cartesian product produces disjoint test partitions that
+each contain both goals and together cover all retained trials once.  For each
 reader--article fold pair, training excludes every trial from either held-out
 fold, and the test set is their intersection.  All test readers and articles
 are therefore absent from training.
@@ -382,10 +387,12 @@ learning rate and fixed epoch count described above, without test-dependent
 stopping.
 
 \subsection{Baseline and Ablation Controls}
+\label{sec:controls}
 
 We used the same outer splits and training setup for the following post hoc
-controls.  Paired conditions inherit the selected learning rate and
-epoch count and keep the remaining student, teacher, or KD settings fixed.
+controls.  Paired conditions inherit the corresponding model's selected
+learning rate and epoch count and keep the remaining student, teacher, or KD
+settings fixed.
 
 The first control replaces KD with binary label smoothing
 ($\epsilon=0.10$)~\cite{szegedy2016label}.  The second creates a word-aligned
@@ -431,8 +438,9 @@ PyTorch thread, excluding input construction, parsing, and disk I/O.
 
 \subsection{Primary Performance}
 
-Table~\ref{tab:main-results} reports pooled out-of-fold predictions for test
-readers and articles excluded from training.
+Table~\ref{tab:main-results} reports pooled out-of-fold predictions from the
+prespecified primary run, which used one fixed initialization.  The seed
+analysis in Table~\ref{tab:controls} averages three matched initializations.
 
 \begin{table}[t]
 \caption{Out-of-fold test performance with both readers and articles held out.
@@ -461,19 +469,18 @@ Model & BA & AUROC & Macro F1 & NLL & Brier & ECE \\
 \modelDistill{} raises BA by 3.39 percentage points relative to \modelGru{}.
 Reader-clustered resampling gives a 95\% interval of $[1.75, 5.04]$ points, and
 crossed reader/article resampling gives $[1.30, 5.53]$ points.  Its NLL, Brier
-score, and ECE are also lower than those of the matched GRU, while \modelText{}
-is near chance.
+score, and ECE are also lower than those of the matched GRU.  \modelText{} is
+near chance.
 
-\modelLinear{} is the best-performing logistic control at 0.6066 BA.  \modelDistill{}
-is 1.39 percentage points higher, but its crossed reader/article interval
-includes zero ($[-0.37, 3.21]$ points).
+\modelLinear{} reaches 0.6066 BA.  \modelDistill{} is 1.39 percentage points
+higher, but its crossed reader/article interval includes zero
+($[-0.37, 3.21]$ points).
 
 \subsection{Ablations and Seed Sensitivity}
 
-Table~\ref{tab:controls} averages the ablation comparisons over three matched
-random seeds.  The tested label-smoothing condition does not improve BA over
-the GRU.  KD yields positive seed-wise differences for both teacher variants
-and for class-shuffled targets.
+Table~\ref{tab:controls} reports the post hoc controls.  The tested
+label-smoothing condition does not improve BA over the GRU.  KD yields positive
+seed-wise differences for both teacher variants and for class-shuffled targets.
 
 \begin{table}[t]
 \caption{Post hoc matched-seed controls.  BA is in percent.  Differences and
@@ -499,9 +506,10 @@ KD: unshuffled $-$ class-shuffled & -- & +1.90 & [0.61, 3.17] & 3/3 \\
 \end{tabular}
 \end{table}
 
-The direct teacher-modality contrast includes zero under both resampling
-schemes.  Reader-clustered and crossed intervals exclude zero for unshuffled
-versus class-shuffled targets, although shuffled targets still outperform BCE.
+The student BA difference between the two teacher modalities has intervals
+that include zero under both resampling schemes.  In contrast, the unshuffled
+versus class-shuffled comparison has intervals that exclude zero under both
+schemes.  Shuffled targets nevertheless remain above BCE.
 
 \subsection{Model-Only Latency}
 
@@ -518,36 +526,34 @@ gaze-summary logistic baseline remains competitive, and the distilled model's
 advantage over it is uncertain under crossed reader/article resampling.
 
 Adding contextual text to the tested word-level teacher yields no detectable
-student improvement.  Both teachers share word-level gaze aggregation and
-greater capacity than the student, and both produce in-sample targets.  The
-contribution of these shared properties remains unresolved.
+student improvement.  Because both teachers share word-level gaze aggregation,
+greater capacity than the student, and in-sample target generation, this
+experiment does not isolate the contribution of those properties.
 
 Within-class shuffling cuts the matched-seed gain roughly in half but does not
 remove it.  Preserving trial-level correspondence between teacher targets and
 student inputs contributes to the gain.  The remaining improvement may reflect
 class-dependent soft targets or changes in optimization.
 
-Bootstrap intervals condition on fixed out-of-fold predictions and do not
-include retraining variability.  The seed analysis covers three
-initializations.  Because each reader was assigned one goal, within-reader
-effects require crossover data.  The data come from English news articles read
-with a laboratory eye tracker, and predictions use complete scanpaths.  Other
-domains, devices, self-selected goals, and partial sequences remain to be
-evaluated.
+Bootstrap intervals characterize sampling uncertainty for fixed out-of-fold
+predictions, while the seed analysis covers three initializations.  Because
+each reader was assigned one goal, the study does not test within-reader goal
+changes.  Generalization beyond complete scanpaths from English news read with
+a laboratory eye tracker remains open.
 
 The gaze-only student still requires calibrated coordinates and paragraph
-bounds.  The CPU benchmark excludes eye tracking, preprocessing, memory use,
-and energy consumption.  Interface adaptation should be opt-in and evaluated
-with users.
+bounds.  The CPU benchmark measures model-only forward passes.  Adaptive
+interfaces should be opt-in and evaluated with users.
 
 \section{Conclusion}
 
 Training-time distillation improves a gaze-only GRU for unseen readers and
 articles while inference uses only fixation sequences.  Within-class target
 shuffling reduces the gain, whereas adding contextual text to the tested
-word-level teacher yields no detectable benefit.  The evidence establishes an
-improvement over the matched GRU, not superiority over the best-performing
-logistic control.
+word-level teacher yields no detectable benefit.  Together, these results
+support word-aligned teacher supervision as a training-time method for
+improving a fixation-sequence GRU without changing its inference inputs or
+operations.
 
 \section*{Code Availability}
 
