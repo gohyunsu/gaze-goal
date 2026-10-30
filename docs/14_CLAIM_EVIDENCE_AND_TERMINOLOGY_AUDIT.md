@@ -24,7 +24,7 @@ used consistently in the paper.
 | Contextual text has no demonstrated incremental benefit in the direct teacher or student contrasts. | `artifacts/metrics/postconfirmatory_seed_extension.json`; `artifacts/manifests/postconfirmatory_seed_extension_audit.json` | Absence of demonstrated incremental benefit, not proof of equivalence |
 | The gaze-summary logistic control reaches 0.6066 BA under the frozen outer splits and nested selection. | `artifacts/metrics/postfeedback_controls.json` | Post hoc stronger baseline; the crossed interval for Distilled GRU minus this control includes zero |
 | Distilled and undistilled GRUs have identical inputs, parameters, and inference operations. | model configuration, result manifests, and parameter-count audit | Distillation changes training only |
-| The distilled GRU occupies 176 KiB; model latency has a 5.08 ms median and 16.57 ms P95 across the 19,438 retained sequences. | `artifacts/manifests/cpu_length_distribution.json` | Single-thread forward-pass latency; no preprocessing, eye-tracking, end-to-end, or embedded-device claim |
+| The distilled GRU occupies 176 KiB; model-only latency has a 5.08 ms median and 16.57 ms P95 across the 19,438 retained sequences. | `artifacts/manifests/cpu_length_distribution.json` | Single-thread forward-pass latency; no preprocessing, eye-tracking, end-to-end, or embedded-device claim |
 | Figure 1's scanpath schematic reflects observed line progression, a return sweep, and relative fixation duration. | `artifacts/manifests/figure1_scanpath_provenance.json` | Five-marker schematic; three size classes follow observed durations while positions remain qualitative |
 
 ## Terminology decisions
@@ -44,7 +44,7 @@ used consistently in the paper.
 | **primary analysis** / **post hoc ablation** | States when the analyses were designed without repeatedly defending the protocol |
 | **random seed** | Standard term; `optimization seed` is avoided |
 | **reader-clustered bootstrap** / **crossed reader/article bootstrap** | Names the resampled units and dependence structure directly |
-| **model latency** | Restricts the timing claim to the measured forward pass |
+| **model-only latency** | Restricts the timing claim to the measured forward pass |
 
 ## Post hoc evidence status
 

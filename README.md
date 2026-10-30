@@ -19,9 +19,9 @@ The evaluation uses regular first-reading trials from OneStop Eye Movements and
 holds out readers and articles simultaneously. The primary distilled GRU
 improves balanced accuracy from 0.5866 to 0.6205 without changing the student's
 43,797-parameter inference architecture. Post hoc controls test label
-smoothing, teacher input modality, optimization seeds, simple baselines, and
-the role of trial-level target correspondence. Class-conditional shuffling
-reduces but does not eliminate the distillation gain.
+smoothing, teacher input modality, random-seed sensitivity, simple baselines,
+and the role of trial-level target correspondence. Shuffling teacher targets
+within each class reduces but does not eliminate the distillation gain.
 
 The repository contains source code, frozen configurations, aggregate results,
 audit manifests, tests, and the paper source. OneStop data, model checkpoints,
@@ -72,8 +72,9 @@ PYTHONPATH=src python -m goalexit.data.cache_roberta --config configs/local.yaml
 ```
 
 Training the teachers is most practical on a GPU. The deployed GRU and the
-reported latency benchmark run on CPU. Exact split seeds, model-selection
-rules, software environments, execution stages, and artifact mappings are in
+reported model-only latency benchmark run on CPU. Exact split seeds,
+model-selection rules, software environments, execution stages, and artifact
+mappings are in
 [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md).
 
 ## Results and provenance

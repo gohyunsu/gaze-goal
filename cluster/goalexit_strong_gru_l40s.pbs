@@ -102,15 +102,7 @@ extract_archive "$GOALEXIT_TRACKED_ARCHIVE"
 extract_archive "$GOALEXIT_GIT_ARCHIVE"
 
 test "$(git -C "$PROJECT" rev-parse HEAD)" = "$GOALEXIT_EXPECTED_COMMIT"
-git -C "$PROJECT" clean -fd -- \
-  docs/00.md \
-  docs/01_research_design.md \
-  docs/02_CODEX_PHASE0_2_PROMPT.md \
-  docs/03_PROJECT_STORAGE_GUIDE.md \
-  docs/03_phase0_2_development_report.md \
-  docs/06_MANUSCRIPT_COMPLETION_AUDIT.md \
-  docs/07_MANUSCRIPT_EDITORIAL_AUDIT.md \
-  docs/08_feedback.txt
+git -C "$PROJECT" clean -fd -- docs/
 test -z "$(git -C "$PROJECT" status --porcelain)"
 
 export PYTHONPATH="$PROJECT/src"

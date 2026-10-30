@@ -12,6 +12,12 @@
 \usepackage[hidelinks]{hyperref}
 \usetikzlibrary{arrows.meta,positioning}
 
+\hypersetup{
+  pdftitle={Learning a Gaze-Only Reading-Goal Classifier from a Word-Aligned Teacher},
+  pdfauthor={Hyunsu Go, Sumin Lee, Jinyong Jun, Kyeonghun Kim, Hyuk-Jae Lee, Nam-Joon Kim},
+  pdfkeywords={eye tracking, scanpath analysis, reading behavior, human-computer interaction, sequence classification}
+}
+
 \makeatletter
 \newcommand{\linebreakand}{%
   \end{@IEEEauthorhalign}
@@ -103,7 +109,8 @@ can instead be used only during training while prediction uses gaze alone.
 
 We study teachers that aggregate gaze by word.  One teacher also receives
 contextual word representations.  Their soft predictions supervise a
-student that observes the chronological fixation sequence.  The primary
+student that observes the chronological fixation sequence.  Fig.~\ref{fig:overview}
+summarizes this separation between training and inference.  The primary
 comparison holds the student architecture and input fixed.  At inference, the
 student uses no teacher, text encoder, tokenization, or fixation-to-word
 alignment.
@@ -278,7 +285,7 @@ current training set only.
 
 Table~\ref{tab:models} summarizes the five neural model variants.  Models
 trained without distillation minimize binary cross-entropy (BCE).  \modelStats{}
-maps 22 sequence summaries to a two-hidden-layer multilayer perceptron with
+maps 22 sequence summaries to a two-hidden-layer multilayer perceptron (MLP) with
 widths 128 and 64, ReLU activations, and dropout 0.2.  The summaries cover
 duration, displacement, saccade amplitude, line transitions, spatial
 dispersion, and path length.
@@ -359,8 +366,9 @@ and articles from the corresponding inner training set.  Learning rates are
 selected from
 $\{10^{-3},3\!\times\!10^{-4}\}$ for the MLP and GRU models and
 $\{3\!\times\!10^{-4},10^{-4}\}$ for the teacher models.  We also select
-$\alpha\in\{0.25,0.50,0.75\}$ for \modelDistill{}.  Balanced accuracy is the
-selection metric, with negative log-likelihood (NLL) as the first tie-breaker.
+$\alpha\in\{0.25,0.50,0.75\}$ for the objective in~\eqref{eq:kd}.  Balanced
+accuracy is the selection metric, with negative log-likelihood (NLL) as the
+first tie-breaker.
 Each final model is refitted for the median number of epochs selected across
 the three inner splits.  The decision threshold is fixed at 0.5 before test
 evaluation.  Test labels are not used for early stopping, calibration, or
@@ -391,7 +399,7 @@ class.  This preserves each class-conditional distribution while removing the
 pairing between a training trial and its teacher prediction.  It uses the same
 seeds and student settings.
 
-We also fit logistic controls using either log dwell time per
+We also fit logistic regression (LR) controls using either log dwell time per
 word~\cite{shubi2025decoding} or the 22 gaze summaries.  Their regularization
 is selected within the same nested reader/article splits.
 
@@ -399,8 +407,9 @@ is selected within the same nested reader/article splits.
 
 Balanced accuracy (BA) is the primary metric because it averages the two
 goal-specific recalls~\cite{brodersen2010balanced}.  Secondary metrics are
-AUROC, macro F1, negative log-likelihood (NLL), Brier score, and 15-bin expected
-calibration error (ECE)~\cite{guo2017calibration}.
+area under the receiver operating characteristic curve (AUROC), macro F1,
+negative log-likelihood (NLL), Brier score, and 15-bin expected calibration
+error (ECE)~\cite{guo2017calibration}.
 
 For the primary contrast between \modelDistill{} and \modelGru{}, a paired
 5,000-draw percentile bootstrap resamples whole readers within each goal.  We
@@ -467,9 +476,9 @@ the GRU.  KD yields positive seed-wise differences for both teacher variants
 and for class-shuffled targets.
 
 \begin{table}[t]
-\caption{Post hoc matched-seed controls.  Model rows compare with GRU+BCE.
-Aligned teachers aggregate gaze by word.  CIs use reader-clustered resampling,
-and $n_+$ counts positive seed-wise differences.}
+\caption{Post hoc matched-seed controls.  BA is in percent.  Differences and
+reader-clustered CIs are in percentage points (pp).  Model rows compare with
+GRU+BCE, and $n_+$ counts positive seed-wise differences.}
 \label{tab:controls}
 \centering
 \scriptsize
