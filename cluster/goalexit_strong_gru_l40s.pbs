@@ -70,11 +70,13 @@ echo "visible_devices=${CUDA_VISIBLE_DEVICES:-unset}"
 echo "started=$(date -Is)"
 nvidia-smi --query-gpu=index,name,uuid,memory.total,driver_version --format=csv,noheader
 
-payload_sha=$(cat \
+PAYLOAD_ARCHIVE=${RUN_ROOT}/goalexit_payload.tar.gz
+cat \
   "$TRANSFER/goalexit_payload.part0" \
   "$TRANSFER/goalexit_payload.part1" \
   "$TRANSFER/goalexit_payload.part2" \
-  "$TRANSFER/goalexit_payload.part3" | sha256sum | cut -d ' ' -f 1)
+  "$TRANSFER/goalexit_payload.part3" > "$PAYLOAD_ARCHIVE"
+payload_sha=$(sha256sum "$PAYLOAD_ARCHIVE" | cut -d ' ' -f 1)
 test "$payload_sha" = "$EXPECTED_PAYLOAD_SHA"
 test -f "$GOALEXIT_BASE_RESULTS"
 test -f "$GOALEXIT_SEED_RESULTS"
@@ -93,16 +95,7 @@ extract_archive() {
   fi
 }
 
-set +e
-cat \
-  "$TRANSFER/goalexit_payload.part0" \
-  "$TRANSFER/goalexit_payload.part1" \
-  "$TRANSFER/goalexit_payload.part2" \
-  "$TRANSFER/goalexit_payload.part3" | tar -mxzf - -C "$PROJECT"
-payload_status=("${PIPESTATUS[@]}")
-set -e
-test "${payload_status[0]}" -eq 0
-test "${payload_status[1]}" -le 1
+extract_archive "$PAYLOAD_ARCHIVE"
 extract_archive "$GOALEXIT_BASE_RESULTS"
 extract_archive "$GOALEXIT_SEED_RESULTS"
 extract_archive "$GOALEXIT_TRACKED_ARCHIVE"
