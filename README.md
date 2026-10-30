@@ -10,10 +10,10 @@ Hyunsu Go · Sumin Lee · Jinyong Jun · Kyeonghun Kim · Hyuk-Jae Lee · Nam-Jo
 
 ## Overview
 
-This repository accompanies the ICCE 2027 paper *Learning a Gaze-Only
-Reading-Goal Classifier from a Word-Aligned Teacher*. The study asks whether
-word-aligned supervision can be confined to training while a GRU uses only
-fixation sequences at inference.
+This repository accompanies the ICCE 2027 paper *Training-Time Distillation
+for Gaze-Only Reading-Goal Classification*. The study asks whether word-aligned
+supervision can be confined to training while a GRU uses only fixation
+sequences at inference.
 
 The evaluation uses regular first-reading trials from OneStop Eye Movements and
 holds out readers and articles simultaneously. The primary distilled GRU
