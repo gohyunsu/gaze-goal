@@ -20,7 +20,7 @@ holds out readers and articles simultaneously. The primary distilled GRU
 improves balanced accuracy from 0.5866 to 0.6205 without changing the student's
 43,797-parameter inference architecture. Post hoc controls test label
 smoothing, teacher input modality, optimization seeds, simple baselines, and
-the role of trial-specific teacher confidence. Class-conditional shuffling
+the role of trial-level target correspondence. Class-conditional shuffling
 reduces but does not eliminate the distillation gain.
 
 The repository contains source code, frozen configurations, aggregate results,

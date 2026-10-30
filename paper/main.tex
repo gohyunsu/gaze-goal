@@ -76,10 +76,10 @@ with readers and articles both held out, distillation raises balanced accuracy
 by 3.39 percentage points over the same GRU trained with hard labels.  Both
 reader-clustered and crossed reader/article 95\% bootstrap intervals for this
 gain exclude zero.  The tested label-smoothing control does not reproduce the
-improvement.  Within-class target shuffling reduces the gain by 1.90 points,
-while contextual text adds no detectable student benefit.  On one laptop CPU
-thread, median and 95th-percentile forward-pass latencies are 5.08 and
-16.57~ms.
+improvement.  Within-class target shuffling reduces the gain by 1.90 points.
+Adding contextual text to the word-level teacher yields no detectable student
+benefit.  On one laptop CPU thread, median and 95th-percentile forward-pass
+latencies are 5.08 and 16.57~ms.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -118,8 +118,9 @@ This study makes three contributions:
 \begin{itemize}
   \item With student inputs and architecture fixed, teacher-derived soft
   targets improve the gaze-only GRU when both readers and articles are unseen.
-  \item Controls indicate that trial-specific soft supervision contributes to
-  the gain, whereas contextual text provides no detectable student benefit.
+  \item Controls indicate that trial-level target correspondence contributes
+  to the gain, whereas adding text to the word-level teacher provides no
+  detectable student benefit.
   \item We characterize student size and single-thread CPU latency across the
   observed sequence-length distribution.
 \end{itemize}
@@ -202,7 +203,8 @@ This study makes three contributions:
   \end{scope}
   \draw[inferarr] (student.east) -- (70,-5);
 
-  \draw[kdarr] (75,12) -- (75,-2);
+  \draw[kdarr] (74.2,12) -- node[midway, right, text=black, align=left,
+        xshift=.2mm] {Soft-target\\supervision} (74.2,-2);
 \end{tikzpicture}
 \caption{Training-time distillation for gaze-only inference.  A teacher
 predicts the reading goal from contextual text and word-level gaze
@@ -226,8 +228,9 @@ Shubi \emph{et al.} introduced this reading-goal decoding task under new-reader
 and new-item conditions~\cite{shubi2025decoding}.  Their fixation-level
 text--gaze model substantially outperforms their word-level variant, although
 different split construction and metrics prevent direct numerical comparison.
-We instead fix a gaze-only inference path and test whether richer information
-can improve its training.
+We use a word-level teacher to place contextual text and aggregated gaze in a
+common representation.  This supports a controlled removal of text while the
+student's chronological fixation input remains fixed.
 
 \subsection{Distillation with Privileged Information}
 
@@ -238,7 +241,7 @@ is unavailable to the student at inference~\cite{lopezpaz2016unifying}.  This
 setting allows word-level text and gaze representations to guide training while
 the deployed model remains gaze-only.  We apply it to reading-goal
 classification and test whether the benefit depends on contextual text or
-trial-specific teacher predictions.
+trial-level target correspondence.
 
 \section{Method}
 
@@ -246,11 +249,14 @@ trial-specific teacher predictions.
 
 The unit of analysis is a completed paragraph-reading trial represented by its
 eye movements.  The binary target is the assigned reading goal: ordinary
-reading for comprehension ($y=0$) or information seeking ($y=1$).  We use the anonymized
-public release of the OneStop Eye Movements corpus, collected with participant
-consent under an institutional ethics protocol~\cite{berzak2025onestop}.  We
-retain first readings from these two conditions and exclude repeated readings,
-question-screen events, answers, correctness, and all post-reading information.
+reading for comprehension ($y=0$) or information seeking ($y=1$).  In the
+information-seeking condition, readers preview the question before the
+paragraph; in ordinary reading, the question follows the paragraph.  Readers
+were randomly assigned to one condition~\cite{berzak2025onestop}.  We use the
+anonymized public release, collected with consent under an institutional ethics
+protocol, and retain first readings from these two conditions.  We exclude
+repeated readings, question-screen events, answers, correctness, and all
+post-reading information.
 
 The resulting data contain 19,438 trials from 360 readers and 30 articles, with
 nearly balanced goal labels.  Each reader completed one goal condition, and the
@@ -373,8 +379,8 @@ controls.  Paired conditions inherit the selected learning rate and
 epoch count and keep the remaining student, teacher, or KD settings fixed.
 
 The first control replaces KD with binary label smoothing
-($\epsilon=0.10$)~\cite{szegedy2016label}.  The second creates a gaze-only
-teacher by zeroing every RoBERTa representation while retaining the
+($\epsilon=0.10$)~\cite{szegedy2016label}.  The second creates a word-aligned
+gaze teacher by zeroing every RoBERTa representation while retaining the
 architecture and word-level gaze summaries.  Across three random seeds, we
 refit the BCE and label-smoothed GRUs, both teachers, and both KD students.
 Each student uses logits from the teacher trained with the same seed.
@@ -403,6 +409,7 @@ Bootstrap samples are paired between models.  For each ablation contrast,
 resampled units are paired across conditions, and the seed-specific BA
 differences are averaged within each draw.
 
+\filbreak
 \subsection{CPU Measurement}
 
 We benchmark one distilled checkpoint on every retained fixation sequence.
@@ -444,9 +451,8 @@ Model & BA & AUROC & Macro F1 & NLL & Brier & ECE \\
 \modelDistill{} improves BA over \modelGru{} by 0.0339.  The reader-clustered
 95\% interval is $[0.0175, 0.0504]$, and the crossed reader/article interval is
 $[0.0130, 0.0553]$.  Its NLL, Brier score, and ECE are also lower than those of
-the matched GRU.  In a post hoc descriptive check, the BA difference is
-positive within each article batch.  The distilled model exceeds \modelStats{}
-and \modelTeacher{} in pooled BA, while \modelText{} is near chance.
+the matched GRU.  The distilled model exceeds \modelStats{} and
+\modelTeacher{} in pooled BA, while \modelText{} is near chance.
 
 \modelLinear{} is the strongest logistic control at 0.6066 BA.  \modelDistill{}
 is 0.0139 higher, but its crossed reader/article interval includes zero
@@ -462,8 +468,8 @@ above zero.
 
 \begin{table}[t]
 \caption{Matched-seed ablations for fixation-sequence students.  Model-row
-$\Delta$BA is relative to GRU+BCE.  CIs are reader-clustered.  $n_+$ counts
-seeds with $\Delta\mathrm{BA}>0$.}
+$\Delta$BA is relative to GRU+BCE.  Aligned teachers aggregate gaze by word.
+CIs are reader-clustered; $n_+$ counts seeds with $\Delta\mathrm{BA}>0$.}
 \label{tab:controls}
 \centering
 \scriptsize
@@ -474,11 +480,11 @@ Condition & BA & $\Delta$BA & Reader 95\% CI & $n_+$ \\
 \midrule
 GRU+BCE & .5857 & -- & -- & -- \\
 $+$ label smoothing & .5852 & $-$.0005 & [$-$.0022,.0011] & 1/3 \\
-KD: gaze-only teacher & .6221 & +.0364 & [.0199,.0534] & 3/3 \\
-KD: text--gaze teacher & .6232 & +.0376 & [.0223,.0529] & 3/3 \\
+KD: aligned gaze teacher & .6221 & +.0364 & [.0199,.0534] & 3/3 \\
+KD: aligned text--gaze teacher & .6232 & +.0376 & [.0223,.0529] & 3/3 \\
 KD: class-shuffled targets & .6042 & +.0185 & [.0052,.0317] & 3/3 \\
 \midrule
-KD: text--gaze $-$ gaze-only & -- & +.0011 & [$-$.0030,.0052] & 1/3 \\
+KD: aligned text--gaze $-$ gaze & -- & +.0011 & [$-$.0030,.0052] & 1/3 \\
 KD: unshuffled $-$ class-shuffled & -- & +.0190 & [.0061,.0317] & 3/3 \\
 \bottomrule
 \end{tabular}
@@ -502,15 +508,15 @@ hard-label BCE, whereas the tested label-smoothing control does not.  The
 gaze-summary logistic baseline remains competitive, and the distilled model's
 advantage over it is uncertain under crossed reader/article resampling.
 
-Adding contextual text to the teacher yields no detectable student improvement.
-Both teachers share word-level gaze aggregation and greater capacity than the
-student, and both produce in-sample targets.  The contribution of these shared
-properties remains unresolved.
+Adding contextual text to the tested word-level teacher yields no detectable
+student improvement.  Both teachers share word-level gaze aggregation and
+greater capacity than the student, and both produce in-sample targets.  The
+contribution of these shared properties remains unresolved.
 
 Within-class shuffling cuts the matched-seed gain roughly in half but does not
-remove it.  Trial-specific teacher predictions account for part of the gain.
-The remaining improvement may reflect class-dependent soft targets or changes
-in optimization.
+remove it.  Preserving trial-level correspondence between teacher targets and
+student inputs contributes to the gain.  The remaining improvement may reflect
+class-dependent soft targets or changes in optimization.
 
 All bootstraps resample fixed out-of-fold predictions and therefore exclude
 retraining variability.  The post hoc ablation intervals also average three
@@ -531,8 +537,9 @@ with users.
 
 Training-time distillation improves a compact gaze-only GRU when both readers
 and articles are unseen.  The deployed model uses only fixation sequences.
-Within-class target shuffling indicates that trial-specific teacher predictions
-account for part of the gain, while contextual text adds no detectable benefit.
+Within-class target shuffling indicates that trial-level target correspondence
+contributes to the gain.  Adding contextual text to the tested word-level
+teacher yields no detectable benefit.
 
 \section*{Code Availability}
 

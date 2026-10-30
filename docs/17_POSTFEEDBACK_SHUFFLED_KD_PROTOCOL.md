@@ -20,9 +20,9 @@ text--gaze KD student. No hyperparameter is selected from outer results.
 
 ## Interpretation
 
-- Lower performance than original KD supports the relevance of trial-specific
-  teacher confidence.
+- Lower performance than original KD supports the relevance of preserving
+  trial-level correspondence between teacher targets and student inputs.
 - Similar performance indicates that class-conditional confidence
   distributions or other optimization effects can explain the gain.
 - The control does not identify word alignment, teacher capacity, or
-  contextual text as the source of any trial-specific signal.
+  contextual text as the source of the corresponding signal.

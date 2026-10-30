@@ -17,7 +17,7 @@ deployment-latency benchmark because that benchmark asks about CPU deployment.
 The analysis addresses three questions:
 
 1. Does ordinary label smoothing explain the gain over the undistilled GRU?
-2. Does distillation from a word-aligned gaze-only Transformer produce the same
+2. Does distillation from a word-aligned gaze Transformer produce the same
    gain as distillation from the text--gaze Transformer?
 3. Does the text--gaze distillation gain persist under additional optimization
    seeds?
@@ -52,7 +52,7 @@ CPU confirmatory results are summarized separately as a replication check.
   pair, this varies teacher initialization, student initialization, and both
   optimization paths. No model uses logits from the original CPU fit.
 
-The gaze-only teacher retains the same trainable parameter count as the
+The word-aligned gaze teacher retains the same trainable parameter count as the
 text--gaze teacher. This deliberately holds architecture and optimization
 settings fixed so that the ablation changes only access to contextual text.
 
@@ -77,9 +77,9 @@ seeds 13, 29, and 47. No seed is excluded based on its result.
 
 - If label smoothing approaches the text--gaze KD gain, the manuscript must not
   attribute the improvement specifically to teacher information.
-- If gaze-only KD approaches text--gaze KD, the manuscript must frame the result
+- If word-aligned gaze KD approaches text--gaze KD, the manuscript must frame the result
   as teacher-driven regularization or transfer from a larger gaze model.
-- If text--gaze KD consistently exceeds gaze-only KD, the result supports an
+- If text--gaze KD consistently exceeds word-aligned gaze KD, the result supports an
   incremental benefit from contextual text under this controlled ablation.
 - Seed results quantify optimization sensitivity and do not replace the
   reader/article uncertainty intervals.

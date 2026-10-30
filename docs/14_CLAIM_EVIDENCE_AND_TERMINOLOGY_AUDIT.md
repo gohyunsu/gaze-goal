@@ -20,7 +20,7 @@ used consistently in the paper.
 | Reader-clustered and crossed reader/article intervals for the primary contrast exclude zero. | `artifacts/metrics/outer_kd_confirmatory.json` | Sampling uncertainty under the two specified resampling schemes |
 | Label smoothing does not reproduce the KD improvement. | `artifacts/metrics/postconfirmatory_seed_extension.json`; seeds 13, 29, and 47 | Post hoc control, not part of the primary analysis |
 | Original text--gaze KD exceeds class-shuffled KD by 0.0190 BA; reader and crossed intervals exclude zero. The shuffled control remains 0.0185 above the GRU. | `artifacts/metrics/postfeedback_shuffled_kd.json`; `docs/18_POSTFEEDBACK_SHUFFLED_KD_REPORT.md` | Trial-level correspondence contributes, but class-conditional soft targets or their optimization effect also retain a gain |
-| A gaze-only word-level teacher improves the student across all three tested seeds. | `artifacts/metrics/postconfirmatory_seed_extension.json` | Supports teacher distillation without contextual text |
+| A word-aligned gaze teacher improves the student across all three tested seeds. | `artifacts/metrics/postconfirmatory_seed_extension.json` | Supports teacher distillation without contextual text |
 | Contextual text has no demonstrated incremental benefit in the direct teacher or student contrasts. | `artifacts/metrics/postconfirmatory_seed_extension.json`; `artifacts/manifests/postconfirmatory_seed_extension_audit.json` | Absence of demonstrated incremental benefit, not proof of equivalence |
 | The gaze-summary logistic control reaches 0.6066 BA under the frozen outer splits and nested selection. | `artifacts/metrics/postfeedback_controls.json` | Post hoc stronger baseline; the crossed interval for Distilled GRU minus this control includes zero |
 | Distilled and undistilled GRUs have identical inputs, parameters, and inference operations. | model configuration, result manifests, and parameter-count audit | Distillation changes training only |
@@ -37,7 +37,7 @@ used consistently in the paper.
 | **fixation sequence** | The student's chronological input representation |
 | **fixation-to-word alignment** | The inference-time operation required to associate fixations with paragraph words |
 | **word-level gaze summaries** | The teacher input produced after alignment and aggregation; not used as a synonym for the alignment operation |
-| **text--gaze teacher** / **gaze-only teacher** | Names the modalities available to each teacher without implying that text is transferred |
+| **word-aligned text--gaze teacher** / **word-aligned gaze teacher** | Distinguishes teacher modalities while making their shared word-level aggregation explicit |
 | **Gaze-summary MLP** | Identifies a baseline built from trial-level aggregate gaze features rather than a fixation sequence |
 | **Dwell-time LR** / **Gaze-summary LR** | Identifies the two post hoc logistic controls by their input features |
 | **Distilled GRU** / **Gaze GRU** | Distinguishes training objective while preserving the fact that the inference architectures are identical |
@@ -58,7 +58,7 @@ partitions. All four student conditions and both teacher modalities use seeds
 
 - The paper does not claim state-of-the-art reading-goal accuracy.
 - The paper does not claim that contextual text causes the distillation gain.
-- The paper does not claim equivalence between text--gaze and gaze-only
+- The paper does not claim equivalence between text--gaze and word-aligned gaze
   teachers; the direct contrasts are interpreted as no demonstrated
   incremental benefit.
 - The paper does not claim partial-scanpath, end-to-end, embedded-device, or
