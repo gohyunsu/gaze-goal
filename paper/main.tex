@@ -262,13 +262,14 @@ median trial contains 96 valid fixations.  Reader identity, article identity,
 question content, session position, and condition metadata are not model
 inputs.
 
-Each fixation is encoded by ten features.  These are $x$ and $y$ coordinates
-normalized to the paragraph bounds, log fixation duration, horizontal and
-vertical displacement from the preceding fixation, log saccade amplitude, the
-sine and cosine of the saccade angle, a line-transition indicator, and position
-within the observed sequence.  Retained fixations have positive finite
-durations and finite paragraph-screen coordinates.  Continuous features are
-standardized using statistics from the current training set only.
+Each fixation is encoded by ten features: $x$ and $y$ coordinates normalized to
+the paragraph bounds, log fixation duration, horizontal and vertical
+displacement from the preceding fixation, and log saccade amplitude.  The
+remaining features are the sine and cosine of the saccade angle, a
+line-transition indicator, and position within the observed sequence.  Retained
+fixations have positive finite durations and finite paragraph-screen
+coordinates.  Continuous features are standardized using statistics from the
+current training set only.
 
 \subsection{Models}
 
