@@ -68,19 +68,19 @@ knj01@snu.ac.kr}}
 
 \begin{abstract}
 Reading interfaces could adapt to whether a user reads for comprehension or
-seeks specific information.  In prior work, the best non-ensemble model combines
+seeks specific information.  In prior work, the best individual model combines
 gaze with contextual text and requires fixation-to-word alignment at inference.
-We use these resources only during training: a word-aligned teacher distills soft
-targets into a compact GRU that operates on fixation sequences alone.  On
-OneStop, with both readers and articles held out, distillation improves
-balanced accuracy by 3.39 percentage points over the same GRU trained with
-hard labels.  Reader-clustered and crossed reader/article bootstrap intervals
-exclude zero.  Label smoothing does not reproduce the gain.  Within-class
-shuffling of the teacher's soft targets reduces the improvement by 1.90 points,
-indicating that trial-specific supervision matters.  Adding contextual text to
-the teacher yields no detectable student improvement.  Using one CPU thread on
-a laptop, model-only latency is 5.08~ms at the median and 16.57~ms at the 95th
-percentile.
+We use text and alignment only during training: a word-aligned teacher distills
+soft targets into a compact GRU that receives only fixation sequences.  On
+OneStop, with both readers and articles held out, distillation improves balanced
+accuracy by 3.39 percentage points over the same GRU trained with hard labels.
+The 95\% intervals remain above zero in both reader-clustered and crossed
+reader/article bootstrap analyses.  Label smoothing does not reproduce the gain.
+Shuffling the teacher's soft targets within class reduces this gain by 1.90
+points, indicating that trial-specific supervision matters.
+Adding contextual text to the teacher yields no detectable student improvement.
+Using one CPU thread on a laptop, model-only latency is 5.08~ms at the median and
+16.57~ms at the 95th percentile.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -99,7 +99,7 @@ each paragraph~\cite{shubi2025decoding}.  Such a classifier must generalize to
 readers and articles absent from its training data.
 
 Recent work established paragraph-level reading-goal decoding on OneStop Eye
-Movements and found that its best non-ensemble model combined scanpaths with
+Movements and found that its best individual model combined scanpaths with
 contextual language representations~\cite{shubi2025decoding}.  Its inference
 path requires passage text, fixation-to-word alignment, and a language encoder.
 We ask whether these resources can instead be confined to training while
@@ -512,9 +512,9 @@ optimization effect.
 These ablations were designed after the primary analysis.  Their
 bootstrap intervals average the three seed-specific differences within each
 draw, so they quantify reader and article sampling rather than the full
-distribution over initializations.  Because reading goal is assigned between
-readers, a crossover study is needed to identify within-reader effects.  The
-data come from one English news corpus and a laboratory eye tracker, and all
+distribution over initializations.  Because each reader is assigned to a single
+goal, a crossover study is needed to identify within-reader effects.  The data
+come from one English news corpus and a laboratory eye tracker, and all
 predictions use completed scanpaths.  Other domains, trackers, self-selected
 goals, and partial sequences require separate evaluation.
 
@@ -528,7 +528,7 @@ adaptation should be opt-in and evaluated with users.
 Training-only distillation improves a compact gaze-only GRU when both readers
 and articles are unseen.  The deployed model uses only fixation sequences.
 Within-class target shuffling indicates that trial-specific teacher predictions
-explain part of the gain, while contextual text adds no detectable benefit.
+account for part of the gain, while contextual text adds no detectable benefit.
 
 \section*{Code Availability}
 
