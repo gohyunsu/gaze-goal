@@ -204,7 +204,7 @@ This study makes three contributions:
 
   \draw[kdarr] (75,12) -- (75,-2);
 \end{tikzpicture}
-\caption{Training-only distillation for gaze-only inference.  A teacher
+\caption{Training-time distillation for gaze-only inference.  A teacher
 predicts the reading goal from contextual text and word-level gaze
 summaries, and its soft predictions supervise a student that receives only
 the fixation sequence.  Marker size represents fixation duration.  At
@@ -446,11 +446,11 @@ Model & BA & AUROC & Macro F1 & NLL & Brier & ECE \\
 $[0.0130, 0.0553]$.  Its NLL, Brier score, and ECE are also lower than those of
 the matched GRU.  In a post hoc descriptive check, the BA difference is
 positive within each article batch.  The distilled model exceeds \modelStats{}
-and \modelTeacher{} in pooled BA, while \modelText{} remains at chance.
+and \modelTeacher{} in pooled BA, while \modelText{} is near chance.
 
-\modelLinear{} is the strongest logistic control at .6066 BA.  \modelDistill{}
-is .0139 higher, but its crossed reader/article interval includes zero
-($[-0.0037,0.0321]$).
+\modelLinear{} is the strongest logistic control at 0.6066 BA.  \modelDistill{}
+is 0.0139 higher, but its crossed reader/article interval includes zero
+($[-0.0037, 0.0321]$).
 
 \subsection{Ablations and Seed Sensitivity}
 
@@ -485,8 +485,8 @@ KD: unshuffled $-$ class-shuffled & -- & +.0190 & [.0061,.0317] & 3/3 \\
 \end{table}
 
 The direct teacher-modality contrast includes zero under both resampling
-schemes.  Both intervals exclude zero for unshuffled versus class-shuffled
-targets, although shuffled targets still outperform BCE.
+schemes.  Reader-clustered and crossed intervals exclude zero for unshuffled
+versus class-shuffled targets, although shuffled targets still outperform BCE.
 
 \subsection{Inference Cost}
 
@@ -516,14 +516,15 @@ All bootstraps resample fixed out-of-fold predictions and therefore exclude
 retraining variability.  The post hoc ablation intervals also average three
 seed-specific differences in each draw, rather than characterizing the full
 distribution across initializations.  Because each reader was assigned one
-goal, within-reader effects require crossover data.  The corpus contains
-English news recorded with a laboratory tracker, and predictions use complete
+goal, within-reader effects require crossover data.  The data come from English
+news articles read with a laboratory eye tracker, and predictions use complete
 scanpaths.  Other domains, devices, self-selected goals, and partial sequences
 remain to be evaluated.
 
 The gaze-only student still requires calibrated coordinates and paragraph
-bounds.  The CPU benchmark excludes eye tracking, preprocessing, runtime memory,
-and energy.  Interface adaptation should be opt-in and evaluated with users.
+bounds.  The CPU benchmark excludes eye tracking, preprocessing, memory use,
+and energy consumption.  Interface adaptation should be opt-in and evaluated
+with users.
 
 \newpage
 \section{Conclusion}
