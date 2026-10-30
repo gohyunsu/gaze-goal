@@ -279,9 +279,10 @@ the paragraph bounds, log fixation duration, horizontal and vertical
 displacement from the preceding fixation, and log saccade amplitude.  The
 remaining features are the sine and cosine of the saccade angle, a
 line-transition indicator, and position within the observed sequence.  Retained
-fixations have positive finite durations and coordinates within the paragraph
-region.  Continuous features are standardized using statistics from the
-current training set only.
+fixations have positive finite durations and finite coordinates.  The first six
+features are standardized using statistics from the current training set only.
+The angular encodings, line-transition indicator, and sequence position retain
+their native scales.
 
 \subsection{Models}
 
@@ -543,8 +544,8 @@ changes.  Generalization beyond complete scanpaths from English news read with
 a laboratory eye tracker remains open.
 
 The gaze-only student still requires calibrated coordinates and paragraph
-bounds.  The CPU benchmark measures model-only forward passes.  Adaptive
-interfaces should be opt-in and evaluated with users.
+bounds, and the CPU benchmark measures model-only forward passes.  Any
+adaptive use requires evaluation with users.
 
 \section{Conclusion}
 
@@ -554,7 +555,9 @@ shuffling reduces the gain, whereas adding contextual text to the tested
 word-level teacher yields no detectable benefit.  Together, these results
 support word-aligned teacher supervision as a training-time method for
 improving a fixation-sequence GRU without changing its inference inputs or
-operations.
+operations.  This separation is relevant to opt-in reading interfaces because
+prediction requires neither contextual text nor fixation-to-word alignment at
+runtime.
 
 \section*{Code Availability}
 
