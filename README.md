@@ -2,7 +2,7 @@
 
 # Gaze-Only Reading-Goal Distillation
 
-### Code and reproducibility materials for compact reading-goal classification
+### Code and reproducibility materials for gaze-only reading-goal classification
 
 Hyunsu Go · Sumin Lee · Jinyong Jun · Kyeonghun Kim · Hyuk-Jae Lee · Nam-Joon Kim
 
@@ -11,9 +11,9 @@ Hyunsu Go · Sumin Lee · Jinyong Jun · Kyeonghun Kim · Hyuk-Jae Lee · Nam-Jo
 ## Overview
 
 This repository accompanies the ICCE 2027 paper *Learning a Gaze-Only
-Reading-Goal Classifier from a Word-Aligned Teacher*. The
-study asks whether richer information can be confined to training while a
-small classifier uses only fixation sequences at inference.
+Reading-Goal Classifier from a Word-Aligned Teacher*. The study asks whether
+word-aligned supervision can be confined to training while a GRU uses only
+fixation sequences at inference.
 
 The evaluation uses regular first-reading trials from OneStop Eye Movements and
 holds out readers and articles simultaneously. The primary distilled GRU

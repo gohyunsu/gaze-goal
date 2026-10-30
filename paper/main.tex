@@ -357,7 +357,7 @@ Within each outer training set, model selection uses three paired inner
 validation splits.  Each validation split likewise holds out both its readers
 and articles from the corresponding inner training set.  Learning rates are
 selected from
-$\{10^{-3},3\!\times\!10^{-4}\}$ for the compact models and
+$\{10^{-3},3\!\times\!10^{-4}\}$ for the MLP and GRU models and
 $\{3\!\times\!10^{-4},10^{-4}\}$ for the teacher models.  We also select
 $\alpha\in\{0.25,0.50,0.75\}$ for \modelDistill{}.  Balanced accuracy is the
 selection metric, with negative log-likelihood (NLL) as the first tie-breaker.
