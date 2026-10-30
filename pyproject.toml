@@ -24,8 +24,8 @@ teacher = ["transformers>=4.56,<5"]
 dev = ["pytest>=8,<9"]
 
 [project.urls]
-Repository = "https://github.com/gohyunsu/gaze-only-reading-goal-distillation"
-Issues = "https://github.com/gohyunsu/gaze-only-reading-goal-distillation/issues"
+Repository = "https://github.com/gohyunsu/gaze-goal"
+Issues = "https://github.com/gohyunsu/gaze-goal/issues"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
