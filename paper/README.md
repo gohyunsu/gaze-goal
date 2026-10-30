@@ -13,6 +13,7 @@ The scientific content and numerical tables are tied to:
 
 - `../artifacts/metrics/outer_kd_confirmatory.json`
 - `../artifacts/manifests/outer_kd_output_audit.json`
+- `../artifacts/manifests/fold_distribution_audit.json`
 - `../docs/05_KD_CONFIRMATORY_REPORT.md`
 - `../artifacts/metrics/postconfirmatory_ablation.json`
 - `../artifacts/manifests/postconfirmatory_ablation_audit.json`

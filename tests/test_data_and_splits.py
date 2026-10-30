@@ -40,6 +40,27 @@ def test_canonical_population_and_word_alignment_contract() -> None:
     assert audit_feature_names()["status"] == "pass"
 
 
+def test_fold_distribution_audit_is_internally_consistent() -> None:
+    audit = json.loads(
+        (ROOT / "artifacts/manifests/fold_distribution_audit.json").read_text()
+    )
+    split = json.loads((ROOT / "artifacts/manifests/split_manifest.json").read_text())
+    assert audit["status"] == "pass"
+    assert audit["trial_table_sha256"] == split["trial_table_sha256"]
+    assert audit["split_mapping_sha256"] == split["mapping_sha256"]
+    assert all(audit["assertions"].values())
+
+    for counts_by_batch in audit["reader_fold_batch_goal_counts"].values():
+        assert sum(counts["H"] for counts in counts_by_batch.values()) == 36
+        assert sum(counts["O"] for counts in counts_by_batch.values()) == 36
+
+    partitions = list(audit["test_partition_trial_counts"].values())
+    assert len(partitions) == 25
+    assert sum(partition["H"] for partition in partitions) == 9_720
+    assert sum(partition["O"] for partition in partitions) == 9_718
+    assert sum(partition["total"] for partition in partitions) == 19_438
+
+
 @requires_canonical_data
 def test_splits_are_deterministic_stratified_and_group_disjoint() -> None:
     trials = pd.read_parquet(TRIAL_TABLE, columns=ASSIGNMENT_COLUMNS)

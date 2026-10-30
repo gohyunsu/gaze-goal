@@ -1,0 +1,75 @@
+{
+  "schema": "goalexit-fold-distribution-audit-v1",
+  "status": "pass",
+  "trial_table_sha256": "788603352b4afb6137658fd02dc38e0efc8eeb46bc7a0dad9aaf7b8abf82adcf",
+  "split_mapping_sha256": "a92dc35355642a1a6cd5c35f9750d5a20048c8417a2c0229d94585a00406844d",
+  "readers": 360,
+  "reader_unique_article_batches": {
+    "1": 360
+  },
+  "reader_fold_batch_goal_counts": {
+    "0": {
+      "1": {"H": 12, "O": 9},
+      "2": {"H": 12, "O": 14},
+      "3": {"H": 12, "O": 13}
+    },
+    "1": {
+      "1": {"H": 13, "O": 13},
+      "2": {"H": 12, "O": 12},
+      "3": {"H": 11, "O": 11}
+    },
+    "2": {
+      "1": {"H": 14, "O": 12},
+      "2": {"H": 10, "O": 15},
+      "3": {"H": 12, "O": 9}
+    },
+    "3": {
+      "1": {"H": 8, "O": 13},
+      "2": {"H": 15, "O": 11},
+      "3": {"H": 13, "O": 12}
+    },
+    "4": {
+      "1": {"H": 13, "O": 13},
+      "2": {"H": 11, "O": 8},
+      "3": {"H": 12, "O": 15}
+    }
+  },
+  "test_partition_trial_counts": {
+    "r0_a0": {"H": 396, "O": 367, "total": 763},
+    "r0_a1": {"H": 384, "O": 382, "total": 766},
+    "r0_a2": {"H": 408, "O": 437, "total": 845},
+    "r0_a3": {"H": 372, "O": 374, "total": 746},
+    "r0_a4": {"H": 384, "O": 384, "total": 768},
+    "r1_a0": {"H": 403, "O": 403, "total": 806},
+    "r1_a1": {"H": 384, "O": 384, "total": 768},
+    "r1_a2": {"H": 393, "O": 393, "total": 786},
+    "r1_a3": {"H": 372, "O": 372, "total": 744},
+    "r1_a4": {"H": 392, "O": 392, "total": 784},
+    "r2_a0": {"H": 418, "O": 384, "total": 802},
+    "r2_a1": {"H": 386, "O": 380, "total": 766},
+    "r2_a2": {"H": 394, "O": 384, "total": 778},
+    "r2_a3": {"H": 370, "O": 375, "total": 745},
+    "r2_a4": {"H": 376, "O": 420, "total": 796},
+    "r3_a0": {"H": 356, "O": 407, "total": 763},
+    "r3_a1": {"H": 381, "O": 385, "total": 766},
+    "r3_a2": {"H": 444, "O": 401, "total": 845},
+    "r3_a3": {"H": 375, "O": 371, "total": 746},
+    "r3_a4": {"H": 388, "O": 380, "total": 768},
+    "r4_a0": {"H": 407, "O": 419, "total": 826},
+    "r4_a1": {"H": 385, "O": 388, "total": 773},
+    "r4_a2": {"H": 401, "O": 424, "total": 825},
+    "r4_a3": {"H": 371, "O": 368, "total": 739},
+    "r4_a4": {"H": 380, "O": 344, "total": 724}
+  },
+  "test_partition_summary": {
+    "total": {"minimum": 724, "median": 768.0, "maximum": 845},
+    "H": {"minimum": 356, "median": 385.0, "maximum": 444},
+    "O": {"minimum": 344, "median": 384.0, "maximum": 437}
+  },
+  "assertions": {
+    "each_reader_belongs_to_one_article_batch": true,
+    "every_reader_fold_contains_both_goals_from_all_three_batches": true,
+    "every_test_partition_contains_both_goals": true,
+    "all_test_partitions_are_nonempty": true
+  }
+}

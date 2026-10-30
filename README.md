@@ -10,8 +10,8 @@ Hyunsu Go · Sumin Lee · Jinyong Jun · Kyeonghun Kim · Hyuk-Jae Lee · Nam-Jo
 
 ## Overview
 
-This repository accompanies the ICCE 2027 paper *Compact Gaze-Only
-Reading-Goal Classification with Word-Aligned Teacher Distillation*. The
+This repository accompanies the ICCE 2027 paper *Training-Time Distillation
+for Compact Gaze-Only Reading-Goal Classification*. The
 study asks whether richer information can be confined to training while a
 small classifier uses only fixation sequences at inference.
 
@@ -84,6 +84,7 @@ The paper's main numerical sources are:
 - `artifacts/metrics/postconfirmatory_seed_extension.json`
 - `artifacts/metrics/postfeedback_controls.json`
 - `artifacts/metrics/postfeedback_shuffled_kd.json`
+- `artifacts/manifests/fold_distribution_audit.json`
 - `artifacts/manifests/cpu_benchmark_manifest.json`
 - `artifacts/manifests/cpu_length_distribution.json`
 

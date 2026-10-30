@@ -14,6 +14,7 @@ used consistently in the paper.
 | The retained data contain 19,438 trials from 360 readers and 30 articles. | `artifacts/manifests/canonical_goalexit.json` | Reported once in the data section |
 | Student inputs contain ten fixation-level features and exclude reader, article, question, answer, and session identifiers. | `artifacts/manifests/feature_schema.json`; `artifacts/manifests/forbidden_field_audit.json` | Exact input definition and leakage boundary |
 | Every test trial has a reader and article absent from its training set. | `artifacts/manifests/split_manifest.json`; `artifacts/manifests/outer_guard_audit.json` | Simultaneous reader and article holdout |
+| Every reader fold contains both goals from all three article batches, and all test partitions contain both goals. | `artifacts/manifests/fold_distribution_audit.json` | Batch composition and test-partition balance |
 | Text--gaze KD improves balanced accuracy over the architecture-matched gaze GRU by 0.0339. | `artifacts/metrics/outer_kd_confirmatory.json`; `artifacts/manifests/outer_kd_output_audit.json` | Primary out-of-fold comparison |
 | Reader-clustered and crossed reader/article intervals for the primary contrast exclude zero. | `artifacts/metrics/outer_kd_confirmatory.json` | Sampling uncertainty under the two specified resampling schemes |
 | Label smoothing does not reproduce the KD improvement. | `artifacts/metrics/postconfirmatory_seed_extension.json`; seeds 13, 29, and 47 | Post hoc control, not part of the primary analysis |

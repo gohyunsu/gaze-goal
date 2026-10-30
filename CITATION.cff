@@ -21,7 +21,7 @@ authors:
     given-names: Nam-Joon
 preferred-citation:
   type: conference-paper
-  title: "Compact Gaze-Only Reading-Goal Classification with Word-Aligned Teacher Distillation"
+  title: "Training-Time Distillation for Compact Gaze-Only Reading-Goal Classification"
   year: 2027
   conference:
     name: "IEEE International Conference on Consumer Electronics"
