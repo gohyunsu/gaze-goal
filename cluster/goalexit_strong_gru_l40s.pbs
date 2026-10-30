@@ -3,7 +3,10 @@
 #PBS -q ssu_lgpu
 #PBS -l select=1:ncpus=8:ngpus=1:mem=64gb:Qlist=l40s:container_engine=singularity
 #PBS -l walltime=24:00:00
+#PBS -v CONTAINER_IMAGE=147.46.121.38:5000/ubuntu:18.04-gpu
+#PBS -v PBS_CONTAINER_ARGS=--no-https
 #PBS -j oe
+#PBS -o /home/hsmail02/goalexit_transfer/logs/
 
 set -euo pipefail
 
