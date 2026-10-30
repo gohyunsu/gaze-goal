@@ -16,7 +16,7 @@ All candidates use AdamW, the same fixation features, preprocessing, batch size,
 
 ## Outer comparison
 
-The selected BCE and KD configurations are refit for seeds 13, 29, and 47. The epoch count is the integer median of the three selected inner epochs. A class-conditional-mean KD control replaces each training trial's teacher logit with the mean logit for its training class. This retains class-level softening while removing trial-specific teacher correspondence.
+The selected BCE and KD configurations are refit for seeds 13, 29, and 47. The epoch count is the integer median of the three selected inner epochs. A class-conditional-mean KD control replaces each training trial's temperature-softened teacher probability with the mean probability for its training class. This retains class-level softening while removing trial-specific teacher correspondence.
 
 Primary contrasts are tuned KD minus tuned BCE and tuned KD minus class-mean KD. Reader-cluster and crossed reader-article bootstrap intervals are reported over the mean of matched seed-specific balanced-accuracy differences.
 

@@ -411,7 +411,7 @@ Bootstrap samples are paired between models.  For each ablation contrast,
 resampled units are paired across conditions, and the seed-specific BA
 differences are averaged within each draw.
 
-\subsection{CPU Measurement}
+\subsection{Model-Only Latency}
 
 We benchmark one distilled checkpoint on every retained fixation sequence.
 After 100 warm-up iterations, we time one full-sequence forward pass per trial
@@ -496,7 +496,7 @@ The direct teacher-modality contrast includes zero under both resampling
 schemes.  Reader-clustered and crossed intervals exclude zero for unshuffled
 versus class-shuffled targets, although shuffled targets still outperform BCE.
 
-\subsection{Inference Cost}
+\subsection{Model-Only Latency}
 
 The distilled and undistilled GRUs have identical parameter counts and
 inference operations.  The serialized student state occupies 176~KiB.  Across

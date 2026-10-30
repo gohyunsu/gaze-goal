@@ -441,16 +441,39 @@ def _outer_teacher_cache(
 
 
 def _class_mean_logits(
-    teacher_logits: dict[str, float], training_targets: pd.DataFrame
+    teacher_logits: dict[str, float],
+    training_targets: pd.DataFrame,
+    temperature: float,
 ) -> dict[str, float]:
+    if temperature <= 0:
+        raise ValueError("Distillation temperature must be positive")
     target = training_targets.set_index("trial_id")["goal_index"].astype(int).to_dict()
     if set(target) != set(teacher_logits):
         raise ValueError("Class-mean targets and teacher logits differ in support")
-    means = {
-        label: float(np.mean([teacher_logits[key] for key, value in target.items() if value == label]))
+    softened = {
+        key: float(1.0 / (1.0 + np.exp(-value / temperature)))
+        for key, value in teacher_logits.items()
+    }
+    mean_probabilities = {
+        label: float(
+            np.mean(
+                [softened[key] for key, value in target.items() if value == label]
+            )
+        )
         for label in (0, 1)
     }
-    return {key: means[value] for key, value in target.items()}
+    epsilon = 1e-7
+    mean_logits = {
+        label: float(
+            temperature
+            * np.log(
+                np.clip(probability, epsilon, 1.0 - epsilon)
+                / (1.0 - np.clip(probability, epsilon, 1.0 - epsilon))
+            )
+        )
+        for label, probability in mean_probabilities.items()
+    }
+    return {key: mean_logits[value] for key, value in target.items()}
 
 
 def _outer_identity(
@@ -583,8 +606,12 @@ def run_outer(config_path: Path) -> None:
                     cache_hash = sha256(teacher_path)
                     target_transform = "identity"
                     if name == "class_mean_kd":
-                        logits = _class_mean_logits(teacher_logits, training_targets)
-                        target_transform = "class_conditional_mean"
+                        logits = _class_mean_logits(
+                            teacher_logits,
+                            training_targets,
+                            float(config["distillation_temperature"]),
+                        )
+                        target_transform = "class_conditional_mean_soft_probability"
                 run_config = _outer_identity(
                     root=root,
                     config_path=resolved,
