@@ -246,11 +246,11 @@ fixation input remains fixed.
 Knowledge distillation (KD) trains a student with class labels and a teacher's
 temperature-softened predictive distribution~\cite{hinton2015distilling}.
 Generalized distillation allows the teacher to use privileged information that
-is unavailable to the student at inference~\cite{lopezpaz2016unifying}.  This
-setting allows word-level gaze, with or without contextual text, to guide
-training while the deployed model remains gaze-only.  We apply it to
-reading-goal classification and test whether the benefit depends on contextual
-text or the pairing between each training trial and its teacher prediction.
+is unavailable to the student at inference~\cite{lopezpaz2016unifying}.  In our
+setting, the teacher uses fixation-to-word alignment and may also receive
+contextual text, whereas the student receives only the chronological fixation
+sequence.  We test whether the benefit depends on contextual text or on the
+pairing between each training trial and its teacher prediction.
 
 \section{Method}
 
@@ -328,9 +328,10 @@ features encode fixation count, total and mean dwell time, first-fixation and
 first-pass dwell time, regression-in and revisit counts, and skipping.  Text
 and gaze features are projected to 128 and 64 dimensions, concatenated with a
 32-dimensional learned word-position embedding, and mapped to width 192.  A
-learned classification token and a three-layer, six-head Transformer
-~\cite{vaswani2017attention} with feed-forward width 384, GELU, and dropout 0.1
-produce the logit.  A padding mask excludes padded word positions.
+learned classification token is prepended before a three-layer, six-head
+Transformer~\cite{vaswani2017attention} with feed-forward width 384, GELU, and
+dropout 0.1.  A linear head maps the classification-token representation to the
+output logit.  A padding mask excludes padded word positions.
 \modelText{} retains the text branch and fusion architecture but sets all gaze
 features to zero.  It tests whether paragraph text alone predicts the reading
 goal.
