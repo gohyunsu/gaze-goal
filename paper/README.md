@@ -31,7 +31,10 @@ The scientific content and numerical tables are tied to:
 - `../artifacts/manifests/figure1_scanpath_provenance.json`
 
 The author block records the author order and affiliations supplied by the
-research team. Nam-Joon Kim is marked as the corresponding author. ICCE 2027
-accepts initial papers from 2 to 6 pages; this manuscript uses 4 pages including
-references. Final spelling, affiliations, submission approval, and policy
-compliance must be confirmed by the research team before upload.
+research team. Nam-Joon Kim is marked as the corresponding author. The
+[official ICCE 2027 submission guide](https://icce.org/2027/submission-guidelines/)
+accepts initial papers from 2 to 6 pages in the IEEE conference format on US
+Letter without author biographies. This manuscript uses 4 pages including
+references. The recommended regular track is Human-Machine Interaction and
+User Experience (HMI). Final spelling, affiliations, submission approval, and
+policy compliance must be confirmed by the research team before upload.
