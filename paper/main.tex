@@ -74,7 +74,7 @@ knj01@snu.ac.kr}}
 
 \begin{abstract}
 Reading interfaces could adapt to whether users read for comprehension or seek
-specific information.  A prior approach combines gaze and contextual text and
+specific information.  Prior work combines gaze and contextual text and
 requires fixation-to-word alignment at inference.  We instead use a
 word-aligned teacher only during training to supervise a GRU that
 receives the chronological fixation sequence.  On OneStop, with readers and
@@ -100,8 +100,8 @@ specific information.  These goals are associated with differences in
 fixation durations, regressions, and scanpath structure
 ~\cite{rayner1998,shubi2023information}.  An opt-in classifier could support
 navigation or content assistance after each paragraph~\cite{shubi2025decoding}.
-We therefore evaluate whether prediction generalizes to readers and articles
-absent from training.
+For this use, a model should generalize to readers and articles absent from
+training.
 
 Shubi \emph{et al.} combined fixation-level gaze with contextual text to
 classify reading goals for unseen readers and articles
@@ -478,9 +478,7 @@ higher, but its crossed reader/article interval includes zero
 
 \subsection{Ablations and Seed Sensitivity}
 
-Table~\ref{tab:controls} reports the post hoc controls.  The tested
-label-smoothing condition does not improve BA over the GRU.  KD yields positive
-seed-wise differences for both teacher variants and for class-shuffled targets.
+Table~\ref{tab:controls} reports the post hoc controls.
 
 \begin{table}[t]
 \caption{Post hoc matched-seed controls.  BA is in percent.  Differences and
@@ -506,10 +504,13 @@ KD: unshuffled $-$ class-shuffled & -- & +1.90 & [0.61, 3.17] & 3/3 \\
 \end{tabular}
 \end{table}
 
-The student BA difference between the two teacher modalities has intervals
-that include zero under both resampling schemes.  In contrast, the unshuffled
-versus class-shuffled comparison has intervals that exclude zero under both
-schemes.  Shuffled targets nevertheless remain above BCE.
+The controls separate the tested training signals.  The label-smoothed GRU
+remains at the BCE baseline.  Both word-aligned teachers yield positive
+seed-wise KD differences, while the student-level modality contrast includes
+zero under both resampling schemes.  Within-class shuffling preserves the
+class-conditional target distribution but removes trial-level pairing.  The
+unshuffled-versus-shuffled contrast excludes zero under both schemes, although
+shuffled targets remain above BCE.
 
 \subsection{Model-Only Latency}
 
@@ -521,19 +522,18 @@ all retained sequences, model-only latency has a 5.08-ms median and a 16.57-ms
 \section{Discussion}
 
 Teacher-derived soft targets improve the matched gaze-only GRU relative to
-hard-label BCE, whereas the tested label-smoothing control does not.  The
-gaze-summary logistic baseline remains competitive, and the distilled model's
-advantage over it is uncertain under crossed reader/article resampling.
+hard-label BCE.  The gaze-summary logistic baseline remains competitive, and
+the distilled model's advantage over it is uncertain under crossed
+reader/article resampling.
 
-Adding contextual text to the tested word-level teacher yields no detectable
-student improvement.  Because both teachers share word-level gaze aggregation,
-greater capacity than the student, and in-sample target generation, this
-experiment does not isolate the contribution of those properties.
-
-Within-class shuffling cuts the matched-seed gain roughly in half but does not
-remove it.  Preserving trial-level correspondence between teacher targets and
-student inputs contributes to the gain.  The remaining improvement may reflect
-class-dependent soft targets or changes in optimization.
+The ablations suggest that the gain has more than one source.  Trial-to-target
+pairing contributes because shuffling within class reduces performance.  The
+remaining improvement may reflect class-dependent targets or an optimization
+effect.  The tested label-smoothing setting does not yield a similar
+improvement, and adding contextual text produces no detectable student
+benefit.  Both teachers also share word-level gaze aggregation, greater
+capacity than the student, and in-sample target generation.  These properties
+remain possible sources of the gain.
 
 Bootstrap intervals characterize sampling uncertainty for fixed out-of-fold
 predictions, while the seed analysis covers three initializations.  Because
