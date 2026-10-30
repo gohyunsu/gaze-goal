@@ -365,13 +365,13 @@ the GRU students, and 128 for the teacher models.  Final refits use the selected
 learning rate and fixed epoch count described above, without test-dependent
 stopping.
 
-\subsection{Post Hoc Ablations}
+\subsection{Ablation Controls}
 
 After the primary result, we ran post hoc controls using the same outer splits
 and training setup.  Paired conditions inherit the selected learning rate and
 epoch count and keep the remaining student, teacher, or KD settings fixed.
 
-The first control replaces teacher targets with binary label smoothing
+The first control replaces KD with binary label smoothing
 ($\epsilon=0.10$)~\cite{szegedy2016label}.  The second creates a gaze-only
 teacher by zeroing every RoBERTa representation while retaining the
 architecture and word-level gaze summaries.  Across three random seeds, we
@@ -398,7 +398,7 @@ For the primary contrast between \modelDistill{} and \modelGru{}, a paired
 report the central 95\% interval.  A 2,000-draw sensitivity analysis resamples
 readers within each goal and independently resamples articles, weighting each
 trial by the product of their multiplicities.
-Bootstrap samples are paired between models.  For each post hoc contrast,
+Bootstrap samples are paired between models.  For each ablation contrast,
 resampled units are paired across conditions, and the seed-specific BA
 differences are averaged within each draw.
 
@@ -446,22 +446,21 @@ $[0.0130, 0.0553]$.  Its NLL, Brier score, and ECE are also lower than those of
 the matched GRU.  The distilled model exceeds \modelStats{} and
 \modelTeacher{} in pooled BA, while \modelText{} remains at chance.
 
-The strongest post hoc logistic control, \modelLinear{}, reaches .6066 BA.
+Among the logistic controls, \modelLinear{} reaches .6066 BA.
 The distilled model leads it by .0139 BA, with a crossed reader/article
 interval of $[-0.0037,0.0321]$.
 
-\subsection{Post Hoc Ablations and Seed Sensitivity}
+\subsection{Ablations and Seed Sensitivity}
 
-Table~\ref{tab:controls} averages the post hoc comparisons over three matched
+Table~\ref{tab:controls} averages the ablation comparisons over three matched
 random seeds.  Label smoothing does not improve BA over the GRU.  Students
 distilled from either teacher, as well as those trained with class-shuffled
 targets, improve BA at every seed, with reader-clustered intervals above zero.
 
 \begin{table}[t]
-\caption{Matched-seed post hoc controls.  KD rows name the teacher or target
-condition; every student receives fixation sequences.  Model-row $\Delta$BA is
-relative to GRU+BCE; rows below the rule are direct contrasts.  CIs are
-reader-clustered, and $n_+$ counts positive seeds.}
+\caption{Matched-seed ablations.  All students use fixation sequences; KD rows
+identify teacher inputs or target shuffling.  Model-row $\Delta$BA is relative
+to GRU+BCE.  CIs are reader-clustered; $n_+$ counts positive seeds.}
 \label{tab:controls}
 \centering
 \scriptsize
@@ -510,7 +509,7 @@ remove it.  Trial-specific teacher predictions account for part of the gain,
 while the remainder is consistent with class-dependent soft targets or their
 optimization effect.
 
-The post hoc ablations were designed after the primary analysis.  Their
+These ablations were designed after the primary analysis.  Their
 bootstrap intervals average the three seed-specific differences within each
 draw, so they quantify reader and article sampling rather than the full
 distribution over initializations.  Because reading goal is assigned between
