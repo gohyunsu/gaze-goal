@@ -8,7 +8,7 @@
 #PBS -j oe
 #PBS -o /home/hsmail02/goalexit_transfer/logs/
 
-set -euo pipefail
+set -euxo pipefail
 
 : "${GOALEXIT_EXPECTED_COMMIT:?GOALEXIT_EXPECTED_COMMIT is required}"
 : "${GOALEXIT_TRACKED_ARCHIVE:?GOALEXIT_TRACKED_ARCHIVE is required}"
