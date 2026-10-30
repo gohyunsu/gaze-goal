@@ -68,16 +68,15 @@ knj01@snu.ac.kr}}
 
 \begin{abstract}
 Reading interfaces could adapt to whether users read for comprehension or seek
-specific information.  For unseen readers and articles, the strongest prior
-model combines gaze and contextual text, requiring fixation-to-word alignment
-at inference.  We confine text and alignment to training, using a word-aligned
-teacher to supply soft targets to a compact fixation-sequence GRU.  On OneStop,
-with readers and articles both held out, distillation raises balanced accuracy
-by 3.39 percentage points over the same GRU trained with hard labels.  Both
-reader-clustered and crossed reader/article 95\% bootstrap intervals for this
-gain exclude zero.  The tested label-smoothing control does not reproduce the
-improvement.  Within-class target shuffling reduces the gain by 1.90 points.
-Adding contextual text to the word-level teacher yields no detectable student
+specific information.  A prior approach combines gaze and contextual text and
+requires fixation-to-word alignment at inference.  We instead use a
+word-aligned teacher only during training to supervise a compact GRU that
+receives the chronological fixation sequence.  On OneStop, with readers and
+articles both held out, distillation raises balanced accuracy by 3.39
+percentage points over the same GRU trained with hard labels.  This gain
+remains positive under reader-clustered and crossed reader/article bootstrap
+analyses.  Within-class target shuffling reduces the gain by 1.90 points, while
+adding contextual text to the word-level teacher yields no detectable student
 benefit.  On one laptop CPU thread, median and 95th-percentile forward-pass
 latencies are 5.08 and 16.57~ms.
 \end{abstract}
@@ -96,17 +95,18 @@ fixation durations, regressions, and scanpath structure
 navigation or content assistance after each paragraph~\cite{shubi2025decoding}.
 It must generalize to readers and articles absent from its training data.
 
-Under unseen-reader and unseen-article evaluation on OneStop, the strongest
-prior model combined fixation-level gaze with contextual text
+The best-performing model reported by Shubi \emph{et al.} for unseen readers
+and articles combined fixation-level gaze with contextual text
 ~\cite{shubi2025decoding}.  Its inference path requires text, fixation-to-word
-alignment, and a language encoder.  We ask whether these resources can be
-confined to training while prediction uses gaze alone.
+alignment, and a language encoder.  We ask whether word-aligned supervision
+can instead be used only during training while prediction uses gaze alone.
 
-We study a text--gaze teacher that combines contextual word representations
-with word-level gaze summaries and a compact student that observes the
-chronological fixation sequence.  The primary comparison holds the student
-architecture and input fixed.  At inference, the student uses no teacher, text
-encoder, tokenization, or fixation-to-word alignment.
+We study teachers that aggregate gaze by word; one teacher also receives
+contextual word representations.  Their soft predictions supervise a compact
+student that observes the chronological fixation sequence.  The primary
+comparison holds the student architecture and input fixed.  At inference, the
+student uses no teacher, text encoder, tokenization, or fixation-to-word
+alignment.
 
 Each OneStop reader completes only one goal condition, while articles recur
 across readers.  We therefore hold out readers and articles simultaneously and
@@ -118,9 +118,9 @@ This study makes three contributions:
 \begin{itemize}
   \item With student inputs and architecture fixed, teacher-derived soft
   targets improve the gaze-only GRU when both readers and articles are unseen.
-  \item Controls indicate that trial-level target correspondence contributes
-  to the gain, whereas adding text to the word-level teacher provides no
-  detectable student benefit.
+  \item Within-class target shuffling reduces but does not eliminate the gain,
+  while adding text to the word-level teacher provides no detectable student
+  benefit.
   \item We characterize student size and single-thread CPU latency across the
   observed sequence-length distribution.
 \end{itemize}
@@ -156,19 +156,19 @@ This study makes three contributions:
     \fill[trainblue] (3,-3) circle (.70);
     \fill[trainblue] (14,-3) circle (1.00);
     \node[text=black, anchor=north] at (11,-4.5)
-          {Text + word-level gaze};
+          {Word-level gaze (+ text)};
   \end{scope}
   \node[trainmodule, text=black] (teacher) at (46,15)
-        {Text--gaze teacher};
+        {Word-aligned teacher};
   \draw[trainarr] (25,15) -- (teacher.west);
 
-  \begin{scope}[shift={(70,15)}]
+  \begin{scope}[shift={(66,15)}]
     \fill[trainblue!45] (0,.8) rectangle (4,1.6);
     \fill[trainblue] (0,-1.6) rectangle (10,-.8);
     \node[text=black, anchor=south] at (5,3.2)
           {Teacher prediction};
   \end{scope}
-  \draw[trainarr] (teacher.east) -- (70,15);
+  \draw[trainarr] (teacher.east) -- (66,15);
 
   \node[font=\scriptsize\bfseries, text=black, anchor=west]
         at (0,3) {Inference path};
@@ -195,22 +195,22 @@ This study makes three contributions:
         {Gaze-only student};
   \draw[inferarr] (25,-5) -- (student.west);
 
-  \begin{scope}[shift={(70,-5)}]
+  \begin{scope}[shift={(66,-5)}]
     \fill[infergreen!45] (0,.8) rectangle (4.8,1.6);
     \fill[infergreen] (0,-1.6) rectangle (9.2,-.8);
     \node[text=black, anchor=north] at (5,-2.7)
           {Student prediction};
   \end{scope}
-  \draw[inferarr] (student.east) -- (70,-5);
+  \draw[inferarr] (student.east) -- (66,-5);
 
-  \draw[kdarr] (74.2,12) -- node[midway, right, text=black, align=left,
-        xshift=.2mm] {Soft-target\\supervision} (74.2,-2);
+  \draw[kdarr] (70.2,12) -- node[midway, right, text=black, align=left,
+        xshift=.2mm] {Soft-target\\supervision} (70.2,-2);
 \end{tikzpicture}
-\caption{Training-time distillation for gaze-only inference.  A teacher
-predicts the reading goal from contextual text and word-level gaze
-summaries, and its soft predictions supervise a student that receives only
-the fixation sequence.  Marker size represents fixation duration.  At
-inference, the student operates without text, word alignment, or the teacher.}
+\caption{Training-time distillation for gaze-only inference.  A word-aligned
+teacher aggregates gaze by word and may also receive contextual text.  Its
+soft predictions supervise a student that receives fixations in temporal
+order.  Marker size represents fixation duration.  At inference, the student
+operates without text, word alignment, or the teacher.}
 \label{fig:overview}
 \end{figure}
 
@@ -248,8 +248,9 @@ trial-level target correspondence.
 \subsection{Task and Data}
 
 The unit of analysis is a completed paragraph-reading trial represented by its
-eye movements.  The binary target is the assigned reading goal: ordinary
-reading for comprehension ($y=0$) or information seeking ($y=1$).  In the
+eye movements.  The binary target is the experimentally assigned reading-goal
+condition: ordinary reading for comprehension ($y=0$) or information seeking
+($y=1$).  In the
 information-seeking condition, readers preview the question before the
 paragraph; in ordinary reading, the question follows the paragraph.  Readers
 were randomly assigned to one condition~\cite{berzak2025onestop}.  We use the
@@ -386,8 +387,9 @@ refit the BCE and label-smoothed GRUs, both teachers, and both KD students.
 Each student uses logits from the teacher trained with the same seed.
 
 The third control cyclically reassigns teacher logits within each ground-truth
-class, preserving the class-conditional distributions while removing
-trial-level correspondence.  It uses the same seeds and student settings.
+class.  This preserves each class-conditional distribution while removing the
+pairing between a training trial and its teacher prediction.  It uses the same
+seeds and student settings.
 
 We also fit logistic controls using either log dwell time per
 word~\cite{shubi2025decoding} or the 22 gaze summaries.  Their regularization
@@ -409,7 +411,6 @@ Bootstrap samples are paired between models.  For each ablation contrast,
 resampled units are paired across conditions, and the seed-specific BA
 differences are averaged within each draw.
 
-\filbreak
 \subsection{CPU Measurement}
 
 We benchmark one distilled checkpoint on every retained fixation sequence.
@@ -467,9 +468,10 @@ variants and class-shuffled targets, and their reader-clustered intervals are
 above zero.
 
 \begin{table}[t]
-\caption{Matched-seed ablations for fixation-sequence students.  Model-row
-$\Delta$BA is relative to GRU+BCE.  Aligned teachers aggregate gaze by word.
-CIs are reader-clustered; $n_+$ counts seeds with $\Delta\mathrm{BA}>0$.}
+\caption{Separate post hoc matched-seed reruns for fixation-sequence students.
+Model-row $\Delta$BA is relative to GRU+BCE.  Aligned teachers aggregate gaze
+by word.  CIs are reader-clustered; $n_+$ counts seeds with
+$\Delta\mathrm{BA}>0$.}
 \label{tab:controls}
 \centering
 \scriptsize
@@ -532,14 +534,15 @@ bounds.  The CPU benchmark excludes eye tracking, preprocessing, memory use,
 and energy consumption.  Interface adaptation should be opt-in and evaluated
 with users.
 
-\newpage
 \section{Conclusion}
 
 Training-time distillation improves a compact gaze-only GRU when both readers
 and articles are unseen.  The deployed model uses only fixation sequences.
 Within-class target shuffling indicates that trial-level target correspondence
 contributes to the gain.  Adding contextual text to the tested word-level
-teacher yields no detectable benefit.
+teacher yields no detectable benefit.  The improvement is established against
+the matched GRU; superiority over the strongest logistic control remains
+uncertain.
 
 \section*{Code Availability}
 

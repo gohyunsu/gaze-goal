@@ -85,11 +85,11 @@ cat \
   "$TRANSFER/goalexit_payload.part0" \
   "$TRANSFER/goalexit_payload.part1" \
   "$TRANSFER/goalexit_payload.part2" \
-  "$TRANSFER/goalexit_payload.part3" | tar --warning=no-timestamp -xzf - -C "$PROJECT"
-tar --warning=no-timestamp -xzf "$GOALEXIT_BASE_RESULTS" -C "$PROJECT"
-tar --warning=no-timestamp -xzf "$GOALEXIT_SEED_RESULTS" -C "$PROJECT"
-tar --warning=no-timestamp -xzf "$GOALEXIT_TRACKED_ARCHIVE" -C "$PROJECT"
-tar --warning=no-timestamp -xzf "$GOALEXIT_GIT_ARCHIVE" -C "$PROJECT"
+  "$TRANSFER/goalexit_payload.part3" | tar -mxzf - -C "$PROJECT"
+tar -mxzf "$GOALEXIT_BASE_RESULTS" -C "$PROJECT"
+tar -mxzf "$GOALEXIT_SEED_RESULTS" -C "$PROJECT"
+tar -mxzf "$GOALEXIT_TRACKED_ARCHIVE" -C "$PROJECT"
+tar -mxzf "$GOALEXIT_GIT_ARCHIVE" -C "$PROJECT"
 
 test "$(git -C "$PROJECT" rev-parse HEAD)" = "$GOALEXIT_EXPECTED_COMMIT"
 test -z "$(git -C "$PROJECT" status --porcelain)"
