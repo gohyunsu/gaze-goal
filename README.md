@@ -10,8 +10,8 @@ Hyunsu Go · Sumin Lee · Jinyong Jun · Kyeonghun Kim · Hyuk-Jae Lee · Nam-Jo
 
 ## Overview
 
-This repository accompanies the ICCE 2027 paper *Training-Time Distillation
-for Compact Gaze-Only Reading-Goal Classification*. The
+This repository accompanies the ICCE 2027 paper *Learning a Gaze-Only
+Reading-Goal Classifier from a Word-Aligned Teacher*. The
 study asks whether richer information can be confined to training while a
 small classifier uses only fixation sequences at inference.
 
