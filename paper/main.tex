@@ -101,7 +101,7 @@ and articles combined fixation-level gaze with contextual text
 alignment, and a language encoder.  We ask whether word-aligned supervision
 can instead be used only during training while prediction uses gaze alone.
 
-We study teachers that aggregate gaze by word; one teacher also receives
+We study teachers that aggregate gaze by word.  One teacher also receives
 contextual word representations.  Their soft predictions supervise a compact
 student that observes the chronological fixation sequence.  The primary
 comparison holds the student architecture and input fixed.  At inference, the
@@ -241,7 +241,7 @@ is unavailable to the student at inference~\cite{lopezpaz2016unifying}.  This
 setting allows word-level text and gaze representations to guide training while
 the deployed model remains gaze-only.  We apply it to reading-goal
 classification and test whether the benefit depends on contextual text or
-trial-level target correspondence.
+the pairing between each training trial and its teacher prediction.
 
 \section{Method}
 
@@ -250,9 +250,8 @@ trial-level target correspondence.
 The unit of analysis is a completed paragraph-reading trial represented by its
 eye movements.  The binary target is the experimentally assigned reading-goal
 condition: ordinary reading for comprehension ($y=0$) or information seeking
-($y=1$).  In the
-information-seeking condition, readers preview the question before the
-paragraph; in ordinary reading, the question follows the paragraph.  Readers
+($y=1$).  In the information-seeking condition, readers preview the question
+before the paragraph.  In ordinary reading, the question follows it.  Readers
 were randomly assigned to one condition~\cite{berzak2025onestop}.  We use the
 anonymized public release, collected with consent under an institutional ethics
 protocol, and retain first readings from these two conditions.  We exclude
@@ -300,7 +299,7 @@ Model & Objective & Model input & Parameters \\
 \modelText{} & BCE & text & 1,038,945$^a$ \\
 \modelDistill{} & BCE + KD & fixation sequence & 43,797 \\
 \bottomrule
-\multicolumn{4}{@{}l}{\scriptsize $^a$Trainable parameters; frozen RoBERTa is excluded.}
+\multicolumn{4}{@{}l}{\scriptsize $^a$Trainable parameters, excluding frozen RoBERTa.}
 \end{tabular}
 \end{table}
 
@@ -470,7 +469,7 @@ above zero.
 \begin{table}[t]
 \caption{Separate post hoc matched-seed reruns for fixation-sequence students.
 Model-row $\Delta$BA is relative to GRU+BCE.  Aligned teachers aggregate gaze
-by word.  CIs are reader-clustered; $n_+$ counts seeds with
+by word.  CIs are reader-clustered, and $n_+$ counts seeds with
 $\Delta\mathrm{BA}>0$.}
 \label{tab:controls}
 \centering
@@ -541,7 +540,7 @@ and articles are unseen.  The deployed model uses only fixation sequences.
 Within-class target shuffling indicates that trial-level target correspondence
 contributes to the gain.  Adding contextual text to the tested word-level
 teacher yields no detectable benefit.  The improvement is established against
-the matched GRU; superiority over the strongest logistic control remains
+the matched GRU.  Superiority over the strongest logistic control remains
 uncertain.
 
 \section*{Code Availability}
