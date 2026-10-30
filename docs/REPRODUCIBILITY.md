@@ -57,6 +57,7 @@ Representative commands are in the root README. Protocols in `docs/04`,
 | Paper evidence | Artifact |
 |---|---|
 | Primary model comparison | `artifacts/metrics/outer_kd_confirmatory.json` |
+| Descriptive consistency across article batches | `artifacts/metrics/outer_kd_batch_robustness.json` |
 | Matched-seed ablations | `artifacts/metrics/postconfirmatory_seed_extension.json` |
 | Post hoc logistic controls | `artifacts/metrics/postfeedback_controls.json` |
 | Class-conditional target shuffling | `artifacts/metrics/postfeedback_shuffled_kd.json` |

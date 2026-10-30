@@ -2,7 +2,7 @@
   "schema": "goalexit-icce2027-pdf-audit-v1",
   "status": "pass",
   "pdf": "paper/main.pdf",
-  "sha256": "f8cac5f2068ca1d0801be326c7af43718fb5f29089c7d26345f7a5719684545b",
+  "sha256": "8f710f3ded98b07e6ade59da7165fb7797f9758db764b66e8ba33833b763afab",
   "pages": 4,
   "page_width_points": 612.0,
   "page_height_points": 792.0,
@@ -21,7 +21,7 @@
   "build_engine": "Tectonic 0.15.0 / xdvipdfmx",
   "tests": {
     "command": "PYTHONPATH=src conda run -n bodex pytest -q",
-    "passed": 27,
+    "passed": 28,
     "skipped": 3,
     "failed": 0
   }

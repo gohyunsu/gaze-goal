@@ -431,7 +431,7 @@ def _write_report(path: Path, result: dict[str, Any]) -> None:
         "", "## Viability checks", "",
     ])
     for name, passed in result["viability_conditions"].items():
-        lines.append(f"- {'PASS' if passed else 'FAIL'} — {name}")
+        lines.append(f"- {'PASS' if passed else 'FAIL'}: {name}")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 

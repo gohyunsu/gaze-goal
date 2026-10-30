@@ -28,9 +28,9 @@ Crossed reader/article sensitivity CI: [+0.0130, +0.0553].
 
 ## Viability checks
 
-- PASS — d_minus_b1_point_positive
-- PASS — d_minus_b1_reader_ci_lower_positive
-- PASS — d_minus_b0_nonnegative
-- PASS — d_within_0p010_of_teacher
-- PASS — text_gain_at_most_half_teacher_gain
-- PASS — complete_set_audit_pass
+- PASS: d_minus_b1_point_positive
+- PASS: d_minus_b1_reader_ci_lower_positive
+- PASS: d_minus_b0_nonnegative
+- PASS: d_within_0p010_of_teacher
+- PASS: text_gain_at_most_half_teacher_gain
+- PASS: complete_set_audit_pass

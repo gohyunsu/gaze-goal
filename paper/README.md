@@ -12,6 +12,7 @@ conda run -n bodex tectonic --keep-logs --keep-intermediates main.tex
 The scientific content and numerical tables are tied to:
 
 - `../artifacts/metrics/outer_kd_confirmatory.json`
+- `../artifacts/metrics/outer_kd_batch_robustness.json`
 - `../artifacts/manifests/outer_kd_output_audit.json`
 - `../artifacts/manifests/fold_distribution_audit.json`
 - `../docs/05_KD_CONFIRMATORY_REPORT.md`

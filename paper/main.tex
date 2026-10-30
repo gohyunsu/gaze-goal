@@ -68,12 +68,12 @@ knj01@snu.ac.kr}}
 
 \begin{abstract}
 Reading interfaces could adapt to whether users read for comprehension or seek
-specific information.  Prior work's strongest individual model combines gaze
-and contextual text, requiring fixation-to-word alignment at inference.  We
-confine text and alignment to training, using a word-aligned teacher to supply
-soft targets to a compact fixation-sequence GRU.  On OneStop, with readers and
-articles both held out, distillation raises balanced accuracy by 3.39
-percentage points over the same GRU trained with hard labels.  Both
+specific information.  For unseen readers and articles, the strongest prior
+model combines gaze and contextual text, requiring fixation-to-word alignment
+at inference.  We confine text and alignment to training, using a word-aligned
+teacher to supply soft targets to a compact fixation-sequence GRU.  On OneStop,
+with readers and articles both held out, distillation raises balanced accuracy
+by 3.39 percentage points over the same GRU trained with hard labels.  Both
 reader-clustered and crossed reader/article 95\% bootstrap intervals for this
 gain exclude zero.  The tested label-smoothing control does not reproduce the
 improvement.  Within-class target shuffling reduces the gain by 1.90 points,
@@ -96,11 +96,11 @@ fixation durations, regressions, and scanpath structure
 navigation or content assistance after each paragraph~\cite{shubi2025decoding}.
 It must generalize to readers and articles absent from its training data.
 
-Prior work on OneStop found that its strongest individual reading-goal model
-combined scanpaths with contextual text~\cite{shubi2025decoding}.  Its inference
-path requires text, fixation-to-word alignment, and a language encoder.  We ask
-whether these resources can be confined to training while prediction uses gaze
-alone.
+Under unseen-reader and unseen-article evaluation on OneStop, the strongest
+prior model combined fixation-level gaze with contextual text
+~\cite{shubi2025decoding}.  Its inference path requires text, fixation-to-word
+alignment, and a language encoder.  We ask whether these resources can be
+confined to training while prediction uses gaze alone.
 
 We study a text--gaze teacher that combines contextual word representations
 with word-level gaze summaries and a compact student that observes the
@@ -277,8 +277,8 @@ duration, displacement, saccade amplitude, line transitions, spatial
 dispersion, and path length.
 
 \begin{table}[t]
-\caption{Model inputs, objectives, and trainable parameter counts.  The GRU
-architecture is held fixed.}
+\caption{Model configurations and trainable parameter counts.  GRU rows share
+an architecture.}
 \label{tab:models}
 \centering
 \scriptsize
@@ -444,8 +444,9 @@ Model & BA & AUROC & Macro F1 & NLL & Brier & ECE \\
 \modelDistill{} improves BA over \modelGru{} by 0.0339.  The reader-clustered
 95\% interval is $[0.0175, 0.0504]$, and the crossed reader/article interval is
 $[0.0130, 0.0553]$.  Its NLL, Brier score, and ECE are also lower than those of
-the matched GRU.  The distilled model exceeds \modelStats{} and
-\modelTeacher{} in pooled BA, while \modelText{} remains at chance.
+the matched GRU.  In a post hoc descriptive check, the BA difference is
+positive within each article batch.  The distilled model exceeds \modelStats{}
+and \modelTeacher{} in pooled BA, while \modelText{} remains at chance.
 
 \modelLinear{} is the strongest logistic control at .6066 BA.  \modelDistill{}
 is .0139 higher, but its crossed reader/article interval includes zero
@@ -496,27 +497,27 @@ all retained sequences, model-only latency has a 5.08-ms median and a 16.57-ms
 
 \section{Discussion}
 
-Teacher-derived soft targets improve the fixed gaze-only GRU, whereas the
-tested label-smoothing control does not.  Under the evaluated dataset protocol,
-distillation is more effective than hard-label BCE or the tested
-label-smoothing control for this GRU architecture.  The gaze-summary logistic
-baseline remains competitive, and the distilled model's advantage over it is
-uncertain under crossed reader/article resampling.
+Teacher-derived soft targets improve the fixed gaze-only GRU relative to
+hard-label BCE, whereas the tested label-smoothing control does not.  The
+gaze-summary logistic baseline remains competitive, and the distilled model's
+advantage over it is uncertain under crossed reader/article resampling.
 
 Adding contextual text to the teacher yields no detectable student improvement.
-Both teachers use word-level gaze aggregation and have greater capacity than
-the student, leaving the contribution of these shared properties unresolved.
+Both teachers share word-level gaze aggregation and greater capacity than the
+student, and both produce in-sample targets.  The contribution of these shared
+properties remains unresolved.
 
 Within-class shuffling cuts the matched-seed gain roughly in half but does not
 remove it.  Trial-specific teacher predictions account for part of the gain.
 The remaining improvement may reflect class-dependent soft targets or changes
 in optimization.
 
-The post hoc ablation intervals average the three seed-specific differences in
-each bootstrap draw.  They capture sampling over readers and articles, not the
-full variability across initializations.  Because each reader was assigned one
-goal, within-reader effects require crossover data.  The corpus contains English
-news recorded with a laboratory tracker, and predictions use complete
+All bootstraps resample fixed out-of-fold predictions and therefore exclude
+retraining variability.  The post hoc ablation intervals also average three
+seed-specific differences in each draw, rather than characterizing the full
+distribution across initializations.  Because each reader was assigned one
+goal, within-reader effects require crossover data.  The corpus contains
+English news recorded with a laboratory tracker, and predictions use complete
 scanpaths.  Other domains, devices, self-selected goals, and partial sequences
 remain to be evaluated.
 
@@ -527,7 +528,7 @@ and energy.  Interface adaptation should be opt-in and evaluated with users.
 \newpage
 \section{Conclusion}
 
-Training-only distillation improves a compact gaze-only GRU when both readers
+Training-time distillation improves a compact gaze-only GRU when both readers
 and articles are unseen.  The deployed model uses only fixation sequences.
 Within-class target shuffling indicates that trial-specific teacher predictions
 account for part of the gain, while contextual text adds no detectable benefit.

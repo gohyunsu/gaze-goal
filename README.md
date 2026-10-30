@@ -81,6 +81,7 @@ rules, software environments, execution stages, and artifact mappings are in
 The paper's main numerical sources are:
 
 - `artifacts/metrics/outer_kd_confirmatory.json`
+- `artifacts/metrics/outer_kd_batch_robustness.json`
 - `artifacts/metrics/postconfirmatory_seed_extension.json`
 - `artifacts/metrics/postfeedback_controls.json`
 - `artifacts/metrics/postfeedback_shuffled_kd.json`

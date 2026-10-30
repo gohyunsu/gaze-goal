@@ -51,7 +51,7 @@ reader-identity parameter scan pass. The non-gaze metadata allowlist is empty;
 the intercept-only logistic shortcut probe obtained mean BA
 **0.5000** over all 75 paired development
 evaluations. Reader and article IDs are used only for splitting, clustered audit,
-and macro-by-article evaluation—not as tensors.
+and macro-by-article evaluation, not as tensors.
 
 ## Teacher feasibility and dependency lock
 

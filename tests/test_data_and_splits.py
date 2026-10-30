@@ -9,7 +9,7 @@ import pytest
 from goalexit.data.dataset import context_positions, load_allowed_targets, outer_context_positions
 from goalexit.features.schema import audit_feature_names
 from goalexit.splits.build_splits import ASSIGNMENT_COLUMNS, construct_manifest
-from goalexit.utils import canonical_json_sha256
+from goalexit.utils import canonical_json_sha256, sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,6 +59,32 @@ def test_fold_distribution_audit_is_internally_consistent() -> None:
     assert sum(partition["H"] for partition in partitions) == 9_720
     assert sum(partition["O"] for partition in partitions) == 9_718
     assert sum(partition["total"] for partition in partitions) == 19_438
+
+
+def test_batch_robustness_artifact_matches_confirmatory_sources() -> None:
+    result = json.loads(
+        (ROOT / "artifacts/metrics/outer_kd_batch_robustness.json").read_text()
+    )
+    assert result["status"] == "complete"
+    assert result["post_hoc"] is True
+    assert result["descriptive_only"] is True
+    assert result["prediction_set_verified_against_outer_output_audit"] is True
+    assert result["confirmatory_metrics_sha256"] == sha256(
+        ROOT / "artifacts/metrics/outer_kd_confirmatory.json"
+    )
+    assert result["outer_output_audit_sha256"] == sha256(
+        ROOT / "artifacts/manifests/outer_kd_output_audit.json"
+    )
+
+    batches = result["per_article_batch"]
+    assert set(batches) == {"1", "2", "3"}
+    assert sum(batch["trials"] for batch in batches.values()) == 19_438
+    assert all(batch["readers"] == 120 for batch in batches.values())
+    assert all(batch["articles"] == 10 for batch in batches.values())
+    assert all(
+        batch["distilled_minus_gaze_gru"] > 0.0 for batch in batches.values()
+    )
+    assert result["all_batch_differences_positive"] is True
 
 
 @requires_canonical_data
