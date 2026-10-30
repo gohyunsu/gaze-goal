@@ -8,7 +8,7 @@
 #PBS -j oe
 #PBS -o /home/hsmail02/goalexit_transfer/logs/
 
-set -euxo pipefail
+set -euo pipefail
 
 : "${GOALEXIT_EXPECTED_COMMIT:?GOALEXIT_EXPECTED_COMMIT is required}"
 : "${GOALEXIT_TRACKED_ARCHIVE:?GOALEXIT_TRACKED_ARCHIVE is required}"
@@ -102,7 +102,7 @@ extract_archive "$GOALEXIT_TRACKED_ARCHIVE"
 extract_archive "$GOALEXIT_GIT_ARCHIVE"
 
 test "$(git -C "$PROJECT" rev-parse HEAD)" = "$GOALEXIT_EXPECTED_COMMIT"
-test -z "$(git -C "$PROJECT" status --porcelain)"
+test -z "$(git -C "$PROJECT" status --porcelain --untracked-files=no)"
 
 export PYTHONPATH="$PROJECT/src"
 export OMP_NUM_THREADS=2
