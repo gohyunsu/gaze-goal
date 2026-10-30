@@ -122,9 +122,8 @@ This study makes three contributions:
   \item With student inputs and architecture fixed, word-aligned teacher
   distillation improves the gaze-only GRU when both readers and articles are
   unseen.
-  \item Controls using label smoothing, contextual-text removal, and target
-  shuffling indicate that trial-specific soft supervision contributes even
-  without contextual text.
+  \item Controls indicate that trial-specific soft supervision contributes to
+  the gain, whereas contextual text provides no detectable student benefit.
   \item We characterize the student model's size and single-thread CPU latency
   across the observed sequence-length distribution.
 \end{itemize}
@@ -412,7 +411,7 @@ PyTorch thread, excluding input construction, parsing, and disk I/O.
 
 \section{Results}
 
-\subsection{Confirmatory Performance}
+\subsection{Primary Performance}
 
 Table~\ref{tab:main-results} reports pooled out-of-fold predictions for test
 readers and articles excluded from training.
