@@ -74,11 +74,12 @@ knj01@snu.ac.kr}}
 
 \begin{abstract}
 Reading interfaces could adapt to whether users read for comprehension or seek
-specific information.  Prior work combines gaze and contextual text and
-requires fixation-to-word alignment at inference.  We instead use a
-word-aligned teacher only during training to supervise a GRU that
-receives the chronological fixation sequence.  On OneStop, with readers and
-articles both held out, distillation raises balanced accuracy by 3.39
+specific information.  Recent work combines fixation-level gaze with
+contextual text, requiring fixation-to-word alignment and a language encoder
+at inference.  We instead use a word-aligned teacher only during training to
+supervise a GRU that receives the chronological fixation sequence.  On
+OneStop, with readers and articles both held out, distillation raises balanced
+accuracy by 3.39
 percentage points over the same GRU trained with hard labels.  The improvement
 remains positive under reader-clustered and crossed reader/article bootstrap
 analyses.  Shuffling teacher targets within each class reduces the gain by
@@ -128,9 +129,8 @@ This study makes three contributions:
 \begin{itemize}
   \item With student inputs and architecture fixed, teacher-derived soft
   targets improve the gaze-only GRU when both readers and articles are unseen.
-  \item Within-class target shuffling reduces but does not eliminate the gain,
-  while adding text to the word-level teacher provides no detectable student
-  benefit.
+  \item Matched ablations assess the roles of teacher modality and the pairing
+  between each training trial and its teacher prediction.
   \item We characterize student size and single-thread CPU latency across the
   observed sequence-length distribution.
 \end{itemize}
@@ -480,7 +480,7 @@ higher, but its crossed reader/article interval includes zero
 
 Table~\ref{tab:controls} reports the post hoc controls.
 
-\begin{table}[t]
+\begin{table}[h]
 \caption{Post hoc matched-seed controls.  BA is in percent.  Differences and
 reader-clustered CIs are in percentage points (pp).  Model rows compare with
 GRU+BCE, and $n_+$ counts positive seed-wise differences.}
@@ -504,13 +504,13 @@ KD: unshuffled $-$ class-shuffled & -- & +1.90 & [0.61, 3.17] & 3/3 \\
 \end{tabular}
 \end{table}
 
-The controls separate the tested training signals.  The label-smoothed GRU
-remains at the BCE baseline.  Both word-aligned teachers yield positive
-seed-wise KD differences, while the student-level modality contrast includes
-zero under both resampling schemes.  Within-class shuffling preserves the
-class-conditional target distribution but removes trial-level pairing.  The
-unshuffled-versus-shuffled contrast excludes zero under both schemes, although
-shuffled targets remain above BCE.
+The controls distinguish fixed label smoothing, teacher modality, and
+trial-level target pairing.  The label-smoothed GRU does not improve on BCE.
+Both word-aligned teachers yield positive seed-wise KD differences, while the
+student-level modality contrast includes zero under both resampling schemes.
+Within-class shuffling preserves the class-conditional target distribution but
+removes trial-level pairing.  The unshuffled-versus-shuffled contrast excludes
+zero under both schemes, although shuffled targets remain above BCE.
 
 \subsection{Model-Only Latency}
 
@@ -526,11 +526,11 @@ hard-label BCE.  The gaze-summary logistic baseline remains competitive, and
 the distilled model's advantage over it is uncertain under crossed
 reader/article resampling.
 
-The ablations suggest that the gain has more than one source.  Trial-to-target
-pairing contributes because shuffling within class reduces performance.  The
-remaining improvement may reflect class-dependent targets or an optimization
-effect.  The tested label-smoothing setting does not yield a similar
-improvement, and adding contextual text produces no detectable student
+Trial-level target pairing explains part of the gain, but not all of it.
+Shuffling within class reduces performance, while shuffled targets remain above
+BCE.  The residual improvement may reflect class-dependent targets or an
+optimization effect.  The tested label-smoothing setting does not yield a
+similar improvement, and adding contextual text produces no detectable student
 benefit.  Both teachers also share word-level gaze aggregation, greater
 capacity than the student, and in-sample target generation.  These properties
 remain possible sources of the gain.
