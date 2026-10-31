@@ -9,6 +9,9 @@ Build from this directory with the cached `bodex` Tectonic installation:
 conda run -n bodex tectonic --keep-logs --keep-intermediates main.tex
 ```
 
+The submission PDF intentionally excludes `hyperref`. The repository address
+is printed as plain text so the PDF contains no active links or bookmarks.
+
 The scientific content and numerical tables are tied to:
 
 - `../artifacts/metrics/outer_kd_confirmatory.json`

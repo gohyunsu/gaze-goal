@@ -73,4 +73,7 @@ related prediction work, the peer-reviewed *Scientific Data* descriptor for
 OneStop, the original papers for knowledge distillation, privileged
 information, label smoothing, AdamW, balanced accuracy, calibration, GRUs, and
 Transformers, and the original RoBERTa technical report. All citation keys in
-the manuscript are defined and used.
+the manuscript are defined and used. A final source-level cross-check confirmed
+the author lists, titles, venues, years, page ranges, and available DOIs for all
+14 entries. It also confirmed that the cited sources support the associated
+dataset, prior-work, and method statements without extending their scope.

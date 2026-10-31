@@ -11,7 +11,7 @@ Hyunsu Go · Sumin Lee · Eunsu Go · Jinyong Jun · Minjeong Kim · Kyeonghun K
 ## Overview
 
 This repository accompanies the ICCE 2027 paper *Gaze-Only Reading-Goal
-Classification via Knowledge Distillation from a Word-Aligned Teacher*. The
+Classification via Knowledge Distillation From a Word-Aligned Teacher*. The
 study asks whether word-aligned supervision can be confined to training while
 a GRU uses only fixation sequences at inference.
 

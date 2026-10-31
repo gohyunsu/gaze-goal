@@ -41,7 +41,7 @@ authors:
     email: "knj01@snu.ac.kr"
 preferred-citation:
   type: conference-paper
-  title: "Gaze-Only Reading-Goal Classification via Knowledge Distillation from a Word-Aligned Teacher"
+  title: "Gaze-Only Reading-Goal Classification via Knowledge Distillation From a Word-Aligned Teacher"
   year: 2027
   conference:
     name: "IEEE International Conference on Consumer Electronics"
