@@ -9,16 +9,32 @@ repository-code: "https://github.com/gohyunsu/gaze-goal"
 authors:
   - family-names: Go
     given-names: Hyunsu
+    affiliation: "Seoul National University, Korea (South)"
+    email: "hsmail02@snu.ac.kr"
   - family-names: Lee
     given-names: Sumin
+    affiliation: "Seoul National University, Korea (South)"
+    email: "cirtuare@snu.ac.kr"
+  - family-names: Go
+    given-names: Eunsu
+    affiliation: "Seoul National University, Korea (South)"
+    email: "esmail04@snu.ac.kr"
   - family-names: Jun
     given-names: Jinyong
+    affiliation: "Seoul National University, Korea (South)"
+    email: "junjinyong@snu.ac.kr"
   - family-names: Kim
     given-names: Kyeonghun
+    affiliation: "OUTTA, Korea (South)"
+    email: "kyeonghun.kim@outta.ai"
   - family-names: Lee
     given-names: Hyuk-Jae
+    affiliation: "Seoul National University, Korea (South)"
+    email: "hjlee@capp.snu.ac.kr"
   - family-names: Kim
     given-names: Nam-Joon
+    affiliation: "Seoul National University, Korea (South)"
+    email: "knj01@snu.ac.kr"
 preferred-citation:
   type: conference-paper
   title: "Gaze-Only Reading-Goal Classification via Knowledge Distillation from a Word-Aligned Teacher"
@@ -28,13 +44,29 @@ preferred-citation:
   authors:
     - family-names: Go
       given-names: Hyunsu
+      affiliation: "Seoul National University, Korea (South)"
+      email: "hsmail02@snu.ac.kr"
     - family-names: Lee
       given-names: Sumin
+      affiliation: "Seoul National University, Korea (South)"
+      email: "cirtuare@snu.ac.kr"
+    - family-names: Go
+      given-names: Eunsu
+      affiliation: "Seoul National University, Korea (South)"
+      email: "esmail04@snu.ac.kr"
     - family-names: Jun
       given-names: Jinyong
+      affiliation: "Seoul National University, Korea (South)"
+      email: "junjinyong@snu.ac.kr"
     - family-names: Kim
       given-names: Kyeonghun
+      affiliation: "OUTTA, Korea (South)"
+      email: "kyeonghun.kim@outta.ai"
     - family-names: Lee
       given-names: Hyuk-Jae
+      affiliation: "Seoul National University, Korea (South)"
+      email: "hjlee@capp.snu.ac.kr"
     - family-names: Kim
       given-names: Nam-Joon
+      affiliation: "Seoul National University, Korea (South)"
+      email: "knj01@snu.ac.kr"

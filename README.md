@@ -4,7 +4,7 @@
 
 ### Code and reproducibility materials for gaze-only reading-goal classification
 
-Hyunsu Go · Sumin Lee · Jinyong Jun · Kyeonghun Kim · Hyuk-Jae Lee · Nam-Joon Kim
+Hyunsu Go · Sumin Lee · Eunsu Go · Jinyong Jun · Kyeonghun Kim · Hyuk-Jae Lee · Nam-Joon Kim
 
 </div>
 
