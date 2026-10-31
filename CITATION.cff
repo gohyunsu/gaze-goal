@@ -24,6 +24,10 @@ authors:
     affiliation: "Seoul National University, Korea (South)"
     email: "junjinyong@snu.ac.kr"
   - family-names: Kim
+    given-names: Minjeong
+    affiliation: "Sookmyung Women's University, Korea (South)"
+    email: "lucia.m.kim@sookmyung.ac.kr"
+  - family-names: Kim
     given-names: Kyeonghun
     affiliation: "OUTTA, Korea (South)"
     email: "kyeonghun.kim@outta.ai"
@@ -58,6 +62,10 @@ preferred-citation:
       given-names: Jinyong
       affiliation: "Seoul National University, Korea (South)"
       email: "junjinyong@snu.ac.kr"
+    - family-names: Kim
+      given-names: Minjeong
+      affiliation: "Sookmyung Women's University, Korea (South)"
+      email: "lucia.m.kim@sookmyung.ac.kr"
     - family-names: Kim
       given-names: Kyeonghun
       affiliation: "OUTTA, Korea (South)"
