@@ -77,3 +77,7 @@ the manuscript are defined and used. A final source-level cross-check confirmed
 the author lists, titles, venues, years, page ranges, and available DOIs for all
 14 entries. It also confirmed that the cited sources support the associated
 dataset, prior-work, and method statements without extending their scope.
+Publisher records take precedence over aggregator exports: Rayner's complete
+page range is 372--422, the privileged-information paper is cited as ICLR 2016,
+AdamW is cited as ICLR 2019, and the 2017 attention paper uses the contemporary
+conference abbreviation NIPS.
