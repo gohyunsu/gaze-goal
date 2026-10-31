@@ -2,7 +2,7 @@
   "schema": "goalexit-icce2027-pdf-audit-v1",
   "status": "pass",
   "pdf": "paper/main.pdf",
-  "sha256": "c4ec5a7d96a0afc889ab895ad09cd2d9b227e34f9f1e4183e74ab8d2856cfa60",
+  "sha256": "9b0e80e852dfe4457db4f2d6e3355dc255a8623a262ecfbb28f637f1a023e0f6",
   "pages": 4,
   "page_width_points": 612.0,
   "page_height_points": 792.0,
